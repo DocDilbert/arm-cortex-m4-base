@@ -1,0 +1,11 @@
+Common files stored here:
+<mcuseries>.h	     MCU series header file
+gpio.h		     Used for PDL and Pin & Code Wizard to configure the GPIOs
+		     The specific package is configures in RTE_Device.h
+		     The GPIO definition for every package is saved in gpio_<mcuname>.h
+		     mcu.h includes the gpio_<mcuname>.h file
+gpio_<mcuname>.h     GPIO definition for package of MCU series
+fgpio.h              Fast GPIO module version of gpio.h
+base_types.h         Type definition specific for the MCU (like uint8_t, boolean_t, result_t, etc.)
+system_<mcuseries>.h System configuration like clocks, HW Watchdog, etc.
+system_<mcuseries>.c System configuration initialization

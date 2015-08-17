@@ -1,0 +1,6 @@
+Contains CMSIS related modules
+svd       Contains System View Description file (xml format)
+include   Contains CMSIS includes, normally already included in every ARM Cortex M toolchain
+          for GNU toolchain not included, so optional added to the template
+          please have a look for latest header files at the ARM website www.arm.com
+ 
