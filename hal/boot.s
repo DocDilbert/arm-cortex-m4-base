@@ -149,17 +149,14 @@ vectors:
     .long _Hang               // IRQ125_Handler
     .long _Hang               // IRQ126_Handler
     .long _Hang               // IRQ127_Handler
-
-.thumb_func   
+  
 _Hang:
     B .
  
-.thumb_func 
 _Reset:
     NOP
     B _Start 
-        
-.thumb_func 
+	
 .global _Start
 _Start: 
     BL init 
