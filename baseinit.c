@@ -28,7 +28,7 @@ extern unsigned long _ebss;
 /// * SysTick Configuration
 ///
 /// \ingroup StartSequence
-void init()
+void baseinit()
 {
     unsigned long *src, *dest;
     

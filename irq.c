@@ -7,14 +7,14 @@
 #include "hw_gpio.h"
 
 extern void main();
-extern void init();
+extern void baseinit();
 
 /// \brief Reset interrupt service routine.
 /// This function gets called when a reset irq is raised. This usually happens
 /// when the system is started.
 void isr_reset()
 {
-	init();
+	baseinit();
 	main();
 }
 
