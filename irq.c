@@ -1,6 +1,6 @@
 /// \file irq.c
 ///
-/// File which contains all interrupt serivce handlers.
+/// File which contains all implemented interrupt service handlers.
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
