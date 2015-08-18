@@ -15,8 +15,7 @@ SRC_FILES = ./main.c\
 			./hal/target/system_mb9b560r.c
 			
 # Include directories
-INC_DIRS = 	./cmsis/include\
-			./hal\
+INC_DIRS = 	./hal\
 			./hal/target
 			   
 # Object directory
@@ -57,6 +56,8 @@ OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
 
 VPATH = $(sort $(dir $(SRC_FILES)))
 
+.PHONY: all info clean
+
 all: $(ELF_NAME)              
 
 $(ELF_NAME): $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld 
@@ -73,12 +74,10 @@ $(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 	
-.PHONY: info
 info:
 	@echo $(OBJS)
 	$(OBJDUMP) -h $(ELF_NAME)
     
-.PHONY: clean
 clean:
 	rm -rf *.elf
 	rm -rf $(OBJ_DIR)/*.o
