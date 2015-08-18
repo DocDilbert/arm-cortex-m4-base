@@ -20,7 +20,7 @@ vectors:
     .long _Hang               // Debug Monitor
     .long _Hang               // Reserved
     .long _Hang               // PendSV
-    .long systick_handler     // SysTick
+    .long isr_systick 	      // SysTick
     .long _Hang               // IRQ000_Handler
     .long _Hang               // IRQ001_Handler
     .long _Hang               // IRQ002_Handler
@@ -164,10 +164,6 @@ _Reset:
 _Start: 
     BL init 
     BL main 
-    
-.thumb_func   
- _SysTick:
-    NOP
     
 
       
