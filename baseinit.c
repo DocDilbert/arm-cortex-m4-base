@@ -38,7 +38,8 @@ void baseinit()
 {
     unsigned long *src, *dest;
     
-	// Initialize the data section in ram with the default values stored in flash
+	// Initialize the data section in ram with the default values stored in flash.
+	// The default values a stored "after" the text section.
     src = &_etext;
     for (dest = &_data; dest<&_edata;)
     {

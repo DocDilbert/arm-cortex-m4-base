@@ -6,7 +6,6 @@
 
 #include "hw_gpio.h"
 
-
 /// \brief Short explanation of what happens when the system starts.
 ///
 /// When the system starts a reset irq is raised. The reset interrupt service
@@ -50,4 +49,6 @@ void main()
         RED_LED_OFF();
         wait();
     } 
+	
+	// do not leave this function
 }
