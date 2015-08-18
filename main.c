@@ -11,7 +11,7 @@
 ///
 /// When the system starts a reset irq is raised. The reset interrupt service
 /// routine currently calls two functions.
-/// * init() - Basic system initalization.
+/// * baseinit() - Basic system initalization.
 /// * main() - Starting point.
 ///
 /// \defgroup StartSequence System startup sequence

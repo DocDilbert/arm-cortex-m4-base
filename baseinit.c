@@ -1,5 +1,11 @@
-#include <mcu.h>
+/// \file baseinit.c
+///
+/// File which contains all code related to basic system initialization. The basic
+/// system initialization "happens" before the main function is called.
+///
+/// \author Christian Groeling <ch.groeling@gmail.com>
 
+#include <mcu.h>
 
 /// End address of the text section.  
 /// The text section is followed by the initial values of the data section.
@@ -32,12 +38,14 @@ void baseinit()
 {
     unsigned long *src, *dest;
     
+	// Initialize the data section in ram with the default values stored in flash
     src = &_etext;
     for (dest = &_data; dest<&_edata;)
     {
         *dest++ = *src++;
     }
 	
+	// Initialize the bss section with 0
     for (src = &_bss; src<&_ebss;)
     {
         *src++ = 0;
