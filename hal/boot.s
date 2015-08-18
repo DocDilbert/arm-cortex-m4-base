@@ -164,6 +164,7 @@ _Reset:
 _Start: 
     BL init 
     BL main 
+	B . // This point should not be reached. 
     
 
       
