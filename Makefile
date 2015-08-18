@@ -1,13 +1,13 @@
 ELF_NAME = fm4.elf
 
-# Toolchain path and prefix
-ARMPATH=arm-none-eabi-
+# Toolchain prefix
+TC_PREFIX=arm-none-eabi-
 
 # Tool definition
-LD=$(ARMPATH)ld
-CC=$(ARMPATH)gcc
-AS=$(ARMPATH)as
-OBJDUMP=$(ARMPATH)objdump
+LD=$(TC_PREFIX)ld
+CC=$(TC_PREFIX)gcc
+AS=$(TC_PREFIX)as
+OBJDUMP=$(TC_PREFIX)objdump
 DOXYGEN=doxygen
 
 # Source files          
