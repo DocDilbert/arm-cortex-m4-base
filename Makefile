@@ -11,12 +11,13 @@ OBJDUMP=$(TC_PREFIX)objdump
 DOXYGEN=doxygen
 
 # Source files          
-SRC_FILES = ./main.c\
+SRC_FILES = ./main.c \
+			./syscalls.c \
 			./hal/hw_gpio.c \
 			./hal/target/system_mb9b560r.c
 			
 # Include directories
-INC_DIRS = 	./hal\
+INC_DIRS = 	./hal \
 			./hal/target
 			   
 # Object directory
