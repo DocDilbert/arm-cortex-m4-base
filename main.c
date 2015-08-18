@@ -52,11 +52,7 @@ void main()
     } 
 }
 
-/// \brief System tick interrupt service handler
-void systick_handler()
-{
-    HW_GPIO_TOGGLE(DEBUGPIN_1);
-}
+
 
 /// End address of the text section.  
 /// The text section is followed by the initial values of the data section.
