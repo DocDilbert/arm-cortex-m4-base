@@ -8,6 +8,7 @@ LD=$(ARMPATH)ld
 CC=$(ARMPATH)gcc
 AS=$(ARMPATH)as
 OBJDUMP=$(ARMPATH)objdump
+DOXYGEN=doxygen
 
 # Source files          
 SRC_FILES = ./main.c\
@@ -56,7 +57,7 @@ OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
 
 VPATH = $(sort $(dir $(SRC_FILES)))
 
-.PHONY: all info clean
+.PHONY: all info clean doc
 
 all: $(ELF_NAME)              
 
@@ -77,7 +78,9 @@ $(OBJ_DIR):
 info:
 	@echo $(OBJS)
 	$(OBJDUMP) -h $(ELF_NAME)
-    
+doc:
+	$(DOXYGEN) doxygen.config
+	
 clean:
 	rm -rf *.elf
 	rm -rf $(OBJ_DIR)/*.o
