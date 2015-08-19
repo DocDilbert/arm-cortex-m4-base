@@ -1,6 +1,7 @@
 /// \file main.c
 ///
-/// File containing the main() function which is the starting point of the program.
+/// File containing the main() function. The main() function is the starting 
+/// point of the program.
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 

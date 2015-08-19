@@ -10,7 +10,7 @@ extern void main();
 extern void baseinit();
 
 /// \brief Reset interrupt service routine.
-/// This function gets called when a reset irq is raised. This usually happens
+/// This function is called when a reset irq is raised. This usually happens
 /// when the system is started.
 void isr_reset()
 {
@@ -19,7 +19,7 @@ void isr_reset()
 }
 
 /// \brief System tick interrupt service routine.
-/// This function gets called when a systick irq is raised.
+/// This function is called when a systick irq is raised.
 void isr_systick()
 {
     HW_GPIO_TOGGLE(DEBUGPIN_1);
