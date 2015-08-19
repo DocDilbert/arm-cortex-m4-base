@@ -149,12 +149,13 @@ vectors:
     .long _Hang               // IRQ125_Handler
     .long _Hang               // IRQ126_Handler
     .long _Hang               // IRQ127_Handler
-    
+ 
+// This function does intentionally hang. 
 .thumb_func 
-_Hang:	// When this function is called the system hangs intentionally
+_Hang:	
     B .
 
-// Reset function 
+// Reset interrupt service routine 
 .global _Reset // Entry point
 .thumb_func 
 _Reset:
