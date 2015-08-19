@@ -28,16 +28,4 @@ void hw_gpio_init()
   HW_GPIO_INIT_OUT(LED_RED, 1);
   HW_GPIO_INIT_OUT(LED_GREEN, 1);
   HW_GPIO_INIT_OUT(LED_BLUE, 1);
-#ifdef _1_
-  // Set PWM pins to output with level 0
-  hw_gpio_disable_pwm_pins() ;
-  
-  /* Uses RTO0x_0 as the output pin of the waveform generator RTO0x.*/
-  bFM4_GPIO_EPFR01_RTO00E0=1;
-  bFM4_GPIO_EPFR01_RTO01E0=1;
-  bFM4_GPIO_EPFR01_RTO02E0=1;
-  bFM4_GPIO_EPFR01_RTO03E0=1;
-  bFM4_GPIO_EPFR01_RTO04E0=1;
-  bFM4_GPIO_EPFR01_RTO05E0=1;
-#endif
 }
