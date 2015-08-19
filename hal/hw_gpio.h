@@ -1,30 +1,40 @@
+/// \file hw_gpio.h
+///
+/// File containing the gpio hardware abstraction. 
+///
+/// Each cortex-m4 based microcontroller has its own way dealing with gpios. The functions
+/// in this file should deliver an hardware independent interface to access these. 
+///
+/// This file is written for the spansion/cypress MB9BF568R. But is should be easily
+/// adaptable to other microcontrollers.
+///
+/// \author Christian Groeling <ch.groeling@gmail.com>
+
 #ifndef __HW_GPIO_H__
 #define __HW_GPIO_H__
 
 #include "mcu.h"
 
-/*
-IMPORTANT GPIO REGISTER DESCRIPTIONS
 
-ADE  
-A register to set whether the I/O port will be used as a special pin (an analog input pin) or a digital input/output pin.
-
-PFR
-A register to set whether the I/O port will be used as an input/output pin of GPIO function or an input/output pin of 
-peripheral functions.
-
-DDR
-A register to set whether the I/O port will be used as an input pin or an output pin if the I/O port is used as a GPIO 
-function pin. 
-Note: If a pin is selected as an I/O pin of peripheral functions, a setting value is invalid.
-
-PDOR
-A register to set output level if the I/O port is used as an output pin of GPIO function.
--  When "0" is set, it outputs Low level.
--  When "1" is set, it outputs High level.
-Note: If a pin is selected as GPIO input or input/output of peripheral functions, a setting value is invalid.
-
-*/
+// IMPORTANT GPIO REGISTER DESCRIPTIONS
+// 
+// ADE  
+// A register to set whether the I/O port will be used as a special pin (an analog input pin) or a digital input/output pin.
+// 
+// PFR
+// A register to set whether the I/O port will be used as an input/output pin of GPIO function or an input/output pin of 
+// peripheral functions.
+// 
+// DDR
+// A register to set whether the I/O port will be used as an input pin or an output pin if the I/O port is used as a GPIO 
+// function pin. 
+// Note: If a pin is selected as an I/O pin of peripheral functions, a setting value is invalid.
+// 
+// PDOR
+// A register to set output level if the I/O port is used as an output pin of GPIO function.
+// -  When "0" is set, it outputs Low level.
+// -  When "1" is set, it outputs High level.
+// Note: If a pin is selected as GPIO input or input/output of peripheral functions, a setting value is invalid.
 
 // DEFINE GPIO MACROS
 
@@ -74,52 +84,42 @@ Note: If a pin is selected as GPIO input or input/output of peripheral functions
 #define RTO03_0_PDOR            bFM4_GPIO_PDOR3_PD
 #define RTO03_0_PFR             bFM4_GPIO_PFR3_PD
 
-/* Toggles the logic-level of an output pin. The pin must be 
- * configured as gpio-output beforehand
- *
- * @_PIN_ - name of the pin. The pin must be listed in the file hw_gpio.h.
- */
-#define HW_GPIO_TOGGLE(_PIN_) {\
-  _PIN_##_PDOR ^= 0x1u; /* invert bit 1 */ \
+/// A macro that toggles the logic-level of an output pin. The pin must be 
+/// configured as gpio-output beforehand.
+#define HW_GPIO_TOGGLE(_PIN_) \
+{\
+    _PIN_##_PDOR ^= 0x1u; /* invert bit 1 */ \
 }
 
-/* Sets the logic level of the given pin. The pin must be 
- * configured as gpio-output beforehand 
- *
- * @_PIN_   - name of the pin. The pin must be listed in the file hw_gpio.h.
- * @_VALUE_ - 0u - low / 1u - high
- */
-#define HW_GPIO_PUT(_PIN_, _VALUE_)  {\
-  _PIN_##_PDOR= _VALUE_; /* Set the logic-level of the gpio */\
+/// A macro that sets the logic level of the given pin. The pin must be 
+/// configured as gpio-output beforehand .
+#define HW_GPIO_PUT(_PIN_, _VALUE_) \
+{\
+    _PIN_##_PDOR= _VALUE_; /* Set the logic-level of the gpio */\
 }
 
-/* Deactivates usage of the pin as analog input
- *
- * @_PIN_ - name of the pin. The pin must be listed in the file hw_gpio.h.
- */
-#define HW_GPIO_ADC_OFF(_PIN_) {\
-  _PIN_##_ADE =0; /* deactivate usage of the pin as analog input*/ \
+/// A macro that deactivates the usage of a pin as analog input.
+#define HW_GPIO_ADC_OFF(_PIN_) \
+{\
+    _PIN_##_ADE =0; /* deactivate usage of the pin as analog input*/ \
 }
 
-/* Configures a pin as a gpio output. 
- * 
- * @_PIN_ - name of the pin. The pin must be listed in the file hw_gpio.h.
- * 
- * Attention: adc functionality off a pin must be deactivated separatly by using
- * the macro HW_GPIO_ADC_OFF 
- */
+/// A macrot that configures a pin as a gpio output. 
+///
+/// Attention: adc functionality of a pin must be deactivated separatly by using
+/// the macro HW_GPIO_ADC_OFF .
 #define HW_GPIO_INIT_OUT(_PIN_, _INITIAL_VALUE_)\
-  { HW_GPIO_PUT(_PIN_,_INITIAL_VALUE_); /* Set initial value of the output */ \
+{ \
+    HW_GPIO_PUT(_PIN_,_INITIAL_VALUE_); /* Set initial value of the output */ \
     _PIN_##_DDR=1u;  /* Set data direction to output*/ \
     _PIN_##_PFR=0u; /* Set pin to gpio*/ \
-  }
-
+}
 
 #define HW_GPIO_INIT_PERIPH_FUNC(_PIN_)\
-  { \
-     _PIN_##_DDR=1u;  /* Set data direction to output*/ \
+{ \
+    _PIN_##_DDR=1u;  /* Set data direction to output*/ \
     _PIN_##_PFR=1u; /* Uses a pin as an input/output pin of peripheral functions. */ \
-  }
+}
 
 #define RED_LED_ON()     HW_GPIO_PUT(LED_RED, 0u)   /* Switches the red led on */
 #define RED_LED_OFF()    HW_GPIO_PUT(LED_RED, 1u)   /* Switches the red led off */
@@ -128,14 +128,8 @@ Note: If a pin is selected as GPIO input or input/output of peripheral functions
 #define BLUE_LED_ON()    HW_GPIO_PUT(LED_BLUE, 0u)  /* Switches the blue led on */
 #define BLUE_LED_OFF()   HW_GPIO_PUT(LED_BLUE, 1u)  /* Switches the blue led off*/
 
-/* Initializes the gpio-unit */
+/// This function initializes the gpio peripheral unit.
 extern void hw_gpio_init();
 
-/* Sets the gpios RT00x to peripheral function, therefore enabling 
-pwm output*/ 
-extern void hw_gpio_enable_pwm_pins();
-
-/* Sets the gpios RT00x to gpios, therefore disabling pwm output*/
-extern void hw_gpio_disable_pwm_pins() ;
 
 #endif
