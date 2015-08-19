@@ -4,7 +4,7 @@ MEMORY {
     SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x1000
     SRAM2 (rwx): ORIGIN = 0x20000000, LENGTH = 0x1000
 }
-ENTRY(_Start)
+ENTRY(_Reset)
 SECTIONS
 {
 	.boot : {

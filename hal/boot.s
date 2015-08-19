@@ -149,22 +149,18 @@ vectors:
     .long _Hang               // IRQ125_Handler
     .long _Hang               // IRQ126_Handler
     .long _Hang               // IRQ127_Handler
-
+    
 .thumb_func 
-_Hang:
+_Hang:	// When this function is called the system hangs intentionally
     B .
 
+// Reset function 
+.global _Reset // Entry point
 .thumb_func 
 _Reset:
-    NOP
-    B _Start
+	// Here the stack can be initialised. See above!
+    B isr_reset				  // Call reset isr
 
-.global _Start	
-.thumb_func 
-_Start: 
-    BL init 
-    BL main 
-	B . // This point should not be reached. 
-    
+
 
       
