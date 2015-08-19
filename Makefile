@@ -2,7 +2,7 @@
 ELF_NAME = fm4.elf
 
 # Optimizer related flags supplied to the compiler
-OPT_FLAGS = -o2
+OPT_FLAGS = -o0 
 
 # Debug related flags supplied to the compiler
 DEBUG_FLAGS = -gdwarf-2 -g3
