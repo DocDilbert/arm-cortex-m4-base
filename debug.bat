@@ -1,1 +1,0 @@
-arm-none-eabi-gdb -x init.gdb
