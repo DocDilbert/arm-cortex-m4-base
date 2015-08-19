@@ -86,3 +86,4 @@ doc:
 clean:
 	rm -rf *.elf
 	rm -rf $(OBJ_DIR)/*.o
+	rm -rf ./doc
