@@ -1,3 +1,4 @@
+# Name of the produced elf file
 ELF_NAME = fm4.elf
 
 # Toolchain prefix
@@ -24,6 +25,9 @@ INC_DIRS = 	./hal \
 			   
 # Object directory
 OBJ_DIR = ./objs
+
+# Debug related flags supplied to the compiler
+DEBUG_FLAGS = -gdwarf-2 -g3
 
 # Custom options for cortex-m and cortex-r processors 
 CORTEX_M0PLUS_CC_FLAGS  = -mthumb -mcpu=cortex-m0plus
@@ -53,11 +57,10 @@ CORTEX_R5_SWFP_LIB_PATH = $(GCC_LIB)armv7-r/thumb/softfp
 CORTEX_R5_HWFP_CC_FLAGS = -mthumb -march=armv7-r -mfloat-abi=softfp -mfloat-abi=hard -mfpu=vfpv3-d16
 CORTEX_R5_HWFP_LIB_PATH = $(GCC_LIB)armv7-r/thumb/fpu
 MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
-DEBUG_FLAGS = -gdwarf-2 -g3
+
 INC_DIRS_FLAGS = -I. $(patsubst %, -I%, $(INC_DIRS))
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
-
 VPATH = $(sort $(dir $(SRC_FILES)))
 
 .PHONY: all info clean doc
@@ -79,8 +82,8 @@ $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 	
 info:
-	@echo $(OBJS)
 	$(OBJDUMP) -h $(ELF_NAME)
+
 doc:
 	$(DOXYGEN) doxygen.config
 	
