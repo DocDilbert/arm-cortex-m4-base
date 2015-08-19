@@ -1,15 +1,11 @@
 # Name of the produced elf file
 ELF_NAME = fm4.elf
 
-# Toolchain prefix
-TC_PREFIX=arm-none-eabi-
+# Optimizer related flags supplied to the compiler
+OPT_FLAGS = -o2
 
-# Tool definition
-LD=$(TC_PREFIX)ld
-CC=$(TC_PREFIX)gcc
-AS=$(TC_PREFIX)as
-OBJDUMP=$(TC_PREFIX)objdump
-DOXYGEN=doxygen
+# Debug related flags supplied to the compiler
+DEBUG_FLAGS = -gdwarf-2 -g3
 
 # Source files          
 SRC_FILES = ./main.c \
@@ -26,8 +22,15 @@ INC_DIRS = 	./hal \
 # Object directory
 OBJ_DIR = ./objs
 
-# Debug related flags supplied to the compiler
-DEBUG_FLAGS = -gdwarf-2 -g3
+# Toolchain prefix
+TC_PREFIX=arm-none-eabi-
+
+# Tool definition
+LD=$(TC_PREFIX)ld
+CC=$(TC_PREFIX)gcc
+AS=$(TC_PREFIX)as
+OBJDUMP=$(TC_PREFIX)objdump
+DOXYGEN=doxygen
 
 # Custom options for cortex-m and cortex-r processors 
 CORTEX_M0PLUS_CC_FLAGS  = -mthumb -mcpu=cortex-m0plus
@@ -73,7 +76,7 @@ $(ELF_NAME): $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@echo "Compiling $<"
-	$(CC) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -O0  -c $< -o $@
+	$(CC) $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS)  -c $< -o $@
     
 $(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
 	$(AS) $(MCU_CC_FLAGS) -g hal/boot.s -o $(OBJ_DIR)/boot.o
