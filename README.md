@@ -4,6 +4,10 @@ The target architecture of this repo is the cortex m4 from arm, but the repo can
 other architectures as well.
 
 
-# Makefile Tips
-This section list some usefull stuff which is used in the Makefile of this project:
+# Makefile 
+The documentation of how to use gnu make can be found at: http://www.gnu.org/software/make/manual/html_node/index.html
+
+The following links represent shortcuts to important concepts which are used in the Makefile of this project:
 * Automatic Variables - http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
+* Functions for String Substitution and Analysis - http://www.gnu.org/software/make/manual/html_node/Text-Functions.html#Text-Functions
+* Substitution References - http://www.gnu.org/software/make/manual/html_node/Substitution-Refs.html#Substitution-Refs
