@@ -7,8 +7,8 @@ other architectures as well.
 On windows the following programs can be used to compile the project:
 * [Gcc arm embedded compiler (4.9.3)](https://launchpad.net/gcc-arm-embedded) 
 * Make:
-** (Cygwin)[https://www.cygwin.com/]
-** (MinGW - MSYS)[https://www.cygwin.com/] 
+   * (Cygwin)[https://www.cygwin.com/]
+   * (MinGW - MSYS)[https://www.cygwin.com/] 
 
 # GCC
 The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html#toc_Top). Its quite usefull as 
