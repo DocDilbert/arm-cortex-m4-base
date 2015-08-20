@@ -4,14 +4,14 @@ The target architecture of this project is the cortex m4 from arm, but the proje
 other architectures as well.
 
 # Toolchain
-The [GCC ARM Embedded](https://launchpad.net/gcc-arm-embedded) compiler (4.9.3) is used to compile this project. 
+* The gcc arm embedded compiler (4.9.3) is used to compile this project. It can be downloaded from https://launchpad.net/gcc-arm-embedded . 
 
 # GCC
-The gcc manual can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html#toc_Top). Its quite usefull as 
-reference for the used compiler switched.
+The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html#toc_Top). Its quite usefull as 
+reference for the used compiler switches.
 
 Some interesting topics in this manual are:
-* [Preprocessor Options](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/Preprocessor-Options.html#Preprocessor-Options) - This is used for automatic dependency generation.
+* [Preprocessor Options](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/Preprocessor-Options.html#Preprocessor-Options) - They are used for automatic dependency generation.
 
 # Makefile 
 The gnu make manual can be found [here](http://www.gnu.org/software/make/manual/html_node/index.html).
