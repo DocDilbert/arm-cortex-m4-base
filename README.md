@@ -15,8 +15,8 @@ The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.
 reference for the used compiler switches.
 
 For this project the following topics in this manual are of special interest:
-* [Optimize-Options](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/Optimize-Options.html#Optimize-Options) - Hey, we're on an embedded target. Optimization is very important.
-* [Preprocessor Options](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/Preprocessor-Options.html#Preprocessor-Options) - They are used for automatic dependency generation.
+* [Options That Control Optimization](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/Optimize-Options.html#Optimize-Options) - Hey, we're on an embedded target. Optimization is very important.
+* [Options Controlling the Preprocessor](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/Preprocessor-Options.html#Preprocessor-Options) - They are used for automatic dependency generation.
 
 # Makefile 
 The gnu make manual can be found [here](http://www.gnu.org/software/make/manual/html_node/index.html).
