@@ -4,19 +4,24 @@ The target architecture of this project is the cortex m4 from arm, but the proje
 other architectures as well.
 
 # Toolchain
-* The gcc arm embedded compiler (4.9.3) is used to compile this project. It can be downloaded from https://launchpad.net/gcc-arm-embedded . 
+On windows the following programs can be used to compile the project:
+* [Gcc arm embedded compiler (4.9.3)](https://launchpad.net/gcc-arm-embedded) 
+* Make:
+** (Cygwin)[https://www.cygwin.com/]
+** (MinGW - MSYS)[https://www.cygwin.com/] 
 
 # GCC
 The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html#toc_Top). Its quite usefull as 
 reference for the used compiler switches.
 
-Some interesting topics in this manual are:
+For this project the following topics in this manual are of special interest:
+* [Optimize-Options](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/Optimize-Options.html#Optimize-Options)
 * [Preprocessor Options](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/Preprocessor-Options.html#Preprocessor-Options) - They are used for automatic dependency generation.
 
 # Makefile 
 The gnu make manual can be found [here](http://www.gnu.org/software/make/manual/html_node/index.html).
 
-The following links represent shortcuts to important concepts which are used in the Makefile of this project:
+For this project the following topics in this manual are of special interest:
 * [Recipe Echoing](http://www.gnu.org/software/make/manual/make.html#Echoing)
 * [Automatic Variables](http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html)
 * [Functions for String Substitution and Analysis](http://www.gnu.org/software/make/manual/html_node/Text-Functions.html#Text-Functions)
