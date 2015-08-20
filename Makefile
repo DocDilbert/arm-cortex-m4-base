@@ -4,7 +4,7 @@ MAKEFLAGS += --no-builtin-rules
 # Name of the output elf file
 ELF_NAME = fm4.elf
 
-# Optimizer related flags supplied to the compiler
+# Optimization related flags supplied to the compiler
 OPT_FLAGS = -O0
 
 # Debug related flags supplied to the compiler
@@ -62,6 +62,7 @@ CORTEX_R5_SWFP_CC_FLAGS = -mthumb -march=armv7-r -mfloat-abi=softfp -mfloat-abi=
 CORTEX_R5_SWFP_LIB_PATH = $(GCC_LIB)armv7-r/thumb/softfp
 CORTEX_R5_HWFP_CC_FLAGS = -mthumb -march=armv7-r -mfloat-abi=softfp -mfloat-abi=hard -mfpu=vfpv3-d16
 CORTEX_R5_HWFP_LIB_PATH = $(GCC_LIB)armv7-r/thumb/fpu
+
 MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 
 INC_DIRS_FLAGS = -I. $(patsubst %,-I%, $(INC_DIRS))
