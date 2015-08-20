@@ -11,7 +11,7 @@ On windows the following programs can be used to compile the project:
    * [MinGW - MSYS](https://www.cygwin.com/) 
 
 # GCC
-The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html#toc_Top). Its quite usefull as 
+The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html). Its quite usefull as 
 reference for the used compiler switches.
 
 For this project the following topics in this manual are of special interest:
