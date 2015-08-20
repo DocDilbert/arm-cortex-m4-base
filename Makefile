@@ -1,8 +1,11 @@
-# Name of the produced elf file
+# Disable make built-in rules. This speeds up the compilation
+MAKEFLAGS += --no-builtin-rules
+
+# Name of the output elf file
 ELF_NAME = fm4.elf
 
 # Optimizer related flags supplied to the compiler
-OPT_FLAGS = -o0 
+OPT_FLAGS = -O0
 
 # Debug related flags supplied to the compiler
 DEBUG_FLAGS = -gdwarf-2 -g3
@@ -16,7 +19,7 @@ SRC_FILES = ./main.c \
 			./hal/target/system_mb9b560r.c
 			
 # Include directories
-INC_DIRS = 	./hal \
+INC_DIRS = 	./hal\
 			./hal/target
 			   
 # Object directory
@@ -61,23 +64,28 @@ CORTEX_R5_HWFP_CC_FLAGS = -mthumb -march=armv7-r -mfloat-abi=softfp -mfloat-abi=
 CORTEX_R5_HWFP_LIB_PATH = $(GCC_LIB)armv7-r/thumb/fpu
 MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 
-INC_DIRS_FLAGS = -I. $(patsubst %, -I%, $(INC_DIRS))
+INC_DIRS_FLAGS = -I. $(patsubst %,-I%, $(INC_DIRS))
 
-OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
+OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
+DEPS = $(OBJS:.o=.d)
 VPATH = $(sort $(dir $(SRC_FILES)))
 
+# Grouping of all compiler flags
+CFLAGS = $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
+
+# All phony targets
 .PHONY: all info clean doc
 
 all: $(ELF_NAME)              
 
-$(ELF_NAME): $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld 
-	@echo "Linking"
-	$(LD)  -T hal/linker.ld  $(OBJ_DIR)/boot.o $(OBJS) -o $(ELF_NAME)
+$(ELF_NAME): $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld
+	@echo 
+	@echo "Linking:"
+	$(LD) -T hal/linker.ld $(OBJ_DIR)/boot.o $(OBJS) -o $(ELF_NAME)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	@echo "Compiling $<"
-	$(CC) $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS)  -c $< -o $@
-    
+	$(CC) $(CFLAGS) -c $< -o $@
+	
 $(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
 	$(AS) $(MCU_CC_FLAGS) -g hal/boot.s -o $(OBJ_DIR)/boot.o
  
@@ -91,6 +99,10 @@ doc:
 	$(DOXYGEN) doxygen.config
 	
 clean:
-	rm -rf *.elf
-	rm -rf $(OBJ_DIR)/*.o
+	rm -f $(ELF_NAME)
+	rm -rf $(OBJ_DIR)
 	rm -rf ./doc
+
+# Include auto dependencies
+-include $(DEPS)
+

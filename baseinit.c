@@ -5,7 +5,7 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
-#include <mcu.h>
+#include "mcu.h"
 
 /// End address of the text section.  
 /// The text section is followed by the initial values of the data section.

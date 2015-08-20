@@ -5,6 +5,7 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
+#include <stdio.h>
 #include "hw_gpio.h"
 
 /// \brief Short explanation of what happens when the system starts.
