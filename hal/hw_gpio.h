@@ -15,7 +15,6 @@
 
 #include "mcu.h"
 
-
 // IMPORTANT GPIO REGISTER DESCRIPTIONS
 // 
 // ADE  
@@ -129,7 +128,6 @@
 #define BLUE_LED_OFF()   HW_GPIO_PUT(LED_BLUE, 1u)  /* Switches the blue led off*/
 
 /// This function initializes the gpio peripheral unit.
-extern void hw_gpio_init();
-
+extern void hw_gpio_init ();
 
 #endif

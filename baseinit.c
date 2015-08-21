@@ -35,27 +35,27 @@ extern uint32_t _ebss;
 /// * SysTick Configuration
 ///
 /// \ingroup StartSequence
-void baseinit()
+void baseinit ()
 {
-	uint32_t *src, *dest;
-    
-	// Initialize the data section in ram with the default values stored in flash.
-	// The default values a stored "after" the text section.
+    uint32_t *src, *dest;
+
+    // Initialize the data section in ram with the default values stored in flash.
+    // The default values a stored "after" the text section.
     src = &_etext;
-    for (dest = &_data; dest<&_edata;)
+    for (dest = &_data; dest < &_edata;)
     {
-        *dest++ = *src++;
+	*dest++ = *src++;
     }
-	
-	// Initialize the bss section with 0
-    for (src = &_bss; src<&_ebss;)
+
+    // Initialize the bss section with 0
+    for (src = &_bss; src < &_ebss;)
     {
-        *src++ = 0;
+	*src++ = 0;
     }
-    
-    SystemInit();
-    SystemCoreClockUpdate();
-    
-	// Set the systick to 1 ms
-    SysTick_Config(SystemCoreClock/1000);
+
+    SystemInit ();
+    SystemCoreClockUpdate ();
+
+    // Set the systick to 1 ms
+    SysTick_Config (SystemCoreClock / 1000);
 }
