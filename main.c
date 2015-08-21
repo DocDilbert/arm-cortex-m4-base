@@ -6,6 +6,8 @@
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
 #include <stdio.h>
+#include <stdint.h>
+
 #include "hw_gpio.h"
 
 /// \brief Short explanation of what happens when the system starts.
@@ -18,12 +20,12 @@
 /// \defgroup StartSequence System startup sequence
 
  
-volatile int test = 0xDEADBEAF;
+volatile uint32_t test = 0xDEADBEAF;
 volatile test2 = 0x2;
 
 void wait()
 {
-    unsigned i = 0;
+    uint32_t i = 0;
     
     for (i=0;i<1000000;i++)
         asm("nop");

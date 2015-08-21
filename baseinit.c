@@ -5,24 +5,25 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
+#include <stdint.h>
 #include "mcu.h"
 
 /// End address of the text section.  
 /// The text section is followed by the initial values of the data section.
 /// This symbol is set by the linker. 
-extern unsigned long _etext; 
+extern uint32_t _etext;
 
 /// Start address of the data section. This symbol is set by the linker.
-extern unsigned long _data;  
+extern uint32_t _data;
 
 /// End address of the data section. This symbol is set by the linker.
-extern unsigned long _edata; 
+extern uint32_t _edata;
 
 /// Start address of the bss section. This symbol is set by the linker.
-extern unsigned long _bss;   
+extern uint32_t _bss;
 
 /// End address of the bss section. This symbol is set by the linker.
-extern unsigned long _ebss;  
+extern uint32_t _ebss;
 
 /// \brief This function performs the basic system initialization.
 ///
@@ -36,7 +37,7 @@ extern unsigned long _ebss;
 /// \ingroup StartSequence
 void baseinit()
 {
-    unsigned long *src, *dest;
+	uint32_t *src, *dest;
     
 	// Initialize the data section in ram with the default values stored in flash.
 	// The default values a stored "after" the text section.
