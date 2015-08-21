@@ -4,14 +4,13 @@ The target architecture of this project is the cortex m4 from arm, but the proje
 other architectures as well.
 
 # Toolchain
-On windows the following programs can be used to compile the project:
-* [Gcc arm embedded compiler (4.9.3)](https://launchpad.net/gcc-arm-embedded) 
-* Basic unix tools (make, rm, grep ...):
-   * [Cygwin](https://www.cygwin.com/)
-   * [MinGW - MSYS](https://www.cygwin.com/) 
+On windows I use the following programs to compile the project:
+* Compiler - [Gcc arm embedded compiler (4.9.3)](https://launchpad.net/gcc-arm-embedded) 
+* IDE and Debugger - [Eclipse CDT (Mars - 4.5.0))] (https://www.eclipse.org)  
+* Unix tools (make, rm, grep ...) - [Cygwin](https://www.cygwin.com/) or [MinGW - MSYS](https://www.cygwin.com/) 
 
 # Compiling
-The Makefile uses the variable ARM_GCC_PATH to locate the arm compiler. This variable must be set to the installation
+The Makefile uses the variable **ARM_GCC_PATH** to locate the gcc arm compiler. This variable must be set to the installation
 directory of the compiler. On windows this path should not contain any whitespaces. 
 
 # GCC
