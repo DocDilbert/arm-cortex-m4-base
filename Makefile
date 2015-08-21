@@ -1,8 +1,8 @@
-# Disable make built-in rules. This speeds up the compilation
-MAKEFLAGS += --no-builtin-rules
-
 # Name of the output elf file
 ELF_NAME = fm4.elf
+
+# Disable built-in rules. This speeds up the compilation
+MAKEFLAGS += --no-builtin-rules
 
 # Optimization related flags supplied to the compiler
 OPT_FLAGS = -O0
@@ -11,29 +11,29 @@ OPT_FLAGS = -O0
 DEBUG_FLAGS = -gdwarf-2 -g3
 
 # Source files          
-SRC_FILES = ./main.c \
-			./syscalls.c \
-			./irq.c \
-			./baseinit.c \
-			./hal/hw_gpio.c \
-			./hal/target/system_mb9b560r.c
+SRC_FILES = main.c \
+			syscalls.c \
+			irq.c \
+			baseinit.c \
+			hal/hw_gpio.c \
+			hal/target/system_mb9b560r.c
 			
 # Include directories
-INC_DIRS = 	./hal\
-			./hal/target
+INC_DIRS = hal \
+		hal/target
 			   
 # Object directory
-OBJ_DIR = ./objs
+OBJ_DIR = objs
 
 # Toolchain prefix
-TC_PREFIX=arm-none-eabi-
+TC_PREFIX = arm-none-eabi-
 
 # Tool definition
-LD=$(TC_PREFIX)ld
-CC=$(TC_PREFIX)gcc
-AS=$(TC_PREFIX)as
-OBJDUMP=$(TC_PREFIX)objdump
-DOXYGEN=doxygen
+LD = $(TC_PREFIX)ld
+CC = $(TC_PREFIX)gcc
+AS = $(TC_PREFIX)as
+OBJDUMP = $(TC_PREFIX)objdump
+DOXYGEN = doxygen
 
 # Custom options for cortex-m and cortex-r processors 
 CORTEX_M0PLUS_CC_FLAGS  = -mthumb -mcpu=cortex-m0plus
@@ -65,7 +65,7 @@ CORTEX_R5_HWFP_LIB_PATH = $(GCC_LIB)armv7-r/thumb/fpu
 
 MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 
-INC_DIRS_FLAGS = -I. $(patsubst %,-I%, $(INC_DIRS))
+INC_DIRS_FLAGS = $(patsubst %,-I %, $(INC_DIRS))
 
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
 DEPS = $(OBJS:.o=.d)
