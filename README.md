@@ -6,7 +6,7 @@ other architectures as well.
 # Toolchain
 On windows I use the following programs to compile the project:
 * Compiler - [Gcc arm embedded compiler (4.9.3)](https://launchpad.net/gcc-arm-embedded) 
-* IDE and Debugger - [Eclipse CDT (Mars - 4.5.0))] (https://www.eclipse.org)  
+* IDE and Debugger - [Eclipse CDT (Mars - 4.5.0)] (https://www.eclipse.org)  
 * Unix tools (make, rm, grep ...) - [Cygwin](https://www.cygwin.com/) or [MinGW - MSYS](https://www.cygwin.com/) 
 
 # Compiling
@@ -14,7 +14,7 @@ The Makefile uses the variable **ARM_GCC_PATH** to locate the gcc arm compiler. 
 directory of the compiler. On windows this path should not contain any whitespaces. 
 
 # GCC
-The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html). Its quite usefull as 
+The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html). It is quite usefull as 
 reference for the used compiler switches.
 
 For this project the following topics in this manual are of special interest:
