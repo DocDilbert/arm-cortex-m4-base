@@ -110,7 +110,7 @@
 <setting id="org.eclipse.cdt.core.formatter.insert_space_after_comma_in_template_parameters" value="insert"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_if" value="do not insert"/>
 <setting id="org.eclipse.cdt.core.formatter.alignment_for_conditional_expression_chain" value="18"/>
-<setting id="org.eclipse.cdt.core.formatter.tabulation.char" value="mixed"/>
+<setting id="org.eclipse.cdt.core.formatter.tabulation.char" value="space"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_new_line_after_template_declaration" value="insert"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_new_line_before_colon_in_constructor_initializer_list" value="do not insert"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_after_comma_in_enum_declarations" value="insert"/>
@@ -161,7 +161,7 @@
 <setting id="org.eclipse.cdt.core.formatter.insert_space_before_question_in_conditional" value="insert"/>
 <setting id="org.eclipse.cdt.core.formatter.indent_body_declarations_compare_to_access_specifier" value="true"/>
 <setting id="org.eclipse.cdt.core.formatter.alignment_for_enumerator_list" value="48"/>
-<setting id="org.eclipse.cdt.core.formatter.tabulation.size" value="8"/>
+<setting id="org.eclipse.cdt.core.formatter.tabulation.size" value="4"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_method_invocation" value="do not insert"/>
 </profile>
 </profiles>

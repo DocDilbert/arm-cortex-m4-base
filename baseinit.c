@@ -44,13 +44,13 @@ void baseinit()
     src = &_etext;
     for (dest = &_data; dest < &_edata;)
     {
-	*dest++ = *src++;
+        *dest++ = *src++;
     }
 
     // Initialize the bss section with 0
     for (src = &_bss; src < &_ebss;)
     {
-	*src++ = 0;
+        *src++ = 0;
     }
 
     SystemInit();
