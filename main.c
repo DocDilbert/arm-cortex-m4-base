@@ -20,14 +20,14 @@
 /// \defgroup StartSequence System startup sequence
 
 volatile uint32_t test = 0xDEADBEAF;
-volatile test2 = 0x2;
+volatile uint32_t test2 = 0x2;
 
 void wait()
 {
     uint32_t i = 0;
 
     for (i = 0; i < 1000000; i++)
-	asm("nop");
+	__asm__("nop");
 }
 
 /// \brief This function is the starting point of the program. 
@@ -47,8 +47,7 @@ void main()
 	HW_GPIO_TOGGLE(DEBUGPIN_2);
 	HW_GPIO_TOGGLE(DEBUGPIN_3);
 	HW_GPIO_TOGGLE(DEBUGPIN_4);
-	RED_LED_ON()
-	;
+	RED_LED_ON();
 	wait();
 	RED_LED_OFF()
 	;
