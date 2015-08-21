@@ -35,7 +35,7 @@ extern uint32_t _ebss;
 /// * SysTick Configuration
 ///
 /// \ingroup StartSequence
-void baseinit ()
+void baseinit()
 {
     uint32_t *src, *dest;
 
@@ -53,9 +53,9 @@ void baseinit ()
 	*src++ = 0;
     }
 
-    SystemInit ();
-    SystemCoreClockUpdate ();
+    SystemInit();
+    SystemCoreClockUpdate();
 
     // Set the systick to 1 ms
-    SysTick_Config (SystemCoreClock / 1000);
+    SysTick_Config(SystemCoreClock / 1000);
 }

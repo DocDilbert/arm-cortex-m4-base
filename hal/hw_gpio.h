@@ -122,12 +122,12 @@
 
 #define RED_LED_ON()     HW_GPIO_PUT(LED_RED, 0u)   /* Switches the red led on */
 #define RED_LED_OFF()    HW_GPIO_PUT(LED_RED, 1u)   /* Switches the red led off */
-#define GREEN_LED_ON()   HW_GPIO_PUT(LED_GREEN, 0u) /* Switches the green led on */ 
+#define GREEN_LED_ON()   HW_GPIO_PUT(LED_GREEN, 0u) /* Switches the green led on */
 #define GREEN_LED_OFF()  HW_GPIO_PUT(LED_GREEN, 1u) /* Switches the green led off */
 #define BLUE_LED_ON()    HW_GPIO_PUT(LED_BLUE, 0u)  /* Switches the blue led on */
 #define BLUE_LED_OFF()   HW_GPIO_PUT(LED_BLUE, 1u)  /* Switches the blue led off*/
 
 /// This function initializes the gpio peripheral unit.
-extern void hw_gpio_init ();
+extern void hw_gpio_init();
 
 #endif

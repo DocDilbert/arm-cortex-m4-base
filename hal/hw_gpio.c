@@ -11,7 +11,7 @@
 /// \author Christian Groeling <ch.groeling@gmail.com>
 #include "hw_gpio.h"
 
-void hw_gpio_init ()
+void hw_gpio_init()
 {
     // INTIALIZE DEBUG PINS
     HW_GPIO_INIT_OUT(DEBUGPIN_1, 0);
