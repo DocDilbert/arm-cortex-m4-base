@@ -29,10 +29,10 @@ OBJ_DIR = objs
 TC_PREFIX = arm-none-eabi-
 
 # Tool definition
-LD = $(TC_PREFIX)ld
-CC = $(TC_PREFIX)gcc
-AS = $(TC_PREFIX)as
-OBJDUMP = $(TC_PREFIX)objdump
+LD = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)ld
+CC = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
+AS = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)as
+OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump"
 DOXYGEN = doxygen
 
 # Custom options for cortex-m and cortex-r processors 

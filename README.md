@@ -10,6 +10,10 @@ On windows the following programs can be used to compile the project:
    * [Cygwin](https://www.cygwin.com/)
    * [MinGW - MSYS](https://www.cygwin.com/) 
 
+# Compiling
+The Makefile uses the variable ARM_GCC_PATH to locate the arm compiler. This variable must be set to the installation
+directory of the compiler. On windows this path should not contain any whitespaces. 
+
 # GCC
 The gcc manual (4.9.3) can be found [here](https://gcc.gnu.org/onlinedocs/gcc-4.9.3/gcc/index.html). Its quite usefull as 
 reference for the used compiler switches.
