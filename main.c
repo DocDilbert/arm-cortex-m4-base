@@ -49,8 +49,7 @@ void main()
 	HW_GPIO_TOGGLE(DEBUGPIN_4);
 	RED_LED_ON();
 	wait();
-	RED_LED_OFF()
-	;
+	RED_LED_OFF();
 	wait();
     }
 

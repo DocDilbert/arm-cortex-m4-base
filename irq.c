@@ -22,5 +22,5 @@ void isr_reset()
 /// This function is called when a systick irq is raised.
 void isr_systick()
 {
-    //HW_GPIO_TOGGLE(DEBUGPIN_1);
+    HW_GPIO_TOGGLE(DEBUGPIN_1);
 }

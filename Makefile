@@ -10,6 +10,9 @@ OPT_FLAGS = -O0
 # Debug related flags supplied to the compiler
 DEBUG_FLAGS = -gdwarf-2 -g3
 
+# C-Standard - Enable c11 support
+C_STD_FLAGS = -std=c11
+
 # Source files          
 SRC_FILES = main.c \
 			syscalls.c \
@@ -72,7 +75,7 @@ DEPS = $(OBJS:.o=.d)
 VPATH = $(sort $(dir $(SRC_FILES)))
 
 # Grouping of all compiler flags
-CFLAGS = -std=c99 $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
+CFLAGS = $(C_STD_FLAGS) $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
 
 # All phony targets
 .PHONY: all info clean doc
