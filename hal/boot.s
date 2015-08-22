@@ -1,8 +1,11 @@
+.syntax unified
+.thumb
+
 .section .isr_vector,"xa"
 .globl  _isr_vector_m
 .type   _isr_vector_m, %object
 _isr_vector_m:
-.align 2
+	.align 2 // make sure the alignment is correct
     .long stack_top
     .long ResetTramp         // Reset
     .long Hang               // NMI
@@ -17,6 +20,7 @@ _isr_vector_m:
     .long Hang               // SVCall
     .long Hang               // Debug Monitor
     .long Hang               // Reserved
+    .long Hang               // PendSV
     .long isr_systick	     // SysTick
     .long Hang               // IRQ000_Handler
     .long Hang               // IRQ001_Handler
@@ -147,31 +151,26 @@ _isr_vector_m:
     .long Hang               // IRQ126_Handler
     .long Hang               // IRQ127_Handler
 
-.section .boot,"x", %progbits
+.macro 	FUNCTION name                // this macro makes life less tedious. =)
+       	.thumb_func					 // when a function is called by using 'bx' or 'blx' this is mandatory
+       	.type \name, %function       // when a function is pointed to from a table, this is mandatory
+       	.func \name,\name            // this tells a debugger that the function starts here
+		.align						 // make sure the address is aligned for code output
+       	\name:                       // this defines the label. the \() is necessary to separate the colon from the label
+ 		.endm
 
-.macro             FUNCTION name                /* this macro makes life less tedious. =) */
-                     .thumb_func
-                     .globl \name
-                     .type              \name,%function              /* when a function is pointed to from a table, this is mandatory */
-                    .func              \name,\name                  /* this tells a debugger that the function starts here */
-                                                                      /* when a function is called by using 'bx' or 'blx' this is mandatory */
-                                          /* make sure the address is aligned for code output */
-		             \name:                       /* this defines the label. the \() is necessary to separate the colon from the label */
-                    .endm
-
- .macro             ENDFUNC name                 /* FUNCTION and ENDFUNC must always be paired */
-                    //.size              \name, . - \name             /* tells the linker how big the code block for the function is */
-                    .pool                                           /* let the assembler place constants here */                                                          /* mark the end of the function, so a debugger can display it better */
-				    .endfunc
-				    .size   \name,.-\name
-                    .endm
+.macro	ENDFUNC name                 // FUNCTION and ENDFUNC must always be paired
+		.size \name,.-\name 		 // tells the linker how big the code block for the function is
+        .pool                        // let the assembler place constants here
+		.endfunc					 // mark the end of the function, so a debugger can display it better
+        .endm
 
 // This function does intentionally hang. 
 FUNCTION Hang
     B .
 ENDFUNC Hang
 
-// Reset interrupt service routine 
+// Trampoline for reset interrupt service routine
 FUNCTION ResetTramp
 	// Here the stack can be initialised. See above!
     B isr_reset				  // Call reset isr

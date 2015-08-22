@@ -7,10 +7,11 @@ MEMORY {
 ENTRY(isr_reset)
 SECTIONS
 {
-	. = ALIGN(4);
-
-	.text : { 
+	.isr_vector : {
 		*(.isr_vector)
+	} > FLASH
+	
+	.text : { 	
 		*(.boot)	
 		*(.text) 
         *(.rodata)

@@ -75,7 +75,7 @@ DEPS = $(OBJS:.o=.d)
 VPATH = $(sort $(dir $(SRC_FILES)))
 
 # Grouping of all compiler flags
-CFLAGS = -std=c99 $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
+CFLAGS = -std=c11 $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
 
 # All phony targets
 .PHONY: all info clean doc
