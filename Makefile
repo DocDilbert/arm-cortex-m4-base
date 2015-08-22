@@ -31,8 +31,8 @@ TC_PREFIX = arm-none-eabi-
 # Tool definition
 LD = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)ld
 CC = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
-AS = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)as
-OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump"
+AS = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc -x assembler-with-cpp
+OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump
 DOXYGEN = doxygen
 
 # Custom options for cortex-m and cortex-r processors 
@@ -72,7 +72,7 @@ DEPS = $(OBJS:.o=.d)
 VPATH = $(sort $(dir $(SRC_FILES)))
 
 # Grouping of all compiler flags
-CFLAGS = -std=c99 $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
+CFLAGS = -std=c11 $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
 
 # All phony targets
 .PHONY: all info clean doc
@@ -82,13 +82,19 @@ all: $(ELF_NAME)
 $(ELF_NAME): $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld
 	@echo 
 	@echo "Linking:"
-	$(LD) -T hal/linker.ld $(OBJ_DIR)/boot.o $(OBJS) -o $(ELF_NAME)
+	$(LD) -T hal/linker.ld $(OBJ_DIR)/boot.o $(OBJS)  -o $(ELF_NAME)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
-	
+
+COMPILER_OPTIONS  = -g -ggdb -Os -Wall -fno-strict-aliasing
+COMPILER_OPTIONS += -fno-strict-aliasing  -ffunction-sections -fdata-sections -fno-exceptions -fno-delete-null-pointer-checks
+COMPILER_OPTIONS += -fno-hosted 
+COMPILER_OPTIONS += -fmessage-length=0 -fno-builtin
+COMPILER_OPTIONS += $(MCU_CC_FLAGS) 
+
 $(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
-	$(AS) $(MCU_CC_FLAGS) -g hal/boot.s -o $(OBJ_DIR)/boot.o
+	$(AS) $(COMPILER_OPTIONS) -c hal/boot.s -o $(OBJ_DIR)/boot.o
  
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)

@@ -4,14 +4,14 @@ MEMORY {
     SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x1000
     SRAM2 (rwx): ORIGIN = 0x20000000, LENGTH = 0x1000
 }
-ENTRY(_Reset)
+ENTRY(isr_reset)
 SECTIONS
 {
-	.boot : {
-		KEEP(*(.boot))
-	} > FLASH
-	
+	. = ALIGN(4);
+
 	.text : { 
+		*(.isr_vector)
+		*(.boot)	
 		*(.text) 
         *(.rodata)
         _etext = .;

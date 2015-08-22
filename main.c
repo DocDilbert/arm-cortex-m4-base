@@ -27,8 +27,9 @@ void wait()
     uint32_t i = 0;
 
     for (i = 0; i < 1000000; i++)
-	__asm__("nop");
+        __asm__("nop");
 }
+
 
 /// \brief This function is the starting point of the program. 
 ///
@@ -44,14 +45,13 @@ void main()
     test2 = test;
     while (1)
     {
-	HW_GPIO_TOGGLE(DEBUGPIN_2);
-	HW_GPIO_TOGGLE(DEBUGPIN_3);
-	HW_GPIO_TOGGLE(DEBUGPIN_4);
-	RED_LED_ON();
-	wait();
-	RED_LED_OFF()
-	;
-	wait();
+        HW_GPIO_TOGGLE(DEBUGPIN_2);
+        HW_GPIO_TOGGLE(DEBUGPIN_3);
+        HW_GPIO_TOGGLE(DEBUGPIN_4);
+        RED_LED_ON();
+        wait();
+        RED_LED_OFF();
+        wait();
     }
 
     // do not leave this function

@@ -11,9 +11,10 @@
 /// \author Christian Groeling <ch.groeling@gmail.com>
 //#include "hw_gpio.h"
 
+#include "hw_gpio.h"
+
 void hw_gpio_init()
 {
-#ifdef _
     // INTIALIZE DEBUG PINS
     HW_GPIO_INIT_OUT(DEBUGPIN_1, 0);
 
@@ -29,5 +30,4 @@ void hw_gpio_init()
     HW_GPIO_INIT_OUT(LED_RED, 1);
     HW_GPIO_INIT_OUT(LED_GREEN, 1);
     HW_GPIO_INIT_OUT(LED_BLUE, 1);
-#endif
 }
