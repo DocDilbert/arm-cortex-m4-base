@@ -2,6 +2,7 @@
 .thumb
 
 .section .isr_vector,"xa"
+
 .globl  _isr_vector_m
 .type   _isr_vector_m, %object
 _isr_vector_m:
@@ -172,13 +173,13 @@ _isr_vector_m:
 
 // This function does intentionally hang. 
 FUNCTION hang
-    B .
-    B hang
+    B . // hang
 ENDFUNC hang
 
 // Trampoline for reset interrupt service routine
 FUNCTION reset_trampoline
-	// Here the stack can be initialised. See above!
+	// At this place some initialization can be done in assembler.
+	// This is currently not necessary.
     B isr_reset				  // Call reset isr
 ENDFUNC reset_trampoline
 
