@@ -12,6 +12,8 @@
 
 #include "hw_gpio.h"
 
+#include "hw_gpio.h"
+
 void hw_gpio_init()
 {
     // INTIALIZE DEBUG PINS

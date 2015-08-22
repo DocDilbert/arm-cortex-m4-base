@@ -35,7 +35,7 @@ TC_PREFIX = arm-none-eabi-
 LD = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)ld
 CC = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
 AS = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)as
-OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump"
+OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump
 DOXYGEN = doxygen
 
 # Custom options for cortex-m and cortex-r processors 
@@ -75,7 +75,7 @@ DEPS = $(OBJS:.o=.d)
 VPATH = $(sort $(dir $(SRC_FILES)))
 
 # Grouping of all compiler flags
-CFLAGS = $(C_STD_FLAGS) $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
+CFLAGS = -std=c99 $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
 
 # All phony targets
 .PHONY: all info clean doc
@@ -85,13 +85,14 @@ all: $(ELF_NAME)
 $(ELF_NAME): $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld
 	@echo 
 	@echo "Linking:"
-	$(LD) -T hal/linker.ld $(OBJ_DIR)/boot.o $(OBJS) -o $(ELF_NAME)
+	$(LD) -T hal/linker.ld $(OBJ_DIR)/boot.o $(OBJS)  -o $(ELF_NAME)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
-	
+
+
 $(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
-	$(AS) $(MCU_CC_FLAGS) -g hal/boot.s -o $(OBJ_DIR)/boot.o
+	$(AS) $(MCU_CC_FLAGS) $(DEBUG_FLAGS) -c hal/boot.s -o $(OBJ_DIR)/boot.o
  
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)

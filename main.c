@@ -30,6 +30,7 @@ void wait()
         __asm__("nop");
 }
 
+
 /// \brief This function is the starting point of the program. 
 ///
 /// The function is called after the basic initialization of the system
