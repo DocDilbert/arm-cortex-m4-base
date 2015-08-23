@@ -33,9 +33,9 @@ void main()
         HW_GPIO_TOGGLE(DEBUGPIN_3);
         HW_GPIO_TOGGLE(DEBUGPIN_4);
         RED_LED_ON();
-        wait();
+        burnCpuTime();
         RED_LED_OFF();
-        wait();
+        burnCpuTime();
     }
     // do not leave this function
 }

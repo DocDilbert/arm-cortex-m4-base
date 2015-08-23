@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include "utils.h"
 
-void wait()
+void burnCpuTime()
 {
     uint32_t i = 0;
 
