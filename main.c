@@ -5,11 +5,9 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
-#include <stdio.h>
-#include <stdint.h>
+#include "base_types.h"
 #include "hw_gpio.h"
 #include "utils.h"
-
 
 
 volatile uint32_t test = 0xDEADBEAF;
@@ -17,8 +15,9 @@ volatile uint32_t test2 = 0x2;
 
 /// \brief This function is the starting point of the program. 
 ///
-/// The function is called after the basic initialization of the system
-/// has finished. It should not be leaved.
+/// The function is called after the reset irq was handled by isr_reset().
+/// It should not be leaved.
+///
 /// \ingroup StartSequence
 void main()
 {
