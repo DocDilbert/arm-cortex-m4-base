@@ -14,7 +14,7 @@
 
 void hw_gpio_init()
 {
-    // INTIALIZE DEBUG PINS
+    // INITIALIZE DEBUG PINS
     HW_GPIO_INIT_OUT(DEBUGPIN_1, 0);
 
     HW_GPIO_ADC_OFF(DEBUGPIN_2);
