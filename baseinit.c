@@ -25,16 +25,6 @@ extern uint32_t _bss;
 /// End address of the bss section. This symbol is set by the linker.
 extern uint32_t _ebss;
 
-/// \brief This function performs the basic system initialization.
-///
-/// When a reset is raised (e.g. at startup) this is the first function which gets called.
-/// It performs the following tasks:
-/// * Copy initial values to the data section in ram.
-/// * Initialize the bss ram section with 0.
-/// * PLL Configuration 
-/// * SysTick Configuration
-///
-/// \ingroup StartSequence
 void baseinit()
 {
     uint32_t *src, *dest;

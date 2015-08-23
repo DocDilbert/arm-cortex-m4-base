@@ -5,9 +5,9 @@
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
 #include "hw_gpio.h"
+#include "baseinit.h"
 
 extern void main();
-extern void baseinit();
 
 /// \brief Reset interrupt service routine.
 /// This function is called when a reset irq is raised. This usually happens

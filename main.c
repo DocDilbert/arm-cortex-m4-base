@@ -7,8 +7,8 @@
 
 #include <stdio.h>
 #include <stdint.h>
-
 #include "hw_gpio.h"
+#include "utils.h"
 
 /// \brief Short explanation of what happens when the system starts.
 ///
@@ -19,17 +19,9 @@
 ///
 /// \defgroup StartSequence System startup sequence
 
+
 volatile uint32_t test = 0xDEADBEAF;
 volatile uint32_t test2 = 0x2;
-
-void wait()
-{
-    uint32_t i = 0;
-
-    for (i = 0; i < 1000000; i++)
-        __asm__("nop");
-}
-
 
 /// \brief This function is the starting point of the program. 
 ///
