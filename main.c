@@ -9,9 +9,10 @@
 #include "hw_gpio.h"
 #include "utils.h"
 
-
+/// \cond TEST
 volatile uint32_t test = 0xDEADBEAF;
 volatile uint32_t test2 = 0x2;
+/// \endcond
 
 /// \brief This function is the starting point of the program. 
 ///
