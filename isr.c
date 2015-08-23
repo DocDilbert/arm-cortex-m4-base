@@ -4,7 +4,7 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
-#include "hw_gpio.h"
+
 #include "baseinit.h"
 
 extern void main();
@@ -18,9 +18,3 @@ void isr_reset()
     main();
 }
 
-/// \brief System tick interrupt service routine.
-/// This function is called when a systick irq is raised.
-void isr_systick()
-{
-    HW_GPIO_TOGGLE(DEBUGPIN_1);
-}

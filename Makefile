@@ -17,6 +17,7 @@ C_STD_FLAGS = -std=c11
 SRC_FILES = main.c \
 			syscalls.c \
 			isr.c \
+			systick.c \
 			baseinit.c \
 			utils.c \
 			hal/hw_gpio.c \
