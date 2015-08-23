@@ -37,6 +37,9 @@
 
 // DEFINE GPIO MACROS
 
+
+//@{
+/// Pin macro
 #define DEBUGPIN_1_DDR          bFM4_GPIO_DDR1_PF
 #define DEBUGPIN_1_PDOR         bFM4_GPIO_PDOR1_PF
 #define DEBUGPIN_1_PFR          bFM4_GPIO_PFR1_PF
@@ -82,6 +85,8 @@
 #define RTO03_0_DDR             bFM4_GPIO_DDR3_PD
 #define RTO03_0_PDOR            bFM4_GPIO_PDOR3_PD
 #define RTO03_0_PFR             bFM4_GPIO_PFR3_PD
+//@}
+
 
 /// A macro that toggles the logic-level of an output pin. The pin must be 
 /// configured as gpio-output beforehand.
