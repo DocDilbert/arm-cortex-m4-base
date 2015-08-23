@@ -10,14 +10,6 @@
 #include "hw_gpio.h"
 #include "utils.h"
 
-/// \brief Short explanation of what happens when the system starts.
-///
-/// When the system starts a reset irq is raised. The reset interrupt service
-/// routine currently calls two functions.
-/// * baseinit() - Basic system initalization.
-/// * main() - Starting point.
-///
-/// \defgroup StartSequence System startup sequence
 
 
 volatile uint32_t test = 0xDEADBEAF;

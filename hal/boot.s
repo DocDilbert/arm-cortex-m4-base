@@ -181,6 +181,8 @@ FUNCTION reset_trampoline
 	// At this place some initialization can be done in assembler.
 	// This is currently not necessary.
     B isr_reset				  // Call reset isr
+    B main					  // Call main function
+    B .						  // This should not be reached
 ENDFUNC reset_trampoline
 
 

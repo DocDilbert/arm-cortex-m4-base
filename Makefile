@@ -16,9 +16,8 @@ C_STD_FLAGS = -std=c11
 # Source files          
 SRC_FILES = main.c \
 			syscalls.c \
-			isr.c \
+			reset.c \
 			systick.c \
-			baseinit.c \
 			utils.c \
 			hal/hw_gpio.c \
 			hal/target/system_mb9b560r.c
