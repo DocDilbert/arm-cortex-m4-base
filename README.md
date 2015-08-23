@@ -38,3 +38,6 @@ The gnu assembler is part of the binutils package. Its documentation can be foun
 
 For this project the following topics in this documentation are of special interest:
 * [ARM Dependent Features](https://sourceware.org/binutils/docs-2.25/as/ARM_002dDependent.html#ARM_002dDependent)
+
+# Doxygen
+The doxygen documentation can be found [here](http://www.stack.nl/~dimitri/doxygen/index.html).
