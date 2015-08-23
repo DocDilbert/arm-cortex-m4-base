@@ -1,4 +1,4 @@
-/// \file irq.c
+/// \file isr.c
 ///
 /// File which contains all implemented interrupt service handlers.
 ///
