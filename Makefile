@@ -23,8 +23,9 @@ SRC_FILES = main.c \
 			hal/target/system_mb9b560r.c
 			
 # Include directories
-INC_DIRS = hal \
-		hal/target
+INC_DIRS = 	. \
+			hal \
+			hal/target
 			   
 # Object directory
 OBJ_DIR = objs
