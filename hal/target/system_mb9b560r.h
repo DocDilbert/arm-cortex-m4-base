@@ -40,7 +40,7 @@
 */
 
 /******************************************************************************/
-/** \file system_mb9bf56xr.h
+/** \file system_mb9b560r.h
  **
  ** Headerfile for FM4 system parameters
  **

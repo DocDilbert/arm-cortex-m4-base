@@ -40,7 +40,7 @@
 */
 /**
  ******************************************************************************
- ** \file system_mb9abxxx.c
+ ** \file system_mb9b560r.c
  **
  ** FM3 system initialization functions
  ** All adjustments can be done in belonging header file.
