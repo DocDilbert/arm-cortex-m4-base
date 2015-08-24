@@ -1,7 +1,14 @@
+// boot.s
+//
+// File contains the interrupt vector table and a function which calls the boot code when a reset
+// irq is raised.
+//
+// Author: Christian Groeling <ch.groeling@gmail.com>
+
 .syntax unified
 .thumb
 
-// define section isr_vector. This section contains the isr_vectors and:
+// define  .isr_vector. This section contains the isr_vectors and:
 //
 // hang - A function which intentionally hangs
 // reset_trampoline - A function which calls isr_reset() and main()
@@ -17,25 +24,26 @@ _isr_vector_m:
 	//
 	// This is done automatically by as. The jump itself ignores this bit, therefore all jumps are 32 Bit aligned.
 	.align 2 // make sure the alignment is correct
-	.long stack_top
-	.long reset_trampoline   // Reset
-	.long hang               // NMI
-	.long hang               // Hard Fault
-	.long hang               // MPU Fault
-	.long hang               // Bus Fault
-	.long hang               // Usage Fault
-	.long hang               // Reserved
-	.long hang               // Reserved
-	.long hang               // Reserved
-	.long hang               // Reserved
-	.long hang               // SVCall
-	.long hang               // Debug Monitor
-	.long hang               // Reserved
-	.long hang               // PendSV
-	.long isr_systick	     // SysTick
+	.long stack_top          // This entry is used at startup to initialize the top address of the stack
+	.long reset_trampoline   // 000 - Reset
+	.long hang               // 001 - NMI
+	.long hang               // 002 - Hard Fault
+	.long hang               // 003 - MPU Fault
+	.long hang               // 004 - Bus Fault
+	.long hang               // 005 - Usage Fault
+	.long hang               // 006 - Reserved
+	.long hang               // 007 - Reserved
+	.long hang               // 008 - Reserved
+	.long hang               // 009 - Reserved
+	.long hang               // 010 - SVCall
+	.long hang               // 011 - Debug Monitor
+	.long hang               // 012 - Reserved
+	.long hang               // 013 - PendSV
+	.long isr_systick	     // 014 - SysTick
 
+	// 015 - 143
 	.rept 128                // Currently no fm4 irq is enabled. Fill the vector table with branches to hang
-	.long hang               // IRQx_Handler
+	.long hang               // xxx - IRQx_Handler
 	.endr
 
 
