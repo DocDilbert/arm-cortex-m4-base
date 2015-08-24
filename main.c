@@ -32,9 +32,9 @@ void main()
         GPIO_TOGGLE(DEBUGPIN_2);
         GPIO_TOGGLE(DEBUGPIN_3);
         GPIO_TOGGLE(DEBUGPIN_4);
-        GPIO_RED_LED_ON();
+        GPIO_PUT(LED_RED, 0); // red led on - inverse logic.
         burnCpuTime();
-        GPIO_RED_LED_OFF();
+        GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
         burnCpuTime();
     }
     // do not leave this function

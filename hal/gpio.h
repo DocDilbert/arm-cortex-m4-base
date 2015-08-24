@@ -125,42 +125,6 @@
     _PIN_##_PFR=1u; /* Uses a pin as an input/output pin of peripheral functions. */ \
 }
 
-/// Switches the red led on
-inline static void GPIO_RED_LED_ON()
-{
-    GPIO_PUT(LED_RED, 0u)
-}
-
-/// Switches the red led off
-inline static void GPIO_RED_LED_OFF()
-{
-    GPIO_PUT(LED_RED, 1u)
-}
-
-/// Switches the green led on
-inline static void GPIO_GREEN_LED_ON()
-{
-    GPIO_PUT(LED_GREEN, 0u)
-}
-
-/// Switches the green led off
-inline static void GPIO_GREEN_LED_OFF()
-{
-    GPIO_PUT(LED_GREEN, 1u)
-}
-
-/// Switches the blue led on
-inline static void GPIO_BLUE_LED_ON()
-{
-    GPIO_PUT(LED_BLUE, 0u)
-}
-
-/// Switches the blue led off
-inline static void GPIO_BLUE_LED_OFF()
-{
-    GPIO_PUT(LED_BLUE, 1u)
-}
-
 /// This function initializes the gpio peripheral unit.
 extern void gpio_init();
 
