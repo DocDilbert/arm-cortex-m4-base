@@ -187,8 +187,8 @@ FUNCTION reset_trampoline
 	// This is currently not necessary.
 
 	// The BL and BLX instructions write the address of the next instruction to LR (the link register, R14).
-	BL isr_reset	// Call reset isr
-	BL main		// Call main function
+	BL isr_reset	// Branch with link to "isr_reset()", return address stored in LR (r14)
+	BL main		// Branch with link to "main()", return address stored in LR (r14)
 	B .			// This should not be reached
 ENDFUNC reset_trampoline
 
