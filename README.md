@@ -20,7 +20,7 @@ The "Cortex M4 Technical Reference Manual" can be found [here](http://infocenter
 Some interesting topics in this manual are:
 * [3.3.1. Cortex-M4 instructions](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0439b/CHDDIGAC.html) - Instruction set summary
 
-# Cortex-M4 Devices Generic User Guide
+## Cortex-M4 Devices Generic User Guide
 The "Cortex-M4 Devices Generic User Guide" can be found [here](http://infocenter.arm.com/help/topic/com.arm.doc.dui0553a/index.html).
 
 Some interesting topics in this user guide are:
