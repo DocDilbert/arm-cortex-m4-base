@@ -82,19 +82,4 @@
  ** 
  ******************************************************************************/
 
-#ifndef __GPIO_H__
-  #include "gpio.h"
-#endif
-#if !defined(__FGPIO_H__) && defined(FM_CORE_TYPE_FM0P)
-  #include "fgpio.h"
-#endif
-
-#if defined(FM_DEVICE_PACKAGE_MB_R)
-    #ifndef __GPIO_MB9BF56XR_H__
-      #include "gpio_mb9bf56xr.h"
-    #endif
-#else
-    #error Please define the proper device package in RTE_Device.h
-#endif
-
 #endif  /* __MCU_H__ */

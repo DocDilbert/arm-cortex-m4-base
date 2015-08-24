@@ -5,7 +5,8 @@
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
 #include "systick.h"
-#include "hw_gpio.h"
+
+#include "hal/gpio.h"
 
 /// \brief System tick interrupt service routine.
 /// This function is called when a systick irq is raised.

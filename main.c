@@ -6,7 +6,7 @@
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
 #include "base_types.h"
-#include "hw_gpio.h"
+#include "hal/gpio.h"
 #include "utils.h"
 
 /// \cond TEST
@@ -22,7 +22,7 @@ volatile uint32_t test2 = 0x2;
 /// \ingroup StartSequence
 void main()
 {
-    hw_gpio_init();
+    gpio_init();
     test = 0;
     test = test + 1;
 

@@ -10,9 +10,9 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
-#include "hw_gpio.h"
+#include "gpio.h"
 
-void hw_gpio_init()
+void gpio_init()
 {
     // INITIALIZE DEBUG PINS
     HW_GPIO_INIT_OUT(DEBUGPIN_1, 0);

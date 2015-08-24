@@ -10,8 +10,8 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
-#ifndef __HW_GPIO_H__
-#define __HW_GPIO_H__
+#ifndef __GPIO_H__
+#define __GPIO_H__
 
 #include "mcu.h"
 
@@ -141,21 +141,18 @@ inline static void RED_LED_OFF()
 inline static void GREEN_LED_ON()
 {
     HW_GPIO_PUT(LED_GREEN, 0u)
-
 }
 
 /// Switches the green led off
 inline static void GREEN_LED_OFF()
 {
     HW_GPIO_PUT(LED_GREEN, 1u)
-
 }
 
 /// Switches the blue led on
 inline static void BLUE_LED_ON()
 {
     HW_GPIO_PUT(LED_BLUE, 0u)
-
 }
 
 /// Switches the blue led off
@@ -165,6 +162,6 @@ inline static void BLUE_LED_OFF()
 }
 
 /// This function initializes the gpio peripheral unit.
-extern void hw_gpio_init();
+extern void gpio_init();
 
 #endif

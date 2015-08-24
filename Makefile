@@ -19,7 +19,7 @@ SRC_FILES = main.c \
 			reset.c \
 			systick.c \
 			utils.c \
-			hal/hw_gpio.c \
+			hal/gpio.c \
 			hal/target/system_mb9b560r.c
 			
 # Include directories
