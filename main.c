@@ -29,9 +29,11 @@ void main()
     test = 0;
     test = test + 1;
 
-    test2 = test;
+    test2 = test - 1;
     while (1)
     {
+        test++;
+        test2++;
         GPIO_TOGGLE(DEBUGPIN_2);
         GPIO_TOGGLE(DEBUGPIN_3);
         GPIO_TOGGLE(DEBUGPIN_4);
