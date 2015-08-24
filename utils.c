@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include "utils.h"
 
-void burnCpuTime()
+void utils_burnCpuTime()
 {
     uint32_t i = 0;
 

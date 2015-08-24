@@ -9,6 +9,6 @@
 
 /// This function does burn cpu time.
 /// TODO: input parameter
-extern void burnCpuTime();
+extern void utils_burnCpuTime();
 
 #endif
