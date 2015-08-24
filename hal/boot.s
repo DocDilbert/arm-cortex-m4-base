@@ -185,8 +185,10 @@ ENDFUNC hang
 FUNCTION reset_trampoline
 	// At this place some initialization can be done in assembler.
 	// This is currently not necessary.
-	B isr_reset	// Call reset isr
-	B main		// Call main function
+
+	// The BL and BLX instructions write the address of the next instruction to LR (the link register, R14).
+	BL isr_reset	// Call reset isr
+	BL main		// Call main function
 	B .			// This should not be reached
 ENDFUNC reset_trampoline
 
