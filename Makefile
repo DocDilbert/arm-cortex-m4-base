@@ -25,6 +25,7 @@ SRC_FILES = main.c \
 # Include directories
 INC_DIRS = 	. \
 			hal \
+			hal/cmsis \
 			hal/target
 			   
 # Object directory
