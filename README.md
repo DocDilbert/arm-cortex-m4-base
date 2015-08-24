@@ -10,7 +10,7 @@ On windows I use the following programs to compile the project:
 * Unix tools (make, rm, grep ...) - [Cygwin](https://www.cygwin.com/) or [MinGW - MSYS](https://www.cygwin.com/) 
 
 # Compiling
-The Makefile uses the variable **ARM_GCC_PATH** to locate the gcc arm compiler. This variable must be set to the installation
+The Makefile uses the environment variable **ARM_GCC_PATH** to locate the gcc arm compiler. This variable must be set to the installation
 directory of the compiler. On windows this path should not contain any whitespaces. 
 
 # References
