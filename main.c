@@ -22,7 +22,10 @@ volatile uint32_t test2 = 0x2;
 /// \ingroup StartSequence
 void main()
 {
+    // Initialize gpios.
     gpio_init();
+
+
     test = 0;
     test = test + 1;
 
