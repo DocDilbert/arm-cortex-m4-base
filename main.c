@@ -29,12 +29,12 @@ void main()
     test2 = test;
     while (1)
     {
-        HW_GPIO_TOGGLE(DEBUGPIN_2);
-        HW_GPIO_TOGGLE(DEBUGPIN_3);
-        HW_GPIO_TOGGLE(DEBUGPIN_4);
-        RED_LED_ON();
+        GPIO_TOGGLE(DEBUGPIN_2);
+        GPIO_TOGGLE(DEBUGPIN_3);
+        GPIO_TOGGLE(DEBUGPIN_4);
+        GPIO_RED_LED_ON();
         burnCpuTime();
-        RED_LED_OFF();
+        GPIO_RED_LED_OFF();
         burnCpuTime();
     }
     // do not leave this function

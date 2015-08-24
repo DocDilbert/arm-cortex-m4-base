@@ -90,20 +90,20 @@
 
 /// A macro that toggles the logic-level of an output pin. The pin must be 
 /// configured as gpio-output beforehand.
-#define HW_GPIO_TOGGLE(_PIN_) \
+#define GPIO_TOGGLE(_PIN_) \
 {\
     _PIN_##_PDOR ^= 0x1u; /* invert bit 1 */ \
 }
 
 /// A macro that sets the logic level of the given pin. The pin must be 
 /// configured as gpio-output beforehand .
-#define HW_GPIO_PUT(_PIN_, _VALUE_) \
+#define GPIO_PUT(_PIN_, _VALUE_) \
 {\
     _PIN_##_PDOR= _VALUE_; /* Set the logic-level of the gpio */\
 }
 
 /// A macro that deactivates the usage of a pin as analog input.
-#define HW_GPIO_ADC_OFF(_PIN_) \
+#define GPIO_ADC_OFF(_PIN_) \
 {\
     _PIN_##_ADE =0; /* deactivate usage of the pin as analog input*/ \
 }
@@ -112,53 +112,53 @@
 ///
 /// Attention: adc functionality of a pin must be deactivated separatly by using
 /// the macro HW_GPIO_ADC_OFF .
-#define HW_GPIO_INIT_OUT(_PIN_, _INITIAL_VALUE_)\
+#define GPIO_INIT_OUT(_PIN_, _INITIAL_VALUE_)\
 { \
-    HW_GPIO_PUT(_PIN_,_INITIAL_VALUE_); /* Set initial value of the output */ \
+    GPIO_PUT(_PIN_,_INITIAL_VALUE_); /* Set initial value of the output */ \
     _PIN_##_DDR=1u;  /* Set data direction to output*/ \
     _PIN_##_PFR=0u; /* Set pin to gpio*/ \
 }
 
-#define HW_GPIO_INIT_PERIPH_FUNC(_PIN_)\
+#define GPIO_INIT_PERIPH_FUNC(_PIN_)\
 { \
     _PIN_##_DDR=1u;  /* Set data direction to output*/ \
     _PIN_##_PFR=1u; /* Uses a pin as an input/output pin of peripheral functions. */ \
 }
 
 /// Switches the red led on
-inline static void RED_LED_ON()
+inline static void GPIO_RED_LED_ON()
 {
-    HW_GPIO_PUT(LED_RED, 0u)
+    GPIO_PUT(LED_RED, 0u)
 }
 
 /// Switches the red led off
-inline static void RED_LED_OFF()
+inline static void GPIO_RED_LED_OFF()
 {
-    HW_GPIO_PUT(LED_RED, 1u)
+    GPIO_PUT(LED_RED, 1u)
 }
 
 /// Switches the green led on
-inline static void GREEN_LED_ON()
+inline static void GPIO_GREEN_LED_ON()
 {
-    HW_GPIO_PUT(LED_GREEN, 0u)
+    GPIO_PUT(LED_GREEN, 0u)
 }
 
 /// Switches the green led off
-inline static void GREEN_LED_OFF()
+inline static void GPIO_GREEN_LED_OFF()
 {
-    HW_GPIO_PUT(LED_GREEN, 1u)
+    GPIO_PUT(LED_GREEN, 1u)
 }
 
 /// Switches the blue led on
-inline static void BLUE_LED_ON()
+inline static void GPIO_BLUE_LED_ON()
 {
-    HW_GPIO_PUT(LED_BLUE, 0u)
+    GPIO_PUT(LED_BLUE, 0u)
 }
 
 /// Switches the blue led off
-inline static void BLUE_LED_OFF()
+inline static void GPIO_BLUE_LED_OFF()
 {
-    HW_GPIO_PUT(LED_BLUE, 1u)
+    GPIO_PUT(LED_BLUE, 1u)
 }
 
 /// This function initializes the gpio peripheral unit.
