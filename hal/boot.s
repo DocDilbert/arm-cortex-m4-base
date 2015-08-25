@@ -68,6 +68,7 @@ ENDFUNC hang
 
 // Trampoline for reset interrupt service routine
 FUNCTION reset_trampoline
+.globl  reset_trampoline
 	// At this place some initialization can be done in assembler.
 	// This is currently not necessary.
 

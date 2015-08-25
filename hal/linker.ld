@@ -1,14 +1,13 @@
-
 MEMORY {
     FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x1000
     SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x1000
     SRAM2 (rwx): ORIGIN = 0x20000000, LENGTH = 0x1000
 }
-ENTRY(isr_reset)
+ENTRY(reset_trampoline)
 SECTIONS
 {
 	.isr_vector : {
-		*(.isr_vector)
+		*(.isr_vector) 
 	} > FLASH
 	
 	.text : { 	
