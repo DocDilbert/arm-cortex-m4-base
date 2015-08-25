@@ -8,6 +8,18 @@
 .syntax unified
 .thumb
 
+
+.equ    Stack_Size, 0x00000400
+.section ".stack", "w"
+.align  3
+.globl  stack_mem
+.globl  stack_size
+_stack_mem:
+    .space  Stack_Size
+    .size   stack_mem,  . - _stack_mem
+    .set    stack_size, . - _stack_mem
+
+
 // define  .isr_vector. This section contains the isr_vectors and:
 //
 // hang - A function which intentionally hangs
