@@ -55,9 +55,13 @@ For this project the following topics in this documentation are of special inter
 * [9.4 ARM Dependent Features](https://sourceware.org/binutils/docs-2.25/as/ARM_002dDependent.html#ARM_002dDependent)
 
 
-### 
+### Linker
 The "GNU Linker" is part of the binutils package. Its documentation can be found [here](https://sourceware.org/binutils/docs-2.25/ld/index.html).
 
+For this project the following topics in this documentation are of special interest:
+* [2.1 Command Line Options](https://sourceware.org/binutils/docs-2.25/ld/Options.html#Options)
+* [3.3 Simple Linker Script Example](https://sourceware.org/binutils/docs-2.25/ld/Simple-Example.html#Simple-Example)
+* [3.4.1 Setting the Entry Point](https://sourceware.org/binutils/docs-2.25/ld/Entry-Point.html#Entry-Point)
 
 ## Doxygen
 The "Doxygen" documentation can be found [here](http://www.stack.nl/~dimitri/doxygen/index.html).
