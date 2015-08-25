@@ -7,10 +7,8 @@
 #include <stdint.h>
 #include "mcu.h"
 
-/// End address of the text section.  
-/// The text section is followed by the initial values of the data section.
-/// This symbol is set by the linker. 
-extern uint32_t _text_end;
+/// Start load address of the data section
+extern uint32_t _data_lma_start;
 
 /// Start address of the data section. This symbol is set by the linker.
 extern uint32_t _data_start;
@@ -38,10 +36,10 @@ void isr_reset()
 {
     uint32_t *src, *dest;
 
-    // Initialize the data section in ram with its initial values stored in flash.
-    // The initial values a stored "after" the text section.
-    src = &_text_end;
+    // Initialize the data section in ram with its initial values stored in flash
+    src = &_data_lma_start;
     dest = &_data_start;
+
     while (dest < &_data_end)
     {
         *dest++ = *src++;

@@ -31,11 +31,14 @@ SECTIONS
   	} > SRAM1
 	
 	/* Place read-write initialized data */
-    .data : AT(_text_end) ALIGN(4) {
+    .data :  ALIGN(4) {
         _data_start = .;
         *(.data)
         _data_end = .;
-	} > SRAM1
+	} > SRAM1 AT>FLASH
+    
+    /* Set start of data section load address */
+    _data_lma_start = LOADADDR(.data);
     
     /* Place read-write zero initialized data. */
     .bss(NOLOAD) : ALIGN(4) {
