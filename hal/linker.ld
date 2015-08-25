@@ -19,21 +19,21 @@ SECTIONS
 	/* Place program code */
 	.text : { 	
 		*(.text) 
-        _etext = .;
+        text_end = .;
 	} > FLASH
 	
 	/* Place read-write initialized data */ 
-    .data : AT(_etext) {
-        _data = .;
+    .data : AT(text_end) {
+        data_start = .;
         *(.data)
-        _edata = .;
+        data_end = .;
 	} > SRAM1
     
     /* Place read-write zero initialized data. */
     .bss(NOLOAD) : {
-		_bss = .;
+		bss_start = .;
 		*(.bss)
-		_ebss = .;
+		bss_end = .;
 	} > SRAM1
     
     . = 0x20000000; /* Put stack SRAM2 */
