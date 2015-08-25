@@ -37,7 +37,7 @@ SECTIONS
         _data_end = .;
 	} > SRAM1 AT>FLASH
     
-    /* Set start of data section load address */
+    /* Set start address of data load section which resides in flash */
     _data_lma_start = LOADADDR(.data);
     
     /* Place read-write zero initialized data. */
