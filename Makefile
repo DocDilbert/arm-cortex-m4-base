@@ -1,5 +1,5 @@
 # Name of the output elf file
-ELF_NAME = fm4.elf
+PROJECT = fm4
 
 # Disable built-in rules. This speeds up the compilation
 MAKEFLAGS += --no-builtin-rules
@@ -12,6 +12,9 @@ DEBUG_FLAGS = -gdwarf-2 -g3
 
 # C-Standard - Enable c11 support
 C_STD_FLAGS = -std=c11
+
+# Linker script
+LD_SCRIPT = hal/linker.ld
 
 # Source files          
 SRC_FILES = main.c \
@@ -35,13 +38,25 @@ OBJ_DIR = objs
 TC_PREFIX = arm-none-eabi-
 
 # Tool definition
-LD = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)ld
+LD = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
 CC = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
 AS = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)as
 OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump
 DOXYGEN = doxygen
 
-# Custom options for cortex-m and cortex-r processors 
+TARGET = $(PROJECT)
+
+INC_DIRS_FLAGS = $(patsubst %,-I %, $(INC_DIRS))
+
+OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
+DEPS = $(OBJS:.o=.d)
+
+# Define search path
+VPATH = $(sort $(dir $(SRC_FILES)))
+
+##############################################################
+# Custom options for cortex-m and cortex-r processors
+############################################################## 
 CORTEX_M0PLUS_CC_FLAGS  = -mthumb -mcpu=cortex-m0plus
 CORTEX_M0PLUS_LIB_PATH  = $(GCC_LIB)armv6-m
 CORTEX_M0_CC_FLAGS      = -mthumb -mcpu=cortex-m0
@@ -68,30 +83,35 @@ CORTEX_R5_SWFP_CC_FLAGS = -mthumb -march=armv7-r -mfloat-abi=softfp -mfloat-abi=
 CORTEX_R5_SWFP_LIB_PATH = $(GCC_LIB)armv7-r/thumb/softfp
 CORTEX_R5_HWFP_CC_FLAGS = -mthumb -march=armv7-r -mfloat-abi=softfp -mfloat-abi=hard -mfpu=vfpv3-d16
 CORTEX_R5_HWFP_LIB_PATH = $(GCC_LIB)armv7-r/thumb/fpu
-
 MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 
-INC_DIRS_FLAGS = $(patsubst %,-I %, $(INC_DIRS))
-
-OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
-DEPS = $(OBJS:.o=.d)
-VPATH = $(sort $(dir $(SRC_FILES)))
-
+##############################################################
 # Grouping of all compiler flags
-CFLAGS = -std=c11 $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) -MP -MMD
+##############################################################
+COMPILER_OPTIONS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
+COMPILER_OPTIONS += -MP -MMD
+
+##############################################################
+# Grouping of all linker flags
+##############################################################
+LD_OPTIONS = $(OPT_FLAGS) $(MCU_CC_FLAGS)  -T $(LD_SCRIPT) 
+
+# --gc-sections - Enable garbage collection of unused input sections. 
+# --cref - Output a cross reference table
+LD_OPTIONS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
 
 # All phony targets
 .PHONY: all info clean doc
 
-all: $(ELF_NAME)              
+all: $(TARGET).elf              
 
-$(ELF_NAME): $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld
+$(TARGET).elf : $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld
 	@echo 
 	@echo "Linking:"
-	$(LD) -T hal/linker.ld $(OBJ_DIR)/boot.o $(OBJS)  -o $(ELF_NAME)
+	$(LD) $(LD_OPTIONS) $(OBJ_DIR)/boot.o $(OBJS) -o $(TARGET).elf
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(COMPILER_OPTIONS) -c $< -o $@
 
 
 $(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
@@ -101,13 +121,14 @@ $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 	
 info:
-	$(OBJDUMP) -h $(ELF_NAME)
+	$(OBJDUMP) -h $(TARGET).elf
 
 doc:
 	$(DOXYGEN) doxygen.config
 	
 clean:
-	rm -f $(ELF_NAME)
+	rm -f $(TARGET).elf
+	rm -f $(TARGET).map
 	rm -rf $(OBJ_DIR)
 	rm -rf ./doc
 
