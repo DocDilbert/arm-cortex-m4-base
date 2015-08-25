@@ -10,19 +10,19 @@
 /// End address of the text section.  
 /// The text section is followed by the initial values of the data section.
 /// This symbol is set by the linker. 
-extern uint32_t text_end;
+extern uint32_t _text_end;
 
 /// Start address of the data section. This symbol is set by the linker.
-extern uint32_t data_start;
+extern uint32_t _data_start;
 
 /// End address of the data section. This symbol is set by the linker.
-extern uint32_t data_end;
+extern uint32_t _data_end;
 
 /// Start address of the bss section. This symbol is set by the linker.
-extern uint32_t bss_start;
+extern uint32_t _bss_start;
 
 /// End address of the bss section. This symbol is set by the linker.
-extern uint32_t bss_end;
+extern uint32_t _bss_end;
 
 /// \brief This function handles the reset irq
 ///
@@ -40,16 +40,16 @@ void isr_reset()
 
     // Initialize the data section in ram with its initial values stored in flash.
     // The initial values a stored "after" the text section.
-    src = &text_end;
-    dest = &data_start;
-    while (dest < &data_end)
+    src = &_text_end;
+    dest = &_data_start;
+    while (dest < &_data_end)
     {
         *dest++ = *src++;
     }
 
     // Initialize the bss section with 0
-    src = &bss_start;
-    while (src < &bss_end)
+    src = &_bss_start;
+    while (src < &_bss_end)
     {
         *src++ = 0;
     }

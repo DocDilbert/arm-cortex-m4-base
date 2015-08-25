@@ -1,51 +1,54 @@
+SEARCH_DIR(.)
+
 MEMORY {
     FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x1000
     SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x1000
-    SRAM2 (rwx): ORIGIN = 0x20000000, LENGTH = 0x1000
 }
 ENTRY(reset_trampoline)
 SECTIONS
 {
 	/* Place interrupt vector table */
-	. = ALIGN(4);
 	.isr_vector : {
+		. = ALIGN(4);
 		*(.isr_vector) 
 	} > FLASH
 	
 	/* Place read only data */
-	. = ALIGN(4);
 	.rodata : {
+		. = ALIGN(4);
 	   *(.rodata)
 	} > FLASH
 	
 	/* Place program code */
-	. = ALIGN(4);
 	.text : { 	
+		. = ALIGN(4);
 		*(.text) 
-        text_end = .;
+        _text_end = .;
 	} > FLASH
-	
-	/* Place read-write initialized data */
-	. = ALIGN(4); 
-    .data : AT(text_end) {
-        data_start = .;
-        *(.data)
-        data_end = .;
-	} > SRAM1
-    
-    /* Place read-write zero initialized data. */
-    . = ALIGN(4);
-    .bss(NOLOAD) : {
-		bss_start = .;
-		*(.bss)
-		bss_end = .;
-	} > SRAM1
 	
 	/* Place stack section */
     .stack :
 	{
     	*(.stack)
-    	stack_top = .;
-  	} > SRAM2
+    	_stack_top = .;
+  	} > SRAM1
+	
+	/* Place read-write initialized data */
+    .data : AT(_text_end) {
+    	. = ALIGN(4); 
+        _data_start = .;
+        *(.data)
+        _data_end = .;
+	} > SRAM1
+    
+    /* Place read-write zero initialized data. */
+    .bss(NOLOAD) : {
+    	. = ALIGN(4);
+		_bss_start = .;
+    	*(.bss)
+    	*(COMMON) /* Place common symbols also into bss (e.g. unitialized globals) */
+		_bss_end = .;
+	} > SRAM1
+		
 
 }

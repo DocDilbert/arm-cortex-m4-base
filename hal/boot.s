@@ -9,15 +9,12 @@
 .thumb
 
 
+// define a stack section
 .equ    Stack_Size, 0x00000400
 .section ".stack", "w"
-.align  3
-.globl  stack_mem
-.globl  stack_size
+.align  3	// stack must be 64 bit aligned
 _stack_mem:
     .space  Stack_Size
-    .size   stack_mem,  . - _stack_mem
-    .set    stack_size, . - _stack_mem
 
 
 // define  .isr_vector. This section contains the isr_vectors and:
@@ -26,7 +23,6 @@ _stack_mem:
 // reset_trampoline - A function which calls isr_reset() and main()
 //
 .section .isr_vector,"xa"
-
 .globl  _isr_vector_m
 .type   _isr_vector_m, %object
 _isr_vector_m:
@@ -36,7 +32,7 @@ _isr_vector_m:
 	//
 	// This is done automatically by as. The jump itself ignores this bit, therefore all jumps are 32 Bit aligned.
 	.align 2 // make sure the alignment is correct
-	.long stack_top          // This entry is used at startup to initialize the top address of the stack
+	.long _stack_top         // This entry is used at startup to initialize the top address of the stack
 	.long reset_trampoline   // 000 - Reset
 	.long hang               // 001 - NMI
 	.long hang               // 002 - Hard Fault
