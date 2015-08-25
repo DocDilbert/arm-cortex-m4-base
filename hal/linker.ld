@@ -6,23 +6,30 @@ MEMORY {
 ENTRY(reset_trampoline)
 SECTIONS
 {
+	/* Place interrupt vector table */
 	.isr_vector : {
 		*(.isr_vector) 
 	} > FLASH
 	
+	/* Place read only data */
+	.rodata : {
+	   *(.rodata)
+	} > FLASH
+	
+	/* Place program code */
 	.text : { 	
-		*(.boot)	
 		*(.text) 
-        *(.rodata)
         _etext = .;
 	} > FLASH
 	
+	/* Place read-write initialized data */ 
     .data : AT(_etext) {
         _data = .;
         *(.data)
         _edata = .;
 	} > SRAM1
     
+    /* Place read-write zero initialized data. */
     .bss(NOLOAD) : {
 		_bss = .;
 		*(.bss)

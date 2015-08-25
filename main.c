@@ -12,6 +12,8 @@
 /// \cond TEST
 volatile uint32_t test = 0xDEADBEAF;
 volatile uint32_t test2 = 0x2;
+
+const uint32_t read_only = 0x100;
 /// \endcond
 
 /// \brief This function is the starting point of the program. 
