@@ -4,7 +4,7 @@ The target architecture of this project is the cortex m4 from arm, but the proje
 other architectures as well.
 
 # Toolchain
-On windows I use the following programs to compile the project:
+On windows, I use the following programs to compile the project:
 * Compiler - [Gcc arm embedded compiler (4.9.3)](https://launchpad.net/gcc-arm-embedded) 
 * IDE and Debugger - [Eclipse CDT (Mars - 4.5.0)] (https://www.eclipse.org)  
 * Unix tools (make, rm, grep ...) - [Cygwin](https://www.cygwin.com/) or [MinGW - MSYS](https://www.cygwin.com/) 
@@ -53,6 +53,11 @@ The "GNU Assembler" is part of the binutils package. Its documentation can be fo
 For this project the following topics in this documentation are of special interest:
 * [7 Assembler Directives](https://sourceware.org/binutils/docs-2.25/as/Pseudo-Ops.html#Pseudo-Ops)
 * [9.4 ARM Dependent Features](https://sourceware.org/binutils/docs-2.25/as/ARM_002dDependent.html#ARM_002dDependent)
+
+
+### 
+The "GNU Linker" is part of the binutils package. Its documentation can be found [here](https://sourceware.org/binutils/docs-2.25/ld/index.html).
+
 
 ## Doxygen
 The "Doxygen" documentation can be found [here](http://www.stack.nl/~dimitri/doxygen/index.html).
