@@ -51,7 +51,7 @@ The following tools are especially useful:
 * [nm](https://sourceware.org/binutils/docs-2.25/binutils/nm.html#nm) - Lists symbols from object files
 * [objdump](https://sourceware.org/binutils/docs-2.25/binutils/objdump.html#objdump) - Display information from object files
 * [size](https://sourceware.org/binutils/docs-2.25/binutils/size.html#size) - List section sizes
-
+* [addr2line](https://sourceware.org/binutils/docs-2.25/binutils/addr2line.html#addr2line) -  Translates addresses into file names and line numbers
 ### Assembler - as
 The Assembler is part of the binutils package. Its documentation can be found [here](https://sourceware.org/binutils/docs-2.25/as/index.html).
 
