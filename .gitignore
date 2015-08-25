@@ -1,6 +1,9 @@
 # Generated files
 *.d
 
+# Map files
+*.map
+
 # Object files
 *.o
 *.ko
