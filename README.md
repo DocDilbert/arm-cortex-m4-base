@@ -45,18 +45,23 @@ For this project the following topics in this documentation are of special inter
 * [10.5.3 Automatic Variables](http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html)
 
 ## Binutils
-The "Binutils Documentation" can be found [here](http://www.gnu.org/software/binutils/). 
+The "Binutils Documentation" can be found [here](https://sourceware.org/binutils/docs-2.25/binutils/index.html). 
 
-### Gnu assembler
-The "GNU Assembler" is part of the binutils package. Its documentation can be found [here](https://sourceware.org/binutils/docs-2.25/as/index.html).
+The following tools are especially useful:
+* [nm](https://sourceware.org/binutils/docs-2.25/binutils/nm.html#nm) - Lists symbols from object files
+* [objdump](https://sourceware.org/binutils/docs-2.25/binutils/objdump.html#objdump) - Display information from object files
+* [size](https://sourceware.org/binutils/docs-2.25/binutils/size.html#size) - List section sizes
+
+### Assembler - as
+The Assembler is part of the binutils package. Its documentation can be found [here](https://sourceware.org/binutils/docs-2.25/as/index.html).
 
 For this project the following topics in this documentation are of special interest:
 * [7 Assembler Directives](https://sourceware.org/binutils/docs-2.25/as/Pseudo-Ops.html#Pseudo-Ops)
 * [9.4 ARM Dependent Features](https://sourceware.org/binutils/docs-2.25/as/ARM_002dDependent.html#ARM_002dDependent)
 
 
-### Linker
-The "GNU Linker" is part of the binutils package. Its documentation can be found [here](https://sourceware.org/binutils/docs-2.25/ld/index.html).
+### Linker - ld
+The Linker is part of the binutils package. Its documentation can be found [here](https://sourceware.org/binutils/docs-2.25/ld/index.html).
 
 For this project the following topics in this documentation are of special interest:
 * [2.1 Command Line Options](https://sourceware.org/binutils/docs-2.25/ld/Options.html#Options)
