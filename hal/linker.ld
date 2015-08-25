@@ -9,7 +9,7 @@ SECTIONS
 {
 	/* Place interrupt vector table */
 	.isr_vector :  ALIGN(4) {
-		*(.isr_vector) 
+		KEEP(*(.isr_vector)) 
 	} > FLASH
 	
 	/* Place read only data */
@@ -23,8 +23,8 @@ SECTIONS
         _text_end = .;
 	} > FLASH
 	
-	/* Place stack section */
-    .stack : ALIGN(8)
+	/* Place stack section. 64 Byte aligned. */
+    .stack(NOLOAD) : ALIGN(8)
 	{
     	*(.stack)
     	_stack_top = .;
@@ -41,7 +41,7 @@ SECTIONS
     .bss(NOLOAD) : ALIGN(4) {
 		_bss_start = .;
     	*(.bss)
-    	*(COMMON) /* Place common symbols also into bss (e.g. unitialized globals) */
+    	*(COMMON) /* Place common symbols into bss (e.g. unitialized globals). Attention they will be initialized with 0. */
 		_bss_end = .;
 	} > SRAM1
 		
