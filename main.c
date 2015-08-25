@@ -14,7 +14,7 @@ uint32_t data_test = 0xDEADBEAF;
 uint8_t data_test2 = 0xDE;
 uint16_t data_test3 = 0xDEAD;
 
-uint32_t bss_test;
+uint32_t bss_test = 0;
 uint8_t bss_test2;
 uint16_t bss_test3;
 
@@ -29,21 +29,18 @@ const uint32_t read_only = 0x100;
 /// \ingroup StartSequence
 void main()
 {
+    static uint32_t test;
     // Initialize gpios.
     gpio_init();
 
-
-    data_test = 0;
-    data_test = data_test + 1;
-
-    data_test2 = data_test - 1;
-    bss_test = 1;
-    bss_test2 = 1;
-    bss_test3 = 1;
     while (1)
     {
+        bss_test++;
+        bss_test2++;
+        bss_test3++;
         data_test++;
         data_test2++;
+        data_test3++;
         GPIO_TOGGLE(DEBUGPIN_2);
         GPIO_TOGGLE(DEBUGPIN_3);
         GPIO_TOGGLE(DEBUGPIN_4);
@@ -54,5 +51,7 @@ void main()
     }
     // do not leave this function
 }
+
+
 
 
