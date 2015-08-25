@@ -121,7 +121,7 @@ $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 	
 info:
-	$(OBJDUMP) -h $(TARGET).elf
+	arm-none-eabi-size --format=SysV -x $(TARGET).elf
 
 doc:
 	$(DOXYGEN) doxygen.config
