@@ -30,6 +30,7 @@ const uint32_t read_only = 0x100;
 void main()
 {
     static uint32_t test;
+
     // Initialize gpios.
     gpio_init();
 
