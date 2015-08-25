@@ -3,5 +3,5 @@ target remote localhost:2331
 monitor reset
 load
 break main
-break _Reset
+break reset_trampoline
 c
