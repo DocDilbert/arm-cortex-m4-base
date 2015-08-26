@@ -1,7 +1,8 @@
-# Name of the output elf file
+# Project name
 PROJECT = fm4
 
-# Disable built-in rules. This speeds up the compilation
+# Additional make flags.
+# - Disable built-in rules. This speeds up the compilation
 MAKEFLAGS += --no-builtin-rules
 
 # Optimization related flags supplied to the compiler
@@ -10,6 +11,9 @@ OPT_FLAGS = -O0
 # Debug related flags supplied to the compiler
 DEBUG_FLAGS = -gdwarf-2 -g3
 
+# Compiler options passed to gcc and c++
+COMPILER_OPTIONS = -fno-exceptions
+ 
 # C-Standard - Enable c11 support
 C_STD_FLAGS = -std=c11
 
@@ -17,7 +21,7 @@ C_STD_FLAGS = -std=c11
 LD_SCRIPT = hal/linker.ld
 
 # Source files          
-SRC_FILES = main.c \
+SRC_FILES = main.cpp \
 			syscalls.c \
 			systick.c \
 			utils.c \
@@ -38,9 +42,10 @@ OBJ_DIR = objs
 TC_PREFIX = arm-none-eabi-
 
 # Tool definition
-LD = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
-CC = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
-AS = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)as
+LD  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
+CC  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
+CPP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)c++
+AS  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)as
 OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump
 DOXYGEN = doxygen
 
@@ -48,8 +53,17 @@ TARGET = $(PROJECT)
 
 INC_DIRS_FLAGS = $(patsubst %,-I %, $(INC_DIRS))
 
-OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
-DEPS = $(OBJS:.o=.d)
+# Filter .c files in SRC_FILES LIST 
+CC_SRC_FILES = $(filter %.c, $(SRC_FILES))
+
+# Filter .cpp files in SRC_FILES LIST
+CPP_SRC_FILES = $(filter %.cpp, $(SRC_FILES))
+
+# Generate object lists 
+CC_OBJS  = $(patsubst %.c, $(OBJ_DIR)/%.o,  $(notdir $(CC_SRC_FILES)))
+CPP_OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o,  $(notdir $(CPP_SRC_FILES)))
+
+DEPS = $(CC_OBJS:.o=.d) $(CPP_OBJS:.o=.d) 
 
 # Define search path
 VPATH = $(sort $(dir $(SRC_FILES)))
@@ -88,8 +102,12 @@ MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 ##############################################################
 # Grouping of all compiler flags
 ##############################################################
-COMPILER_FLAGS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
-COMPILER_FLAGS += -MP -MMD
+
+CC_FLAGS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(COMPILER_OPTIONS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
+CC_FLAGS += -MP -MMD
+
+CPP_FLAGS  = $(OPT_FLAGS) $(MCU_CC_FLAGS) $(COMPILER_OPTIONS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
+CPP_FLAGS += -MP -MMD
 
 ##############################################################
 # Grouping of all linker flags
@@ -105,14 +123,16 @@ LD_FLAGS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
 
 all: $(TARGET).elf              
 
-$(TARGET).elf : $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld
+$(TARGET).elf : $(OBJ_DIR)/boot.o $(CC_OBJS) $(CPP_OBJS) hal/linker.ld
 	@echo 
 	@echo "Linking:"
-	$(LD) $(LD_FLAGS) $(OBJ_DIR)/boot.o $(OBJS) -o $(TARGET).elf
+	$(LD) $(LD_FLAGS) $(OBJ_DIR)/boot.o $(CC_OBJS) $(CPP_OBJS) -o $(TARGET).elf
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(COMPILER_FLAGS) -c $< -o $@
+	$(CC) $(CC_FLAGS) -c $< -o $@
 
+$(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
+	$(CPP) $(CPP_FLAGS) -c $< -o $@
 
 $(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
 	$(AS) $(MCU_CC_FLAGS) $(DEBUG_FLAGS) -c hal/boot.s -o $(OBJ_DIR)/boot.o
