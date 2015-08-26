@@ -125,7 +125,15 @@
     _PIN_##_PFR=1u; /* Uses a pin as an input/output pin of peripheral functions. */ \
 }
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 /// This function initializes the gpio peripheral unit.
 extern void gpio_init();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
