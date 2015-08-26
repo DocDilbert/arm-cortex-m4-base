@@ -1,8 +1,8 @@
 SEARCH_DIR(.)
 
 MEMORY {
-    FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x1000     /* 4 KByte */
-    SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x1000 /* 4 KByte */
+    FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x2000     /* 8 KByte */
+    SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x2000 /* 8 KByte */
 }
 ENTRY(reset_trampoline)
 SECTIONS
@@ -28,10 +28,20 @@ SECTIONS
 	/* Place stack section. 64 Byte aligned. */
     .stack(NOLOAD) : ALIGN(8)
 	{
-    	*(.stack)
+    	KEEP(*(.stack))
     	_stack_top = .;
   	} > SRAM1
 	
+	/* Place heap section. 64 Byte aligned. */
+    .heap(NOLOAD) : ALIGN(8)
+	{
+		_heap_start = .;
+    	KEEP(*(.heap))
+    	_heap_end = .;
+  	} > SRAM1
+  	PROVIDE(__HEAP_START = _heap_start );
+  	
+  	
 	/* Place read-write initialized data */
     .data :  ALIGN(4) {
         _data_start = .;

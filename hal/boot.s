@@ -9,12 +9,20 @@
 .thumb
 
 
-// define a stack section
+// define stack section
 .equ    Stack_Size, 0x00000400
-.section ".stack", "w"
+.section ".stack", "wa"
 .align  3	// stack must be 64 bit aligned
 _stack_mem:
     .space  Stack_Size
+
+
+// define heap section
+.equ    Heap_Size,  0x00000400
+.section ".heap", "wa"
+.align  3 // heap must be 64 bit aligned
+_heap_mem:
+    .space  Heap_Size
 
 
 // define  .isr_vector. This section contains the isr_vectors and:
