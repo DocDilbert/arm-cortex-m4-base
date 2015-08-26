@@ -10,7 +10,7 @@
 
 
 // define stack section
-.equ    Stack_Size, 0x00000400
+.equ    Stack_Size, 0x00000400 // 1 KByte
 .section ".stack", "wa"
 .align  3	// stack must be 64 bit aligned
 _stack_mem:
@@ -18,7 +18,9 @@ _stack_mem:
 
 
 // define heap section
-.equ    Heap_Size,  0x00000400
+// The page size of malloc is 4096 bytes aka 0x1000. This should be a multiple
+// of this size
+.equ    Heap_Size,  0x00002000 // 8 kByte
 .section ".heap", "wa"
 .align  3 // heap must be 64 bit aligned
 _heap_mem:

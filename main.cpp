@@ -59,7 +59,10 @@ int main()
     malloc_test   = malloc(10);
     malloc_test_2 = malloc(13);
     malloc_test_3 = malloc(0x100);
-    malloc_test_4 = malloc(0x100);
+    malloc_test_4 = malloc(0x500);
+    malloc_test_4 = malloc(0x500);
+    malloc_test_4 = malloc(0x500);
+    malloc_test_4 = malloc(0x500);
     while (1)
     {
         bss_test++;
