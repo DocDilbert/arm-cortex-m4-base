@@ -1,4 +1,4 @@
-file fm4.elf
+file arm-cortex-m4-base.elf
 target remote localhost:2331
 monitor reset
 load
