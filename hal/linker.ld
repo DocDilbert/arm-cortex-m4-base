@@ -21,7 +21,7 @@ SECTIONS
 	
 	/* Place program code */
 	.text : ALIGN(4) { 	
-		*(.text) 
+		 *(.text .text.* .gnu.linkonce.t.*)
         _text_end = .;
 	} > FLASH
 	
@@ -45,7 +45,8 @@ SECTIONS
 	/* Place read-write initialized data */
     .data :  ALIGN(4) {
         _data_start = .;
-        *(.data)
+       	*(.shdata)
+    	*(.data .data.* .gnu.linkonce.d.*)
         _data_end = .;
 	} > SRAM1 AT>FLASH
     
@@ -55,7 +56,9 @@ SECTIONS
     /* Place read-write zero initialized data. */
     .bss(NOLOAD) : ALIGN(4) {
 		_bss_start = .;
-    	*(.bss)
+		
+		 *(.shbss)
+   		 *(.bss .bss.* .gnu.linkonce.b.*)
     	*(COMMON) /* Place common symbols into bss (e.g. unitialized globals). Attention they will be initialized with 0. */
 		_bss_end = .;
 	} > SRAM1

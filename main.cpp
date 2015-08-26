@@ -5,9 +5,11 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <malloc.h>
 #include "base_types.h"
 #include "hal/gpio.h"
 #include "utils.h"
@@ -42,11 +44,22 @@ int main()
     volatile float32_t abs_in = -5.0;
     volatile float32_t abs_out = 0;
 
+    volatile void* malloc_test;
+    volatile void* malloc_test_2;
+    volatile void* malloc_test_3;
+    volatile void* malloc_test_4;
     memset(array_test, 1, 5);
 
     abs_out = fabs(abs_in);
     // Initialize gpios.
     gpio_init();
+
+    mallopt(M_MMAP_THRESHOLD, 0x100);
+
+    malloc_test   = malloc(10);
+    malloc_test_2 = malloc(13);
+    malloc_test_3 = malloc(0x100);
+    malloc_test_4 = malloc(0x100);
     while (1)
     {
         bss_test++;
@@ -66,8 +79,3 @@ int main()
     // never leave this function
     return -1;
 }
-
-
-
-
-
