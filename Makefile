@@ -88,17 +88,17 @@ MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 ##############################################################
 # Grouping of all compiler flags
 ##############################################################
-COMPILER_OPTIONS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
-COMPILER_OPTIONS += -MP -MMD
+COMPILER_FLAGS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
+COMPILER_FLAGS += -MP -MMD
 
 ##############################################################
 # Grouping of all linker flags
 ##############################################################
-LD_OPTIONS = $(OPT_FLAGS) $(MCU_CC_FLAGS)  -T $(LD_SCRIPT) 
+LD_FLAGS = $(OPT_FLAGS) $(MCU_CC_FLAGS)  -T $(LD_SCRIPT) 
 
 # --gc-sections - Enable garbage collection of unused input sections. 
-# --cref - Output a cross reference table
-LD_OPTIONS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
+# --cref - Output a cross reference table in map file
+LD_FLAGS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
 
 # All phony targets
 .PHONY: all info clean doc
@@ -108,10 +108,10 @@ all: $(TARGET).elf
 $(TARGET).elf : $(OBJ_DIR)/boot.o $(OBJS) hal/linker.ld
 	@echo 
 	@echo "Linking:"
-	$(LD) $(LD_OPTIONS) $(OBJ_DIR)/boot.o $(OBJS) -o $(TARGET).elf
+	$(LD) $(LD_FLAGS) $(OBJ_DIR)/boot.o $(OBJS) -o $(TARGET).elf
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(COMPILER_OPTIONS) -c $< -o $@
+	$(CC) $(COMPILER_FLAGS) -c $< -o $@
 
 
 $(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
