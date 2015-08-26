@@ -19,6 +19,10 @@ uint8_t bss_test2;
 uint16_t bss_test3;
 
 const uint32_t read_only = 0x100;
+
+uint16_t array_test[20];
+uint16_t array_test2[10] = {50,60,10};
+const uint16_t array_test3[10] = {50,60,10};
 /// \endcond
 
 /// \brief This function is the starting point of the program. 
@@ -33,7 +37,6 @@ void main()
 
     // Initialize gpios.
     gpio_init();
-
     while (1)
     {
         bss_test++;
@@ -52,6 +55,7 @@ void main()
     }
     // do not leave this function
 }
+
 
 
 
