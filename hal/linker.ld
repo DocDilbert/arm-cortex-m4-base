@@ -9,12 +9,14 @@ SECTIONS
 {
 	/* Place interrupt vector table */
 	.isr_vector :  ALIGN(4) {
+		/* KEEP - Do not delete .isr_vector sections even if they are not used */
 		KEEP(*(.isr_vector)) 
 	} > FLASH
 	
 	/* Place read only data */
 	.rodata : ALIGN(4) {
-	   *(.rodata)
+		/* KEEP - Do not delete .rodata sections even if they are not used */
+	   KEEP(*(.rodata)) 
 	} > FLASH
 	
 	/* Place program code */

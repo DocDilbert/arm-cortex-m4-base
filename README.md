@@ -68,6 +68,7 @@ For this project the following topics in this documentation are of special inter
 * [2.1 Command Line Options](https://sourceware.org/binutils/docs-2.25/ld/Options.html#Options)
 * [3.3 Simple Linker Script Example](https://sourceware.org/binutils/docs-2.25/ld/Simple-Example.html#Simple-Example)
 * [3.4.1 Setting the Entry Point](https://sourceware.org/binutils/docs-2.25/ld/Entry-Point.html#Entry-Point)
+* [3.6.4.4 Input Section and Garbage Collection](https://sourceware.org/binutils/docs-2.25/ld/Input-Section-Keep.html#Input-Section-Keep)
 
 ## Doxygen
 The "Doxygen" documentation can be found [here](http://www.stack.nl/~dimitri/doxygen/index.html).
