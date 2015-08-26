@@ -1,5 +1,5 @@
 # Project name
-PROJECT = fm4
+PROJECT = arm-cortex-m4-base
 
 # Additional make flags.
 # - Disable built-in rules. This speeds up the compilation
@@ -148,7 +148,6 @@ doc:
 	
 clean:
 	rm -f $(TARGET).elf
-	rm -f $(TARGET).map
 	rm -rf $(OBJ_DIR)
 	rm -rf ./doc
 
