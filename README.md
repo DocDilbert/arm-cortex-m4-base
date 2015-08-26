@@ -42,6 +42,7 @@ For this project the following topics in this documentation are of special inter
 * [5.2 Recipe Echoing](http://www.gnu.org/software/make/manual/make.html#Echoing)
 * [8.2 Functions for String Substitution and Analysis](http://www.gnu.org/software/make/manual/html_node/Text-Functions.html#Text-Functions)
 * [6.3.1 Substitution References](http://www.gnu.org/software/make/manual/html_node/Substitution-Refs.html#Substitution-Refs)
+* [8.2 Functions for String Substitution and Analysis](http://www.gnu.org/software/make/manual/html_node/Text-Functions.html#Text-Functions)
 * [10.5.3 Automatic Variables](http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html)
 
 ## Binutils
