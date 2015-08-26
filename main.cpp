@@ -5,9 +5,13 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
 #include "base_types.h"
 #include "hal/gpio.h"
 #include "utils.h"
+
 
 /// \cond TEST
 uint32_t data_test = 0xDEADBEAF;
@@ -35,6 +39,12 @@ int main()
 {
     static uint32_t test;
 
+    volatile float32_t abs_in = -5.0;
+    volatile float32_t abs_out = 0;
+
+    memset(array_test, 1, 5);
+
+    abs_out = fabs(abs_in);
     // Initialize gpios.
     gpio_init();
     while (1)
