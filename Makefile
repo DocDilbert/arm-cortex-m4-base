@@ -13,8 +13,8 @@ DEBUG_FLAGS = -gdwarf-2 -g3
 
 # Compiler options passed to gcc and c++
 COMPILER_OPTIONS  = -fno-exceptions
-# COMPILER_OPTIONS += -ffunction-sections  # Place each function item into its own section in the output file
-# COMPILER_OPTIONS += -fdata-sections # Place each data item into its own section in the output file
+COMPILER_OPTIONS += -ffunction-sections  # Place each function item into its own section in the output file
+COMPILER_OPTIONS += -fdata-sections # Place each data item into its own section in the output file
  
 # C-Standard - Enable c11 support
 C_STD_FLAGS = -std=c11

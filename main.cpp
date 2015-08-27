@@ -14,7 +14,7 @@
 #include "hal/gpio.h"
 #include "utils.h"
 
-void * operator new(size_t size)
+void *operator new(size_t size)
 {
     void *p;
     // attention - no error checks here
