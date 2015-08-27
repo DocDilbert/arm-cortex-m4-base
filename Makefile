@@ -27,7 +27,7 @@ SRC_FILES = main.cpp \
 			syscalls.c \
 			systick.c \
 			utils.c \
-			hal/reset.c \
+			reset.c \
 			hal/gpio.c \
 			hal/target/system_mb9b560r.c
 			
