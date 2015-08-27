@@ -23,7 +23,8 @@ C_STD_FLAGS = -std=c11
 LD_SCRIPT = hal/linker.ld
 
 # Source files          
-SRCS =  hal/boot.s \
+SRCS =  pre_sections.s \
+		hal/isr_vectors.s \
 		main.cpp \
 		syscalls.c \
 		systick.c \

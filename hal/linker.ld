@@ -8,9 +8,9 @@ ENTRY(reset_trampoline)
 SECTIONS
 {
 	/* Place interrupt vector table */
-	.isr_vector :  ALIGN(4) {
+	.isr_vectors :  ALIGN(4) {
 		/* KEEP - Do not delete .isr_vector sections even if they are not used */
-		KEEP(*(.isr_vector)) 
+		KEEP(*(.isr_vectors)) 
 	} > FLASH
 	
 	/* Place read only data */
