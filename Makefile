@@ -12,7 +12,7 @@ OPT_FLAGS = -O0
 DEBUG_FLAGS = -gdwarf-2 -g3
 
 # Compiler options passed to gcc and c++
-COMPILER_OPTIONS  = -fno-exceptions 
+COMPILER_OPTIONS  = -fno-exceptions
 # COMPILER_OPTIONS += -ffunction-sections  # Place each function item into its own section in the output file
 # COMPILER_OPTIONS += -fdata-sections # Place each data item into its own section in the output file
  
@@ -23,14 +23,14 @@ C_STD_FLAGS = -std=c11
 LD_SCRIPT = hal/linker.ld
 
 # Source files          
-SRC_FILES = hal/boot.s \
-			main.cpp \
-			syscalls.c \
-			systick.c \
-			utils.c \
-			reset.c \
-			hal/gpio.c \
-			hal/target/system_mb9b560r.c
+SRCS =  hal/boot.s \
+		main.cpp \
+		syscalls.c \
+		systick.c \
+		utils.c \
+		reset.c \
+		hal/gpio.c \
+		hal/target/system_mb9b560r.c
 			
 # Include directories
 INC_DIRS = 	. \
@@ -56,25 +56,25 @@ TARGET = $(PROJECT)
 
 INC_DIRS_FLAGS = $(patsubst %,-I %, $(INC_DIRS))
 
-# Filter .c files in SRC_FILES list 
-CC_SRC_FILES = $(filter %.c, $(SRC_FILES))
+# Filter .c files in SRCS list 
+C_SRCS = $(filter %.c, $(SRCS))
 
-# Filter .cpp files in SRC_FILES list
-CPP_SRC_FILES = $(filter %.cpp, $(SRC_FILES))
+# Filter .cpp files in SRCS list
+CXX_SRCS = $(filter %.cpp, $(SRCS))
 
-# Filter .s files in SRC_FILES list
-ASM_SRC_FILES = $(filter %.s, $(SRC_FILES))
+# Filter .s files in SRCS list
+S_SRCS = $(filter %.s, $(SRCS))
 
 # Generate object lists 
-CC_OBJS  = $(patsubst %.c, $(OBJ_DIR)/%.o,  $(notdir $(CC_SRC_FILES)))
-CPP_OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o,  $(notdir $(CPP_SRC_FILES)))
-ASM_OBJS = $(patsubst %.s, $(OBJ_DIR)/%.o,  $(notdir $(ASM_SRC_FILES)))
+C_OBJS  = $(patsubst %.c, $(OBJ_DIR)/%.o,  $(notdir $(C_SRCS)))
+CXX_OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o,  $(notdir $(CXX_SRCS)))
+S_OBJS = $(patsubst %.s, $(OBJ_DIR)/%.o,  $(notdir $(S_SRCS)))
 
 
-DEPS = $(CC_OBJS:.o=.d) $(CPP_OBJS:.o=.d) 
+DEPS = $(C_OBJS:.o=.d) $(CXX_OBJS:.o=.d) 
 
 # Define search path
-VPATH = $(sort $(dir $(SRC_FILES)))
+VPATH = $(sort $(dir $(SRCS)))
 
 ##############################################################
 # Custom options for cortex-m and cortex-r processors
@@ -111,19 +111,19 @@ MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 # Grouping of all compiler flags
 ##############################################################
 
-CC_FLAGS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(COMPILER_OPTIONS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
-CC_FLAGS += -MP -MMD
+C_FLAGS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(COMPILER_OPTIONS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
+C_FLAGS += -MP -MMD
 
-CPP_FLAGS  = $(OPT_FLAGS) $(MCU_CC_FLAGS) $(COMPILER_OPTIONS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS)
-CPP_FLAGS += -fno-rtti # Disable runtime type information 
-CPP_FLAGS += -MP -MMD 
+CXX_FLAGS  = $(OPT_FLAGS) $(MCU_CC_FLAGS) $(COMPILER_OPTIONS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS)
+CXX_FLAGS += -fno-rtti # Disable runtime type information 
+CXX_FLAGS += -MP -MMD 
 
 AS_FLAGS = $(MCU_CC_FLAGS) $(DEBUG_FLAGS)
 
 ##############################################################
 # Grouping of all linker flags
 ##############################################################
-LD_FLAGS = $(OPT_FLAGS) $(MCU_CC_FLAGS)  -T $(LD_SCRIPT) 
+LD_FLAGS = $(OPT_FLAGS) $(MCU_CC_FLAGS) -T $(LD_SCRIPT) 
 
 # --gc-sections - Enable garbage collection of unused input sections. 
 # --cref - Output a cross reference table in map file
@@ -134,16 +134,16 @@ LD_FLAGS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
 
 all: $(TARGET).elf              
 
-$(TARGET).elf : $(ASM_OBJS) $(CC_OBJS) $(CPP_OBJS) hal/linker.ld
+$(TARGET).elf : $(S_OBJS) $(C_OBJS) $(CXX_OBJS) hal/linker.ld
 	@echo 
 	@echo "Linking:"
-	$(LD) $(LD_FLAGS) $(ASM_OBJS) $(CC_OBJS) $(CPP_OBJS) -o $(TARGET).elf
+	$(LD) $(LD_FLAGS) $(S_OBJS) $(C_OBJS) $(CXX_OBJS) -o $(TARGET).elf
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CC_FLAGS) -c $< -o $@
+	$(CC) $(C_FLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
-	$(CPP) $(CPP_FLAGS) -c $< -o $@
+	$(CPP) $(CXX_FLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
 	$(AS)  $(AS_FLAGS) -c $< -o $@
