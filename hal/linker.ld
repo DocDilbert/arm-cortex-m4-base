@@ -16,13 +16,13 @@ SECTIONS
 	/* Place read only data */
 	.rodata : ALIGN(4) {
 		/* KEEP - Do not delete .rodata sections even if they are not used */
-	   KEEP(*(.rodata .rodata.* .gnu.linkonce.r.*)) 
+	   KEEP(*(.rodata .rodata.* )) 
 	} > FLASH
 	
 	
 	/* Place program code */
 	.text : ALIGN(4) { 	
-		 *(.text .text.* .gnu.linkonce.t.*)
+		 *(.text .text.*)
         _text_end = .;
 	} > FLASH
 	
@@ -57,7 +57,7 @@ SECTIONS
 		_bss_start = .;
 		
 		 *(.shbss)
-   		 *(.bss .bss.* .gnu.linkonce.b.*)
+   		 *(.bss .bss.*)
     	*(COMMON) /* Place common symbols into bss (e.g. unitialized globals). Attention they will be initialized with 0. */
 		_bss_end = .;
 	} > SRAM1
