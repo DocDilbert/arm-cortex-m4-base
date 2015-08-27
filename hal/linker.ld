@@ -16,8 +16,9 @@ SECTIONS
 	/* Place read only data */
 	.rodata : ALIGN(4) {
 		/* KEEP - Do not delete .rodata sections even if they are not used */
-	   KEEP(*(.rodata)) 
+	   KEEP(*(.rodata .rodata.* .gnu.linkonce.r.*)) 
 	} > FLASH
+	
 	
 	/* Place program code */
 	.text : ALIGN(4) { 	
