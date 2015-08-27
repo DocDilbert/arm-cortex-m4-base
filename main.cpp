@@ -61,7 +61,7 @@ int main()
     abs_out = fabs(abs_in);
     // Initialize gpios.
     gpio_init();
-
+    a = new A(10);
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
     malloc_test[2] = malloc(0x100);
@@ -70,7 +70,7 @@ int main()
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
 
-   // a = new A(10);
+
     while (1)
     {
         free(malloc_test[0]);

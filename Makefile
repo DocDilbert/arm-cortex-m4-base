@@ -12,7 +12,7 @@ OPT_FLAGS = -O0
 DEBUG_FLAGS = -gdwarf-2 -g3
 
 # Compiler options passed to gcc and c++
-COMPILER_OPTIONS  = -fno-exceptions
+COMPILER_OPTIONS  = -fno-exceptions 
 # COMPILER_OPTIONS += -ffunction-sections  # Place each function item into its own section in the output file
 # COMPILER_OPTIONS += -fdata-sections # Place each data item into its own section in the output file
  
@@ -124,7 +124,7 @@ AS_FLAGS = $(MCU_CC_FLAGS) $(DEBUG_FLAGS)
 ##############################################################
 # Grouping of all linker flags
 ##############################################################
-LD_FLAGS = $(OPT_FLAGS) $(MCU_CC_FLAGS) -T $(LD_SCRIPT) 
+LD_FLAGS = $(OPT_FLAGS) $(COMPILER_OPTIONS)  $(MCU_CC_FLAGS) -T $(LD_SCRIPT) 
 LD_FLAGS += -fno-rtti # Disable runtime type information 
 # --gc-sections - Enable garbage collection of unused input sections. 
 # --cref - Output a cross reference table in map file

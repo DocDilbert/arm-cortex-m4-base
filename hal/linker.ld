@@ -1,7 +1,7 @@
 SEARCH_DIR(.)
 
 MEMORY {
-    FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x2000     /* 8 KByte */
+    FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x20000    /* 128 KByte */
     SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x4000 /* 16 KByte */
 }
 ENTRY(reset_trampoline)
@@ -19,13 +19,24 @@ SECTIONS
 	   KEEP(*(.rodata .rodata.* )) 
 	} > FLASH
 	
-	
 	/* Place program code */
 	.text : ALIGN(4) { 	
 		 *(.text .text.*)
-        _text_end = .;
 	} > FLASH
 	
+	/* The following .ARM.extab section has something to do with stack frame unwinding */
+	.ARM.extab   : 
+	{ 
+		*(.ARM.extab* .gnu.linkonce.armextab.*) 
+	} >FLASH
+	
+	/* The following .ARM.extab section has something to do with stack frame unwinding */
+    .ARM : {
+   		__exidx_start = .;
+     	*(.ARM.exidx*)
+     	__exidx_end = .;
+   	} >FLASH
+   	
 	/* Place stack section. 64 Byte aligned. */
     .stack(NOLOAD) : ALIGN(8)
 	{
@@ -45,7 +56,7 @@ SECTIONS
     .data :  ALIGN(4) {
         _data_start = .;
        	*(.shdata)
-    	*(.data .data.* .gnu.linkonce.d.*)
+    	*(.data .data.*)
         _data_end = .;
 	} > SRAM1 AT>FLASH
     
