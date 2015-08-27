@@ -30,8 +30,6 @@ SRCS =  pre_sections.s \
 		systick.c \
 		utils.c \
 		reset.c \
-		overrides/new.cpp \
-		overrides/delete.cpp \
 		overrides/malloc_syscalls.c \
 		hal/gpio.c \
 		hal/target/system_mb9b560r.c
@@ -127,7 +125,8 @@ AS_FLAGS = $(MCU_CC_FLAGS) $(DEBUG_FLAGS)
 ##############################################################
 # Grouping of all linker flags
 ##############################################################
-LD_FLAGS = $(OPT_FLAGS) $(COMPILER_OPTIONS)  $(MCU_CC_FLAGS) -T $(LD_SCRIPT) 
+LD_FLAGS = --specs=nano.specs # Compile with newlibc-nano and libstdc++-nano. This greatly reduces the code size.
+LD_FLAGS += $(OPT_FLAGS) $(COMPILER_OPTIONS)  $(MCU_CC_FLAGS) -T $(LD_SCRIPT) 
 LD_FLAGS += -fno-rtti # Disable runtime type information 
 # --gc-sections - Enable garbage collection of unused input sections. 
 # --cref - Output a cross reference table in map file
