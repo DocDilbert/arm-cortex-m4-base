@@ -56,13 +56,13 @@ TARGET = $(PROJECT)
 
 INC_DIRS_FLAGS = $(patsubst %,-I %, $(INC_DIRS))
 
-# Filter .c files in SRC_FILES LIST 
+# Filter .c files in SRC_FILES list 
 CC_SRC_FILES = $(filter %.c, $(SRC_FILES))
 
-# Filter .cpp files in SRC_FILES LIST
+# Filter .cpp files in SRC_FILES list
 CPP_SRC_FILES = $(filter %.cpp, $(SRC_FILES))
 
-# Filter .s files in SRC_FILES LIST
+# Filter .s files in SRC_FILES list
 ASM_SRC_FILES = $(filter %.s, $(SRC_FILES))
 
 # Generate object lists 
