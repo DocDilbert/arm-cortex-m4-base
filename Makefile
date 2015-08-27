@@ -23,7 +23,8 @@ C_STD_FLAGS = -std=c11
 LD_SCRIPT = hal/linker.ld
 
 # Source files          
-SRC_FILES = main.cpp \
+SRC_FILES = hal/boot.s \
+			main.cpp \
 			syscalls.c \
 			systick.c \
 			utils.c \
@@ -61,9 +62,14 @@ CC_SRC_FILES = $(filter %.c, $(SRC_FILES))
 # Filter .cpp files in SRC_FILES LIST
 CPP_SRC_FILES = $(filter %.cpp, $(SRC_FILES))
 
+# Filter .s files in SRC_FILES LIST
+ASM_SRC_FILES = $(filter %.s, $(SRC_FILES))
+
 # Generate object lists 
 CC_OBJS  = $(patsubst %.c, $(OBJ_DIR)/%.o,  $(notdir $(CC_SRC_FILES)))
 CPP_OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o,  $(notdir $(CPP_SRC_FILES)))
+ASM_OBJS = $(patsubst %.s, $(OBJ_DIR)/%.o,  $(notdir $(ASM_SRC_FILES)))
+
 
 DEPS = $(CC_OBJS:.o=.d) $(CPP_OBJS:.o=.d) 
 
@@ -112,6 +118,8 @@ CPP_FLAGS  = $(OPT_FLAGS) $(MCU_CC_FLAGS) $(COMPILER_OPTIONS) $(INC_DIRS_FLAGS) 
 CPP_FLAGS += -fno-rtti # Disable runtime type information 
 CPP_FLAGS += -MP -MMD 
 
+AS_FLAGS = $(MCU_CC_FLAGS) $(DEBUG_FLAGS)
+
 ##############################################################
 # Grouping of all linker flags
 ##############################################################
@@ -126,10 +134,10 @@ LD_FLAGS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
 
 all: $(TARGET).elf              
 
-$(TARGET).elf : $(OBJ_DIR)/boot.o $(CC_OBJS) $(CPP_OBJS) hal/linker.ld
+$(TARGET).elf : $(ASM_OBJS) $(CC_OBJS) $(CPP_OBJS) hal/linker.ld
 	@echo 
 	@echo "Linking:"
-	$(LD) $(LD_FLAGS) $(OBJ_DIR)/boot.o $(CC_OBJS) $(CPP_OBJS) -o $(TARGET).elf
+	$(LD) $(LD_FLAGS) $(ASM_OBJS) $(CC_OBJS) $(CPP_OBJS) -o $(TARGET).elf
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CC_FLAGS) -c $< -o $@
@@ -137,8 +145,8 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	$(CPP) $(CPP_FLAGS) -c $< -o $@
 
-$(OBJ_DIR)/boot.o: hal/boot.s | $(OBJ_DIR)
-	$(AS) $(MCU_CC_FLAGS) $(DEBUG_FLAGS) -c hal/boot.s -o $(OBJ_DIR)/boot.o
+$(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
+	$(AS)  $(AS_FLAGS) -c $< -o $@
  
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
