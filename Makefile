@@ -32,6 +32,7 @@ SRCS =  pre_sections.s \
 		reset.c \
 		overrides/new.cpp \
 		overrides/delete.cpp \
+		overrides/malloc_syscalls.c \
 		hal/gpio.c \
 		hal/target/system_mb9b560r.c
 			
