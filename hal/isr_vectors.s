@@ -14,6 +14,7 @@
 		.thumb_func					 // when a function is called by using 'bx' or 'blx' this is mandatory
 		.type \name, %function       // when a function is pointed to from a table, this is mandatory
 		.func \name,\name            // this tells a debugger that the function starts here
+		.fnstart
 		.align						 // make sure the address is aligned for code output
 		\name:                       // this defines the label. the \() is necessary to separate the colon from the label
 		.endm
@@ -21,6 +22,8 @@
 .macro	ENDFUNC name                 // FUNCTION and ENDFUNC must always be paired
 		.size \name,.-\name 		 // tells the linker how big the code block for the function is
 		.pool                        // let the assembler place constants here
+		.cantunwind
+    	.fnend
 		.endfunc					 // mark the end of the function, so a debugger can display it better
 		.endm
 
