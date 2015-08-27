@@ -30,6 +30,8 @@ SRCS =  pre_sections.s \
 		systick.c \
 		utils.c \
 		reset.c \
+		overrides/new.cpp \
+		overrides/delete.cpp \
 		hal/gpio.c \
 		hal/target/system_mb9b560r.c
 			

@@ -14,20 +14,14 @@
 #include "hal/gpio.h"
 #include "utils.h"
 
-void *operator new(size_t size)
-{
-    void *p;
-    // attention - no error checks here
-    p = malloc(size);
-    return p;
-}
 
-void operator delete(void *p)
-{
-    free(p);
-}
+
 class A {
 public:
+    A()
+    {
+
+    }
     A(int arg)
     {
         member = arg;
@@ -69,7 +63,7 @@ int main()
 
     volatile float32_t abs_in = -5.0;
     volatile float32_t abs_out = 0;
-    A* a;
+    A* a, *b;
 
     void* malloc_test[7];
     memset(array_test, 1, 5);
@@ -77,9 +71,13 @@ int main()
     abs_out = fabs(abs_in);
     // Initialize gpios.
     gpio_init();
-    a = new A(10);
 
+    a = new A(10);
     delete(a);
+
+    b= new A[10];
+    delete[](b);
+
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
     malloc_test[2] = malloc(0x100);
