@@ -11,7 +11,7 @@
 
 // define stack section
 .equ    Stack_Size, 0x00000400 // 1 KByte
-.section ".stack", "wa"
+.section ".stack", "wa" // .stack section is writable(w) and allocatable(a)
 .align  3	// stack must be 64 bit aligned
 _stack_mem:
     .space  Stack_Size
@@ -22,7 +22,7 @@ _stack_mem:
 // If the page size of malloc must be changed the newlibc must be recompiled.
 // Another option is to provide an own implementation of malloc.
 .equ    Heap_Size,  0x00002000 // 8 kByte
-.section ".heap", "wa"
+.section ".heap", "wa" // .heap section is writable(w) and allocatable(a)
 .align  3 // heap must be 64 bit aligned
 _heap_mem:
     .space  Heap_Size
@@ -33,7 +33,7 @@ _heap_mem:
 // hang - A function which intentionally hangs
 // reset_trampoline - A function which calls isr_reset() and main()
 //
-.section .isr_vector,"xa"
+.section .isr_vector,"xa" // .isr_vector section is executable(x) and allocatable(a)
 .globl  _isr_vector_m
 .type   _isr_vector_m, %object
 _isr_vector_m:
