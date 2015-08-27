@@ -14,6 +14,18 @@
 #include "hal/gpio.h"
 #include "utils.h"
 
+void * operator new(size_t size)
+{
+    void *p;
+    // attention - no error checks here
+    p = malloc(size);
+    return p;
+}
+
+void operator delete(void *p)
+{
+    free(p);
+}
 class A {
 public:
     A(int arg)
@@ -21,6 +33,10 @@ public:
         member = arg;
     }
 
+     ~A()
+     {
+         member = -1;
+     }
 private:
     int member;
 };
@@ -62,6 +78,8 @@ int main()
     // Initialize gpios.
     gpio_init();
     a = new A(10);
+
+    delete(a);
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
     malloc_test[2] = malloc(0x100);
