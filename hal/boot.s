@@ -33,7 +33,7 @@ _heap_mem:
 // hang - A function which intentionally hangs
 // reset_trampoline - A function which calls isr_reset() and main()
 //
-.section .isr_vector,"xa" // .isr_vector section is executable(x) and allocatable(a)
+.section .isr_vector,"wa" // .isr_vector section is writable(w) and allocatable(a)
 .globl  _isr_vector_m
 .type   _isr_vector_m, %object
 _isr_vector_m:
@@ -66,6 +66,7 @@ _isr_vector_m:
 	.endr
 
 
+.text // Place the following function into the text section (code)
 .macro 	FUNCTION name                // this macro makes life less tedious. =)
 		.thumb_func					 // when a function is called by using 'bx' or 'blx' this is mandatory
 		.type \name, %function       // when a function is pointed to from a table, this is mandatory
