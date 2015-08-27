@@ -44,27 +44,24 @@ int main()
     volatile float32_t abs_in = -5.0;
     volatile float32_t abs_out = 0;
 
-    volatile void* malloc_test;
-    volatile void* malloc_test_2;
-    volatile void* malloc_test_3;
-    volatile void* malloc_test_4;
+    void* malloc_test[7];
     memset(array_test, 1, 5);
 
     abs_out = fabs(abs_in);
     // Initialize gpios.
     gpio_init();
 
-    mallopt(M_MMAP_THRESHOLD, 0x100);
-
-    malloc_test   = malloc(10);
-    malloc_test_2 = malloc(13);
-    malloc_test_3 = malloc(0x100);
-    malloc_test_4 = malloc(0x500);
-    malloc_test_4 = malloc(0x500);
-    malloc_test_4 = malloc(0x500);
-    malloc_test_4 = malloc(0x500);
+    malloc_test[0] = malloc(10);
+    malloc_test[1] = malloc(13);
+    malloc_test[2] = malloc(0x100);
+    malloc_test[3] = malloc(0x500);
+    malloc_test[4] = malloc(0x500);
+    malloc_test[5] = malloc(0x500);
+    malloc_test[6] = malloc(0x500);
     while (1)
     {
+        free(malloc_test[0]);
+        malloc_test[0] = malloc(100);
         bss_test++;
         bss_test2++;
         bss_test3++;
@@ -78,6 +75,8 @@ int main()
         utils_burnCpuTime();
         GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
         utils_burnCpuTime();
+
+
     }
     // never leave this function
     return -1;
