@@ -2,7 +2,7 @@
 ///
 /// This file contains implementations of the new operator which replace
 /// the ones supplied by stdlibc++. This is done to save code and data memory
-/// because the standard new operators use a lot other methods.
+/// because the standard new operators use a lot of both.
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
