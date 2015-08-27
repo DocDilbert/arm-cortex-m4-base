@@ -18,8 +18,9 @@ _stack_mem:
 
 
 // define heap section
-// The page size of malloc is 4096 bytes aka 0x1000. This should be a multiple
-// of this size
+// The malloc implementation of the newlibc uses 4 KByte pagesize.
+// If the page size of malloc must be changed the newlibc must be recompiled.
+// Another option is to provide an own implementation of malloc.
 .equ    Heap_Size,  0x00002000 // 8 kByte
 .section ".heap", "wa"
 .align  3 // heap must be 64 bit aligned
