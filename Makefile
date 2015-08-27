@@ -106,8 +106,9 @@ MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 CC_FLAGS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(COMPILER_OPTIONS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
 CC_FLAGS += -MP -MMD
 
-CPP_FLAGS  = $(OPT_FLAGS) $(MCU_CC_FLAGS) $(COMPILER_OPTIONS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
-CPP_FLAGS += -MP -MMD
+CPP_FLAGS  = $(OPT_FLAGS) $(MCU_CC_FLAGS) $(COMPILER_OPTIONS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS)
+CPP_FLAGS += -fno-rtti # Disable runtime type information 
+CPP_FLAGS += -MP -MMD 
 
 ##############################################################
 # Grouping of all linker flags
