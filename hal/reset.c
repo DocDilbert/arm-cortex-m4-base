@@ -7,19 +7,19 @@
 #include <stdint.h>
 #include "mcu.h"
 
-/// Start load address of the data section
+/// Start address of the data section. This symbol is set by the linker.
 extern uint32_t _data_lma_start;
 
-/// Start address of the data section. This symbol is set by the linker.
+/// Start address of the .data initialization section. This symbol is set by the linker.
 extern uint32_t _data_start;
 
-/// End address of the data section. This symbol is set by the linker.
+/// End address of the .data section. This symbol is set by the linker.
 extern uint32_t _data_end;
 
-/// Start address of the bss section. This symbol is set by the linker.
+/// Start address of the .bss section. This symbol is set by the linker.
 extern uint32_t _bss_start;
 
-/// End address of the bss section. This symbol is set by the linker.
+/// End address of the .bss section. This symbol is set by the linker.
 extern uint32_t _bss_end;
 
 /// \brief This function handles the reset irq
