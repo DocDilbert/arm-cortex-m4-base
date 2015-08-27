@@ -39,8 +39,6 @@ SECTIONS
     	KEEP(*(.heap))
     	_heap_end = .;
   	} > SRAM1
-  	PROVIDE(__HEAP_START = _heap_start );
-  	
   	
 	/* Place read-write initialized data */
     .data :  ALIGN(4) {

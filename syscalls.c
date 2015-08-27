@@ -6,33 +6,48 @@
 
 /// \brief System call which called by the exit() function. 
 /// \retval arg [in] The argument which the user supplied to the exit() call.
+#include <errno.h>
 #include <sys/types.h>
+#include <unistd.h>
 
-void _exit(int arg)
+#undef errno
+extern int errno;
+
+/// Start address of the .heap section. This symbol is set by the linker.
+extern int _heap_start;
+
+/// Start address of the .heap section. This symbol is set by the linker.
+extern int _heap_end;
+
+/// \brief Change space allocation
+/// The _sbrk( ) function adds incr bytes to the break value and changes the allocated space
+/// accordingly. If incr is negative, the amount of allocated space is decreased by incr bytes. The
+/// current value of the program break is returned by sbrk(0).
+///
+/// \param incr Number of increments which should be added to the break value
+void* _sbrk(int incr)
 {
-    while (1)
-    {
-    }
-}
-
-extern int __HEAP_START;
-
-caddr_t _sbrk(int incr)
-{
-    static unsigned char *heap = NULL;
-    unsigned char *prev_heap;
+    static void *heap = NULL;
+    void *prev_heap;
+    void *new_heap;
 
     if (heap == NULL)
     {
-        heap = (unsigned char *) &__HEAP_START;
+        heap = (void *) &_heap_start;
     }
+
     prev_heap = heap;
+    new_heap = heap + incr;
 
-
-    /* check removed to show basic approach */
-
-    heap += incr;
-
-    return (caddr_t) prev_heap;
+    if (new_heap < (void*)&_heap_end)
+    {
+        heap = new_heap;
+        return (void*) prev_heap;
+    }
+    else
+    {
+        errno = ENOMEM;
+        return ((void*) -1);
+    }
 }
 
