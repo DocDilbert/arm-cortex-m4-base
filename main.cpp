@@ -14,6 +14,16 @@
 #include "hal/gpio.h"
 #include "utils.h"
 
+class A {
+public:
+    A(int arg)
+    {
+        member = arg;
+    }
+
+private:
+    int member;
+};
 
 /// \cond TEST
 uint32_t data_test = 0xDEADBEAF;
@@ -43,6 +53,7 @@ int main()
 
     volatile float32_t abs_in = -5.0;
     volatile float32_t abs_out = 0;
+    A* a;
 
     void* malloc_test[7];
     memset(array_test, 1, 5);
@@ -58,6 +69,8 @@ int main()
     malloc_test[4] = malloc(0x500);
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
+
+   // a = new A(10);
     while (1)
     {
         free(malloc_test[0]);

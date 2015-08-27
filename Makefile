@@ -46,7 +46,7 @@ OBJ_DIR = objs
 TC_PREFIX = arm-none-eabi-
 
 # Tool definition
-LD  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
+LD  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)c++
 CC  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
 CPP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)c++
 AS  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)as
@@ -125,7 +125,7 @@ AS_FLAGS = $(MCU_CC_FLAGS) $(DEBUG_FLAGS)
 # Grouping of all linker flags
 ##############################################################
 LD_FLAGS = $(OPT_FLAGS) $(MCU_CC_FLAGS) -T $(LD_SCRIPT) 
-
+LD_FLAGS += -fno-rtti # Disable runtime type information 
 # --gc-sections - Enable garbage collection of unused input sections. 
 # --cref - Output a cross reference table in map file
 LD_FLAGS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
