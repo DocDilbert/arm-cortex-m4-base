@@ -49,6 +49,8 @@ const uint32_t read_only = 0x100;
 uint16_t array_test[20];
 uint16_t array_test2[10] = {50,60,10};
 const uint16_t array_test3[10] = {50,60,10};
+
+volatile A a_static(50);
 /// \endcond
 
 /// \brief This function is the starting point of the program. 

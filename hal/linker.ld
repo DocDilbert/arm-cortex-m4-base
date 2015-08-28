@@ -22,6 +22,14 @@ SECTIONS
 	/* Place program code */
 	.text : ALIGN(4) { 	
 		 *(.text .text.*)
+		 
+	} > FLASH
+	
+	/* Place.init_array - function pointer to used for static initialization */
+	.init_array : ALIGN(4) {
+		__init_array_start = .;
+		 KEEP (*(.init_array*))
+		 __init_array_end = .;
 	} > FLASH
 	
 	/* The following .ARM.extab section has something to do with stack frame unwinding */
@@ -72,6 +80,8 @@ SECTIONS
     	*(COMMON) /* Place common symbols into bss (e.g. unitialized globals). Attention they will be initialized with 0. */
 		_bss_end = .;
 	} > SRAM1
-		
+	
+	PROVIDE(__bss_start__ = _bss_start);
+	PROVIDE(__bss_end__ = _bss_end);
 
 }
