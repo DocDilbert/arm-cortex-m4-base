@@ -3,13 +3,14 @@ This project gives a good starting point for developing a bare metal embedded pr
 It uses the gnu c and c++ compiler for compiling, therefore no expenses are necessary to get it running.
 
 # Toolchain
-On windows, I use the following programs to compile the project:
+The following programs are used for development:
 * Compiler - [Gcc arm embedded compiler (4.9.3)](https://launchpad.net/gcc-arm-embedded) 
 * IDE and Debugger - [Eclipse CDT (Mars - 4.5.0)] (https://www.eclipse.org)  
-* Unix tools (make, rm, grep ...) - [Cygwin](https://www.cygwin.com/) or [MinGW - MSYS](https://www.cygwin.com/) 
+* Unix tools (make, rm, grep ...) - [Cygwin](https://www.cygwin.com/) or [MinGW - MSYS](https://www.cygwin.com/)
+* Documentation - [Doxygen](http://www.stack.nl/~dimitri/doxygen/) 
 
 # Compiling
-The Makefile uses the environment variable **ARM_GCC_PATH** to locate the gcc arm compiler. This variable must be set to the installation
+The Makefile uses the environment variable **ARM_GCC_PATH** to locate the arm gcc compiler. This variable must be set to the installation
 directory of the compiler. On windows this path should not contain any whitespaces. 
 
 # References
