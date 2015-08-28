@@ -14,13 +14,15 @@ The Makefile uses the environment variable **ARM_GCC_PATH** to locate the arm gc
 directory of the compiler. On windows this path should not contain any whitespaces. 
 
 To build:
-    $ set ARM_GCC_PATH=...path-to-builchain...
-    $ make
-	
+```
+set ARM_GCC_PATH=...path-to-builchain...
+make
+```
 # Doxygen
 To build the docs:
-    $ make doc
-	
+```
+make doc
+```
 # References
 ## Cortex M4 Technical Reference Manual 
 The "Cortex M4 Technical Reference Manual" can be found [here](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0439b/index.html).
