@@ -71,6 +71,9 @@ void isr_reset()
         (*f)();
     }
 
+    // ------------------------------------------------------------------------------
+    // System initialization - Usually provided by the chip vendor
+    // ------------------------------------------------------------------------------
     SystemInit();
     SystemCoreClockUpdate();
 
