@@ -23,8 +23,10 @@ extern uint32_t __bss_start;
 /// End address of the .bss section. This symbol is set by the linker.
 extern uint32_t __bss_end;
 
+/// Start address of the .init_array section. This symbol is set by the linker.
 extern uint32_t __init_array_start;
 
+/// End address of the .init_array section. This symbol is set by the linker.
 extern uint32_t __init_array_end;
 
 /// \brief This function handles the reset irq
@@ -64,6 +66,7 @@ void isr_reset()
     src = &__init_array_start;
     while (src < &__init_array_end)
     {
+        // Cast to function pointer
         func_ptr_t f = (func_ptr_t) (*(src++));
         (*f)();
     }
