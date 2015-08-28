@@ -31,7 +31,7 @@ SECTIONS
 	} >FLASH
 	
 	/* The following .ARM.extab section has something to do with stack frame unwinding */
-    .ARM : {
+    .ARM.exidx : {
    		__exidx_start = .;
      	*(.ARM.exidx*)
      	__exidx_end = .;
