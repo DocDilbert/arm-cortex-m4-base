@@ -4,15 +4,16 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
-/// \brief System call which called by the exit() function. 
-/// \retval arg [in] The argument which the user supplied to the exit() call.
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <signal.h>
 #include <unistd.h>
 
-void _exit(int arg)
+/// \brief Syscall: Terminate process
+/// \param status User supplied argument to exit() call.
+/// \return This function does not return.
+void _exit(int status)
 {
     while (1)
     {
