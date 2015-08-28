@@ -142,7 +142,7 @@ LD_FLAGS := $(strip $(LD_FLAGS))
 
 all: $(TARGET).elf              
 
-$(TARGET).elf : $(S_OBJS) $(C_OBJS) $(CXX_OBJS) hal/linker.ld
+$(TARGET).elf : $(S_OBJS) $(C_OBJS) $(CXX_OBJS) $(LD_SCRIPT)
 	@echo 
 	@echo "Linking:"
 	$(LD) $(LD_FLAGS) $(S_OBJS) $(C_OBJS) $(CXX_OBJS) -o $(TARGET).elf
