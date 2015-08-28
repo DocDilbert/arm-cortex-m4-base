@@ -59,7 +59,7 @@ SIZE = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)size
 OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump
 DOXYGEN = doxygen
 
-TARGET = $(PROJECT)
+TARGET = $(PROJECT).elf
 
 INC_DIRS_FLAGS = $(patsubst %,-I%, $(INC_DIRS))
 
@@ -140,12 +140,12 @@ LD_FLAGS := $(strip $(LD_FLAGS))
 # All phony targets
 .PHONY: all info clean doc
 
-all: $(TARGET).elf              
+all: $(TARGET)              
 
-$(TARGET).elf : $(S_OBJS) $(C_OBJS) $(CXX_OBJS) $(LD_SCRIPT)
+$(TARGET) : $(S_OBJS) $(C_OBJS) $(CXX_OBJS) $(LD_SCRIPT)
 	@echo 
 	@echo "Linking:"
-	$(LD) $(LD_FLAGS) $(S_OBJS) $(C_OBJS) $(CXX_OBJS) -o $(TARGET).elf
+	$(LD) $(LD_FLAGS) $(S_OBJS) $(C_OBJS) $(CXX_OBJS) -o $(TARGET)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(C_FLAGS) -c $< -o $@
@@ -159,14 +159,14 @@ $(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 	
-info: $(TARGET).elf
-	@$(SIZE) --format=sysv -x $(TARGET).elf
+info: $(TARGET)
+	@$(SIZE) --format=sysv -x $(TARGET)
 
 doc:
 	@$(DOXYGEN) doxygen.config
 	
 clean:
-	rm -f $(TARGET).elf
+	rm -f $(TARGET)
 	rm -rf $(OBJ_DIR)
 	rm -rf ./doc
 
