@@ -29,8 +29,8 @@ SRCS =  pre_sections.s \
 		systick.c \
 		utils.c \
 		reset.c \
-		syscalls/malloc_syscalls.c \
-		syscalls/syscalls.c \
+		syscalls/malloc.c \
+		syscalls/general.c \
 		hal/gpio.c \
 		hal/target/system_mb9b560r.c
 			
