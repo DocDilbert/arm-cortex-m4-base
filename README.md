@@ -9,10 +9,18 @@ The following programs are used for development:
 * Unix tools (make, rm, grep ...) - [Cygwin](https://www.cygwin.com/) or [MinGW - MSYS](https://www.cygwin.com/)
 * Documentation - [Doxygen](http://www.stack.nl/~dimitri/doxygen/) 
 
-# Compiling
+# Building
 The Makefile uses the environment variable **ARM_GCC_PATH** to locate the arm gcc compiler. This variable must be set to the installation
 directory of the compiler. On windows this path should not contain any whitespaces. 
 
+To build:
+	$ set ARM_GCC_PATH=...path-to-builchain...
+	$ make
+	
+# Doxygen
+To build the docs:
+	$ make doc
+	
 # References
 ## Cortex M4 Technical Reference Manual 
 The "Cortex M4 Technical Reference Manual" can be found [here](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0439b/index.html).
