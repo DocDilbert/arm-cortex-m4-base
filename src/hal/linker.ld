@@ -21,11 +21,11 @@ SECTIONS
 	
 	/* Place program code */
 	.text : ALIGN(4) { 	
-		 *(.text .text.*)
+		 *(.text .text.*) /* The text section contains program code */
 		 
 	} > FLASH
 	
-	/* Place.init_array - function pointer to used for static initialization */
+	/* Place.init_array - function pointer list used for static initialization */
 	.init_array : ALIGN(4) {
 		__init_array_start = .;
 		 KEEP (*(.init_array*))
