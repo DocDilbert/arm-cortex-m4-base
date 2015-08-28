@@ -11,7 +11,7 @@
 #include <math.h>
 #include <malloc.h>
 #include "base_types.h"
-#include "hal/gpio.h"
+#include "gpio.h"
 #include "utils.h"
 
 

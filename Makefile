@@ -23,25 +23,25 @@ C_USER_FLAGS = -std=c11 # enable c11 standard
 CXX_USER_FLAGS = -fno-rtti # Disable runtime type information 
 
 # Linker script
-LD_SCRIPT = hal/linker.ld
+LD_SCRIPT = src/hal/linker.ld
 
 # Source files          
-SRCS =  pre_sections.s \
-		main.cpp \
-		systick.c \
-		utils.c \
-		reset.c \
-		syscalls/malloc.c \
-		syscalls/general.c \
-		hal/isr_vectors.s \
-		hal/gpio.c \
-		hal/target/system_mb9b560r.c
+SRCS =  src/pre_sections.s \
+		src/main.cpp \
+		src/systick.c \
+		src/utils.c \
+		src/reset.c \
+		src/syscalls/malloc.c \
+		src/syscalls/general.c \
+		src/hal/isr_vectors.s \
+		src/hal/gpio.c \
+		src/hal/target/system_mb9b560r.c
 			
 # Include directories
-INC_DIRS = 	. \
-			hal \
-			hal/cmsis \
-			hal/target
+INC_DIRS = 	./include \
+			./include/hal \
+			./include/cmsis \
+			./include/hal/target
 			   
 # Object directory
 OBJ_DIR = objs
