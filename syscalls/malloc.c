@@ -6,7 +6,8 @@
 
 #include <errno.h>
 
-/// Libc errno symbol. This is used to give more error details.
+/// Libc error symbol. This is used to give more error details.
+/// \ingroup SystemCalls
 extern int errno;
 
 /// Start address of the .heap section. This symbol is set by the linker.
@@ -25,6 +26,8 @@ extern int _heap_end;
 ///
 /// \returns Upon successful completion, sbrk( ) returns the prior break value. Otherwise, it returns
 ///          (void *)−1 and sets errno to indicate the error.
+///
+/// \ingroup SystemCalls
 void* _sbrk(int incr)
 {
     static void *heap = NULL;

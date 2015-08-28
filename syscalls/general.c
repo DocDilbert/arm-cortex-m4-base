@@ -10,11 +10,21 @@
 #include <signal.h>
 #include <unistd.h>
 
+/// The newlibc and stdlibc++ do need some basic functions which the user must supply.
+/// Without these functions there are undefined symbols after linking. Most of
+/// the listed functions make no sense in an embedded bare metal application, but
+/// must be defined nonetheless.
+///
+/// \defgroup SystemCalls System calls
+
+
+
 /// \brief Terminate process.
 ///
 /// \param status User supplied argument to exit() call.
 ///
 /// \return This function does not return.
+/// \ingroup SystemCalls
 void _exit(int status)
 {
     while (1)
@@ -29,6 +39,7 @@ void _exit(int status)
 ///
 /// \returns Upon successful completion, 0 is returned. Otherwise, −1 is returned and errno is set to indicate
 ///          the error.
+/// \ingroup SystemCalls
 int _kill(pid_t pid, int sig)
 {
     return (-1); // Always return an error since we do not have any processes.
@@ -37,6 +48,7 @@ int _kill(pid_t pid, int sig)
 /// \brief The getpid() function returns the process ID of the calling process.
 ///
 /// \returns The process id of the calling process
+/// \ingroup SystemCalls
 pid_t _getpid(void)
 {
     return 0; // always return 0
