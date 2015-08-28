@@ -15,7 +15,7 @@
 #include "utils.h"
 
 
-
+/// \cond TEST
 class A {
 public:
     A()
@@ -35,7 +35,7 @@ private:
     int member;
 };
 
-/// \cond TEST
+
 uint32_t data_test = 0xDEADBEAF;
 uint8_t data_test2 = 0xDE;
 uint16_t data_test3 = 0xDEAD;
