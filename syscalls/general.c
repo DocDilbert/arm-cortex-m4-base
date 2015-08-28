@@ -1,6 +1,6 @@
-/// \file syscalls.c
+/// \file general.c
 ///
-/// File which contains all necessary stdlib system calls.
+/// File which contains some general system calls which are used by newlibc and stdlibc++
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
@@ -10,8 +10,10 @@
 #include <signal.h>
 #include <unistd.h>
 
-/// \brief Syscall: Terminate process
+/// \brief Terminate process.
+///
 /// \param status User supplied argument to exit() call.
+///
 /// \return This function does not return.
 void _exit(int status)
 {
@@ -20,16 +22,27 @@ void _exit(int status)
     }
 }
 
+/// \brief Send a signal to a process or a group of processes.
+///
+/// \param pid Process id
+/// \param sig The signal to be send.
+///
+/// \returns Upon successful completion, 0 is returned. Otherwise, −1 is returned and errno is set to indicate
+///          the error.
 int _kill(pid_t pid, int sig)
 {
-    return (-1);
+    return (-1); // Always return an error since we do not have any processes.
 }
 
+/// \brief The getpid() function returns the process ID of the calling process.
+///
+/// \returns The process id of the calling process
 pid_t _getpid(void)
 {
-    return 0;
+    return 0; // always return 0
 }
 
+#ifdef _UNUSED_
 int _close(int fildes)
 {
     return -1;
@@ -60,3 +73,4 @@ int _isatty(int fildes)
     return (0);
 }
 
+#endif

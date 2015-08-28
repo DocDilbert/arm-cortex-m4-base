@@ -1,12 +1,12 @@
-/// \file malloc_syscalls.c
+/// \file malloc.c
 ///
-/// This file contains all functions which are needed by
-/// malloc to work properly.
+/// This file contains all system calls which are needed by malloc to work properly.
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
 #include <errno.h>
 
+/// Libc errno symbol. This is used to give more error details.
 extern int errno;
 
 /// Start address of the .heap section. This symbol is set by the linker.
@@ -16,11 +16,15 @@ extern int _heap_start;
 extern int _heap_end;
 
 /// \brief Change space allocation
+///
 /// The _sbrk( ) function adds incr bytes to the break value and changes the allocated space
 /// accordingly. If incr is negative, the amount of allocated space is decreased by incr bytes. The
 /// current value of the program break is returned by sbrk(0).
 ///
 /// \param incr Number of increments which should be added to the break value
+///
+/// \returns Upon successful completion, sbrk( ) returns the prior break value. Otherwise, it returns
+///          (void *)−1 and sets errno to indicate the error.
 void* _sbrk(int incr)
 {
     static void *heap = NULL;
