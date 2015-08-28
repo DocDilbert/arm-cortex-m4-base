@@ -13,11 +13,14 @@ DEBUG_FLAGS = -gdwarf-2 -g3
 
 # Compiler options passed to gcc and c++
 COMPILER_OPTIONS  = -fno-exceptions
-COMPILER_OPTIONS += -ffunction-sections  # Place each function item into its own section in the output file
+COMPILER_OPTIONS += -ffunction-sections # Place each function item into its own section in the output file
 COMPILER_OPTIONS += -fdata-sections # Place each data item into its own section in the output file
  
-# C-Standard - Enable c11 support
-C_STD_FLAGS = -std=c11
+# C specific compiler flags
+C_USER_FLAGS = -std=c11 # enable c11 standard
+
+# C++ specific compiler options
+CXX_USER_FLAGS = -fno-rtti # Disable runtime type information 
 
 # Linker script
 LD_SCRIPT = hal/linker.ld
@@ -56,22 +59,21 @@ DOXYGEN = doxygen
 
 TARGET = $(PROJECT)
 
-INC_DIRS_FLAGS = $(patsubst %,-I %, $(INC_DIRS))
+INC_DIRS_FLAGS = $(patsubst %,-I%, $(INC_DIRS))
 
 # Filter .c files in SRCS list 
-C_SRCS = $(filter %.c, $(SRCS))
+C_SRCS = $(strip $(filter %.c, $(SRCS)))
 
 # Filter .cpp files in SRCS list
-CXX_SRCS = $(filter %.cpp, $(SRCS))
+CXX_SRCS = $(strip $(filter %.cpp, $(SRCS)))
 
 # Filter .s files in SRCS list
-S_SRCS = $(filter %.s, $(SRCS))
+S_SRCS = $(strip $(filter %.s, $(SRCS)))
 
 # Generate object lists 
-C_OBJS  = $(patsubst %.c, $(OBJ_DIR)/%.o,  $(notdir $(C_SRCS)))
-CXX_OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o,  $(notdir $(CXX_SRCS)))
-S_OBJS = $(patsubst %.s, $(OBJ_DIR)/%.o,  $(notdir $(S_SRCS)))
-
+C_OBJS  = $(strip $(patsubst %.c, $(OBJ_DIR)/%.o,  $(notdir $(C_SRCS))))
+CXX_OBJS = $(strip $(patsubst %.cpp, $(OBJ_DIR)/%.o,  $(notdir $(CXX_SRCS))))
+S_OBJS = $(strip $(patsubst %.s, $(OBJ_DIR)/%.o,  $(notdir $(S_SRCS))))
 
 DEPS = $(C_OBJS:.o=.d) $(CXX_OBJS:.o=.d) 
 
@@ -112,25 +114,26 @@ MCU_CC_FLAGS = $(CORTEX_M4_HWFP_CC_FLAGS)
 ##############################################################
 # Grouping of all compiler flags
 ##############################################################
+C_FLAGS := $(OPT_FLAGS) $(COMPILER_OPTIONS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS)
+C_FLAGS += -MP -MMD $(C_USER_FLAGS) 
+C_FLAGS :=  $(strip $(C_FLAGS))
 
-C_FLAGS  = $(C_STD_FLAGS) $(OPT_FLAGS) $(COMPILER_OPTIONS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS) 
-C_FLAGS += -MP -MMD
+CXX_FLAGS := $(OPT_FLAGS) $(COMPILER_OPTIONS) $(MCU_CC_FLAGS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS)
+CXX_FLAGS += -MP -MMD $(CXX_USER_FLAGS)
+CXX_FLAGS := $(strip $(CXX_FLAGS))
 
-CXX_FLAGS  = $(OPT_FLAGS) $(MCU_CC_FLAGS) $(COMPILER_OPTIONS) $(INC_DIRS_FLAGS) $(DEBUG_FLAGS)
-CXX_FLAGS += -fno-rtti # Disable runtime type information 
-CXX_FLAGS += -MP -MMD 
-
-AS_FLAGS = $(MCU_CC_FLAGS) $(DEBUG_FLAGS)
+AS_FLAGS :=  $(MCU_CC_FLAGS) $(DEBUG_FLAGS)
+AS_FLAGS := $(strip $(AS_FLAGS))
 
 ##############################################################
 # Grouping of all linker flags
 ##############################################################
-LD_FLAGS = --specs=nano.specs # Compile with newlibc-nano and libstdc++-nano. This greatly reduces the code size.
-LD_FLAGS += $(OPT_FLAGS) $(COMPILER_OPTIONS)  $(MCU_CC_FLAGS) -T $(LD_SCRIPT) 
-LD_FLAGS += -fno-rtti # Disable runtime type information 
+LD_FLAGS := --specs=nano.specs # Compile with newlibc-nano and libstdc++-nano. This greatly reduces the code size.
+LD_FLAGS += $(CXX_USER_FLAGS) $(OPT_FLAGS) $(COMPILER_OPTIONS)  $(MCU_CC_FLAGS) -T $(LD_SCRIPT)
 # --gc-sections - Enable garbage collection of unused input sections. 
 # --cref - Output a cross reference table in map file
 LD_FLAGS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
+LD_FLAGS := $(strip $(LD_FLAGS))
 
 # All phony targets
 .PHONY: all info clean doc
@@ -149,7 +152,7 @@ $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	$(CPP) $(CXX_FLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
-	$(AS)  $(AS_FLAGS) -c $< -o $@
+	$(AS) $(AS_FLAGS) -c $< -o $@
  
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
