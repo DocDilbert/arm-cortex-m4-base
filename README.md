@@ -85,5 +85,6 @@ For this project the following topics in this documentation are of special inter
 The "Doxygen" documentation can be found [here](http://www.stack.nl/~dimitri/doxygen/index.html).
 
 ## Books
-This section contains some book I found very helpful when programming on the Cortex M4.
+This section contains some book I found very helpful when programming on the Cortex M4:
 * "Definitive Guide to ARM Cortex-M3 and Cortex-M4 Processors" from Joseph Yiu
+* "System Interfaces and Header Issue 4 Version 2" from the open group  
