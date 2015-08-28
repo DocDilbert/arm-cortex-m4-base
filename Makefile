@@ -47,6 +47,7 @@ INC_DIRS = 	. \
 OBJ_DIR = objs
 
 # Toolchain prefix
+# It is very important to specify a bare metal compiler here
 TC_PREFIX = arm-none-eabi-
 
 # Tool definition
