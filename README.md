@@ -1,7 +1,6 @@
 # Introduction
-This project should give a good starting point to develop a bare metal embedded program with gcc. 
-The target architecture of this project is the cortex m4 from arm, but the project can easily be adapted to 
-other architectures as well.
+This project gives a good starting point for developing a bare metal embedded program on the arm cortex m3/m4. 
+It uses the gnu c and c++ compiler for compiling, therefore no expenses are necessary to get it running.
 
 # Toolchain
 On windows, I use the following programs to compile the project:
