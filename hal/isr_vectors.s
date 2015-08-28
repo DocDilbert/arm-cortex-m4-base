@@ -40,7 +40,7 @@ _isr_vector_m:
 	//
 	// This is done automatically by as. The jump itself ignores this bit, therefore all jumps are 32 Bit aligned.
 	.align 2 // make sure the alignment is correct
-	.long _stack_top         // This entry is used at startup to initialize the top address of the stack
+	.long __stack_top        // This entry is used at startup to initialize the top address of the stack
 	.long reset_trampoline   // 000 - Reset
 	.long hang               // 001 - NMI
 	.long hang               // 002 - Hard Fault

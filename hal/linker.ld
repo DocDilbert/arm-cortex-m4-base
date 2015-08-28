@@ -49,39 +49,39 @@ SECTIONS
     .stack(NOLOAD) : ALIGN(8)
 	{
     	KEEP(*(.stack))
-    	_stack_top = .;
+    	__stack_top = .;
   	} > SRAM1
 	
 	/* Place heap section. 64 Byte aligned. */
     .heap(NOLOAD) : ALIGN(8)
 	{
-		_heap_start = .;
+		__heap_start = .;
     	KEEP(*(.heap))
-    	_heap_end = .;
+    	__heap_end = .;
   	} > SRAM1
   	
 	/* Place read-write initialized data */
     .data :  ALIGN(4) {
-        _data_start = .;
+        __data_start = .;
        	*(.shdata)
     	*(.data .data.*)
-        _data_end = .;
+        __data_end = .;
 	} > SRAM1 AT>FLASH
     
     /* Set start address of data load section which resides in flash */
-    _data_lma_start = LOADADDR(.data);
+    __data_lma_start = LOADADDR(.data);
     
     /* Place read-write zero initialized data. */
     .bss(NOLOAD) : ALIGN(4) {
-		_bss_start = .;
+		__bss_start = .;
 		
 		 *(.shbss)
    		 *(.bss .bss.*)
     	*(COMMON) /* Place common symbols into bss (e.g. unitialized globals). Attention they will be initialized with 0. */
-		_bss_end = .;
+		__bss_end = .;
 	} > SRAM1
 	
-	PROVIDE(__bss_start__ = _bss_start);
-	PROVIDE(__bss_end__ = _bss_end);
+	PROVIDE(__bss_start__ = __bss_start);
+	PROVIDE(__bss_end__ = __bss_end);
 
 }

@@ -11,10 +11,10 @@
 extern int errno;
 
 /// Start address of the .heap section. This symbol is set by the linker.
-extern int _heap_start;
+extern int __heap_start;
 
 /// Start address of the .heap section. This symbol is set by the linker.
-extern int _heap_end;
+extern int __heap_end;
 
 /// \brief Change space allocation
 ///
@@ -36,13 +36,13 @@ void* _sbrk(int incr)
 
     if (heap == NULL)
     {
-        heap = (void *) &_heap_start;
+        heap = (void *) &__heap_start;
     }
 
     prev_heap = heap;
     new_heap = heap + incr;
 
-    if (new_heap < (void*) &_heap_end)
+    if (new_heap < (void*) &__heap_end)
     {
         heap = new_heap;
         return (void*) prev_heap;

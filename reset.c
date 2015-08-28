@@ -9,26 +9,23 @@
 #include "mcu.h"
 
 /// Start address of the data section. This symbol is set by the linker.
-extern uint32_t _data_lma_start;
+extern uint32_t __data_lma_start;
 
 /// Start address of the .data initialization section. This symbol is set by the linker.
-extern uint32_t _data_start;
+extern uint32_t __data_start;
 
 /// End address of the .data section. This symbol is set by the linker.
-extern uint32_t _data_end;
+extern uint32_t __data_end;
 
 /// Start address of the .bss section. This symbol is set by the linker.
-extern uint32_t _bss_start;
+extern uint32_t __bss_start;
 
 /// End address of the .bss section. This symbol is set by the linker.
-extern uint32_t _bss_end;
+extern uint32_t __bss_end;
 
 extern uint32_t __init_array_start;
 
 extern uint32_t __init_array_end;
-
-//extern void (**__init_array_start)();
-//extern void (**__init_array_end)();
 
 /// \brief This function handles the reset irq
 ///
@@ -46,17 +43,17 @@ void isr_reset()
     // ------------------------------------------------------------------------------
     // Initialize the data section in ram with its initial values stored in flash
     // ------------------------------------------------------------------------------
-    src = &_data_lma_start;
-    dest = &_data_start;
-    while (dest < &_data_end)
+    src = &__data_lma_start;
+    dest = &__data_start;
+    while (dest < &__data_end)
     {
         *dest++ = *src++;
     }
     // ------------------------------------------------------------------------------
     // Initialize the bss section with 0
     // ------------------------------------------------------------------------------
-    src = &_bss_start;
-    while (src < &_bss_end)
+    src = &__bss_start;
+    while (src < &__bss_end)
     {
         *src++ = 0;
     }
