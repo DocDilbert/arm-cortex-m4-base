@@ -55,6 +55,7 @@ LD  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)c++
 CC  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)gcc
 CPP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)c++
 AS  = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)as
+SIZE = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)size
 OBJDUMP = $(ARM_GCC_PATH)/bin/$(TC_PREFIX)objdump
 DOXYGEN = doxygen
 
@@ -158,11 +159,11 @@ $(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 	
-info:
-	arm-none-eabi-size --format=SysV -x $(TARGET).elf
+info: $(TARGET).elf
+	@$(SIZE) --format=sysv -x $(TARGET).elf
 
 doc:
-	$(DOXYGEN) doxygen.config
+	@$(DOXYGEN) doxygen.config
 	
 clean:
 	rm -f $(TARGET).elf
