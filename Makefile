@@ -24,13 +24,13 @@ LD_SCRIPT = hal/linker.ld
 
 # Source files          
 SRCS =  pre_sections.s \
-		hal/isr_vectors.s \
 		main.cpp \
 		systick.c \
 		utils.c \
 		reset.c \
 		syscalls/malloc.c \
 		syscalls/general.c \
+		hal/isr_vectors.s \
 		hal/gpio.c \
 		hal/target/system_mb9b560r.c
 			
