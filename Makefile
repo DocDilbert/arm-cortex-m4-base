@@ -31,6 +31,7 @@ SRCS =  src/pre_sections.s \
 		src/systick.c \
 		src/utils.c \
 		src/reset.c \
+		src/faults.c \
 		src/syscalls/malloc.c \
 		src/syscalls/general.c \
 		src/hal/isr_vectors.s \

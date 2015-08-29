@@ -43,9 +43,9 @@ _isr_vector_m:
 	.long __stack_top        // This entry is used at startup to initialize the top address of the stack
 	.long reset_trampoline   // 000 - Reset
 	.long hang               // 001 - NMI
-	.long hang               // 002 - Hard Fault
-	.long hang               // 003 - MPU Fault
-	.long hang               // 004 - Bus Fault
+	.long isr_hard_fault     // 002 - Hard Fault
+	.long isr_mpu_fault      // 003 - MPU Fault
+	.long isr_bus_fault      // 004 - Bus Fault
 	.long hang               // 005 - Usage Fault
 	.long hang               // 006 - Reserved
 	.long hang               // 007 - Reserved
