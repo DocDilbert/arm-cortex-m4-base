@@ -7,9 +7,9 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
-
 #ifdef __cplusplus
- extern "C" {
+extern "C"
+{
 #endif
 
 /// This function does burn cpu time.
