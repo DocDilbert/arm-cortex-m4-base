@@ -14,9 +14,9 @@
 #include "gpio.h"
 #include "utils.h"
 
-
 /// \cond TEST
-class A {
+class A
+{
 public:
     A()
     {
@@ -27,14 +27,13 @@ public:
         member = arg;
     }
 
-     ~A()
-     {
-         member = -1;
-     }
+    ~A()
+    {
+        member = -1;
+    }
 private:
     int member;
 };
-
 
 uint32_t data_test = 0xDEADBEAF;
 uint8_t data_test2 = 0xDE;
@@ -47,8 +46,10 @@ uint16_t bss_test3;
 const uint32_t read_only = 0x100;
 
 uint16_t array_test[20];
-uint16_t array_test2[10] = {50,60,10};
-const uint16_t array_test3[10] = {50,60,10};
+uint16_t array_test2[10] =
+    { 50, 60, 10 };
+const uint16_t array_test3[10] =
+    { 50, 60, 10 };
 
 volatile A a_static(50);
 /// \endcond
@@ -62,12 +63,18 @@ volatile A a_static(50);
 int main()
 {
     static uint32_t test;
-
     volatile float32_t abs_in = -5.0;
     volatile float32_t abs_out = 0;
     A* a, *b;
-
     void* malloc_test[7];
+
+    // turn off buffers, so IO occurs immediately
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+
+    printf("Hello world\n");
+
     memset(array_test, 1, 5);
 
     abs_out = fabs(abs_in);
@@ -75,11 +82,12 @@ int main()
     gpio_init();
 
     a = new A(10);
-    delete(a);
+    delete (a);
 
-    b= new A[10];
-    delete[](b);
+    b = new A[10];
+    delete[] (b);
 
+    utils_burnCpuTime();
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
     malloc_test[2] = malloc(0x100);
@@ -106,7 +114,6 @@ int main()
         utils_burnCpuTime();
         GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
         utils_burnCpuTime();
-
 
     }
     // never leave this function

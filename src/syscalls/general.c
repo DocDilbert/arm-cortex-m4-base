@@ -3,12 +3,23 @@
 /// File which contains some general system calls which are used by newlibc and stdlibc++
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
-
 #include <errno.h>
-#include <sys/types.h>
 #include <sys/stat.h>
-#include <signal.h>
-#include <unistd.h>
+#include <sys/times.h>
+#include <sys/unistd.h>
+#include "mcu.h"
+
+#undef errno
+extern int errno;
+
+/*
+ environ
+ A pointer to a list of environment variables and their values.
+ For a minimal environment, this empty list is adequate:
+ */
+char *__env[1] =
+    { 0 };
+char **environ = __env;
 
 /// The newlibc and stdlibc++ do need some basic functions which the user must supply.
 /// Without these functions there are undefined symbols after linking. Most of
@@ -16,8 +27,6 @@
 /// must be defined nonetheless.
 ///
 /// \defgroup SystemCalls System calls
-
-
 
 /// \brief Terminate process.
 ///
@@ -51,38 +60,106 @@ int _kill(pid_t pid, int sig)
 /// \ingroup SystemCalls
 pid_t _getpid(void)
 {
-    return 0; // always return 0
+    return 1; // always return 1
 }
 
-#ifdef _UNUSED_
+/// \ingroup SystemCalls
 int _close(int fildes)
 {
     return -1;
 }
 
+/// \ingroup SystemCalls
 off_t _lseek(int fildes, off_t offset, int whence)
 {
-    return ((off_t) -1);
+    return 0;
 }
 
+/// \ingroup SystemCalls
 ssize_t _read(int fildes, void *buf, size_t nbyte)
 {
     return ((ssize_t) -1);
 }
 
-ssize_t _write(int fildes, const void *buf, size_t nbyte)
+/// Status of an open file. For consistency with other minimal implementations in these examples,
+/// all files are regarded as character special devices.
+///
+/// \ingroup SystemCalls
+int _fstat(int fildes, struct stat *st)
 {
-    return ((ssize_t) -1);
+    st->st_mode = S_IFCHR;
+    return 0;
 }
 
-int _fstat(int fildes, struct stat *buf)
+
+/// Status of a file (by name)
+///
+/// \ingroup SystemCalls
+int _stat(const char *filepath, struct stat *st)
 {
-    return (-1);
+    st->st_mode = S_IFCHR;
+    return 0;
 }
 
+
+/// Timing information for current process. Minimal implementation:
+///
+/// \ingroup SystemCalls
+clock_t _times(struct tms *buf)
+{
+    return -1;
+}
+
+
+/// Remove a file's directory entry. Minimal implementation:
+///
+/// \ingroup SystemCalls
+int _unlink(char *name)
+{
+    errno = ENOENT;
+    return -1;
+}
+
+/// \ingroup SystemCalls
+int link(const char *old, const char *new)
+{
+    errno = EMLINK;
+    return -1;
+}
+
+/// Wait for a child process. Minimal implementation:
+/// \ingroup SystemCalls
+int _wait(int *status)
+{
+    errno = ECHILD;
+    return -1;
+}
+
+/// Query whether output stream is a terminal.
+/// \ingroup SystemCalls
 int _isatty(int fildes)
 {
-    return (0);
+    switch (fildes) {
+        case STDOUT_FILENO:
+        case STDERR_FILENO:
+        case STDIN_FILENO:
+            return 1;
+        default:
+            //errno = ENOTTY;
+            errno = EBADF;
+            return 0;
+    }
+
+}
+/// Write a character to a file. `libc' subroutines will use this system routine for output to all files, including stdout
+/// Returns -1 on error or number of bytes sent,
+/// \ingroup SystemCalls
+ssize_t _write(int filedes, const void *buf, size_t nbytes)
+{
+    int n;
+    for (n = 0; n < nbytes; n++)
+    {
+        ITM_SendChar(((char*) buf)[n]);
+    }
 }
 
-#endif
