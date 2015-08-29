@@ -84,6 +84,13 @@ For this project the following topics in this documentation are of special inter
 ## Doxygen
 The "Doxygen" documentation can be found [here](http://www.stack.nl/~dimitri/doxygen/index.html).
 
+## Libraries
+### Redhat newlibc
+The "newlibc" documentation can be found [here](https://sourceware.org/newlib/libc.html).
+
+For this project the following topics in this documentation are of special interest:
+* [12 System Calls](https://sourceware.org/newlib/libc.html#Syscalls)
+
 ## Books
 This section contains some book I found very helpful when programming on the Cortex M4:
 * "Definitive Guide to ARM Cortex-M3 and Cortex-M4 Processors" from Joseph Yiu
