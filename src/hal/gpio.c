@@ -1,4 +1,4 @@
-/// \file hw_gpio.c
+/// \file gpio.c
 ///
 /// File containing the gpio hardware abstraction. 
 ///
