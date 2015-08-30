@@ -62,7 +62,7 @@ volatile A a_static(50);
 /// \ingroup StartSequence
 int main()
 {
-    static uint32_t test;
+    static uint32_t cycles;
     volatile float32_t abs_in = -5.0;
     volatile float32_t abs_out = 0;
     A* a, *b;
@@ -73,7 +73,6 @@ int main()
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
 
-    printf("Hello world\n");
 
     memset(array_test, 1, 5);
 
@@ -99,6 +98,8 @@ int main()
 
     while (1)
     {
+        printf("Hello World %i\n", cycles);
+        cycles++;
         free(malloc_test[0]);
         malloc_test[0] = malloc(100);
         bss_test++;
