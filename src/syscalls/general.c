@@ -116,7 +116,7 @@ int _unlink(char *name)
 /// Establish a new name for an existing file
 ///
 /// \ingroup SystemCalls
-int link(const char *old, const char *new)
+int _link(const char *old, const char *new)
 {
     errno = EMLINK;
     return -1;
