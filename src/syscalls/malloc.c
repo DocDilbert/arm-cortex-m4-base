@@ -16,7 +16,7 @@ extern int __heap_start;
 /// Start address of the .heap section. This symbol is set by the linker.
 extern int __heap_end;
 
-/// \brief Change space allocation
+/// \brief Increase program data space.
 ///
 /// The _sbrk( ) function adds incr bytes to the break value and changes the allocated space
 /// accordingly. If incr is negative, the amount of allocated space is decreased by incr bytes. The
