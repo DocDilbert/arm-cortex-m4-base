@@ -13,5 +13,7 @@ void utils_burnCpuTime()
     uint32_t i = 0;
 
     for (i = 0; i < 1000000; i++)
+    {
         __asm__("nop");
+    }
 }

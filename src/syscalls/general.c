@@ -136,7 +136,8 @@ int _wait(int *status)
 /// \ingroup SystemCalls
 int _isatty(int fildes)
 {
-    switch (fildes) {
+    switch (fildes)
+    {
         case STDOUT_FILENO:
         case STDERR_FILENO:
         case STDIN_FILENO:

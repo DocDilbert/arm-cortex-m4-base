@@ -27,11 +27,11 @@
 <setting id="org.eclipse.cdt.core.formatter.alignment_for_binary_expression" value="16"/>
 <setting id="org.eclipse.cdt.core.formatter.brace_position_for_method_declaration" value="next_line"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_before_semicolon_in_for" value="do not insert"/>
-<setting id="org.eclipse.cdt.core.formatter.brace_position_for_array_initializer" value="next_line_shifted"/>
+<setting id="org.eclipse.cdt.core.formatter.brace_position_for_array_initializer" value="end_of_line"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_before_opening_brace_in_method_declaration" value="insert"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_method_declaration" value="do not insert"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_between_empty_braces_in_array_initializer" value="do not insert"/>
-<setting id="org.eclipse.cdt.core.formatter.brace_position_for_switch" value="end_of_line"/>
+<setting id="org.eclipse.cdt.core.formatter.brace_position_for_switch" value="next_line"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_before_comma_in_expression_list" value="do not insert"/>
 <setting id="org.eclipse.cdt.core.formatter.keep_else_statement_on_same_line" value="false"/>
 <setting id="org.eclipse.cdt.core.formatter.insert_space_before_colon_in_base_clause" value="insert"/>

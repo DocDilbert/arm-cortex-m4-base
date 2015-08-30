@@ -6,7 +6,6 @@
 
 #include <errno.h>
 
-
 /// Libc error symbol. This is used to give more error details.
 /// \ingroup SystemCalls
 extern int errno;

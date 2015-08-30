@@ -46,10 +46,8 @@ uint16_t bss_test3;
 const uint32_t read_only = 0x100;
 
 uint16_t array_test[20];
-uint16_t array_test2[10] =
-    { 50, 60, 10 };
-const uint16_t array_test3[10] =
-    { 50, 60, 10 };
+uint16_t array_test2[10] = { 50, 60, 10 };
+const uint16_t array_test3[10] = { 50, 60, 10 };
 
 volatile A a_static(50);
 /// \endcond
@@ -73,7 +71,6 @@ int main()
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
 
-
     memset(array_test, 1, 5);
 
     abs_out = fabs(abs_in);
@@ -94,7 +91,6 @@ int main()
     malloc_test[4] = malloc(0x500);
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
-
 
     while (1)
     {
