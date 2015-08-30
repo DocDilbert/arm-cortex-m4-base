@@ -34,6 +34,7 @@ SRCS =  src/pre_sections.s \
 		src/faults.c \
 		src/syscalls/malloc.c \
 		src/syscalls/general.c \
+		src/syscalls/sbrk.c \
 		src/hal/isr_vectors.s \
 		src/hal/gpio.c \
 		src/hal/target/system_mb9b560r.c
