@@ -42,7 +42,7 @@ SRCS =  src/pre_sections.s \
 # Include directories
 INC_DIRS = 	./include \
 			./include/hal \
-			./include/cmsis \
+			./ext/cmsis \
 			./include/hal/target
 			   
 # Object directory
