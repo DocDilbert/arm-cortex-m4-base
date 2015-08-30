@@ -4,7 +4,7 @@ MEMORY {
     FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x2000    /* 8 KByte */
     SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x4000 /* 16 KByte */
 }
-ENTRY(reset_trampoline)
+ENTRY(resetTrampoline)
 SECTIONS
 {
 	/* Place interrupt vector table */

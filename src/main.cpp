@@ -75,7 +75,7 @@ int main()
 
     abs_out = fabs(abs_in);
     // Initialize gpios.
-    gpio_init();
+    GPIO_init();
 
     a = new A(10);
     delete (a);
@@ -83,7 +83,7 @@ int main()
     b = new A[10];
     delete[] (b);
 
-    utils_burnCpuTime();
+    UTILS_burnCpuTime();
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
     malloc_test[2] = malloc(0x100);
@@ -108,9 +108,9 @@ int main()
         GPIO_TOGGLE(DEBUGPIN_3);
         GPIO_TOGGLE(DEBUGPIN_4);
         GPIO_PUT(LED_RED, 0); // red led on - inverse logic.
-        utils_burnCpuTime();
+        UTILS_burnCpuTime();
         GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
-        utils_burnCpuTime();
+        UTILS_burnCpuTime();
 
     }
     // never leave this function

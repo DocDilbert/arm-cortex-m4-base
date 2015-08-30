@@ -12,7 +12,7 @@
 
 #include "gpio.h"
 
-void gpio_init()
+void GPIO_init()
 {
     // INITIALIZE DEBUG PINS
     GPIO_INIT_OUT(DEBUGPIN_1, 0);

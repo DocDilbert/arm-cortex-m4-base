@@ -14,7 +14,7 @@ extern "C"
 
 /// This function does burn cpu time.
 /// TODO: input parameter
-extern void utils_burnCpuTime();
+extern void UTILS_burnCpuTime();
 
 #ifdef __cplusplus
 }

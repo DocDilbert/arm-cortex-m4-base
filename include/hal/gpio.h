@@ -130,7 +130,7 @@
 #endif
 
 /// This function initializes the gpio peripheral unit.
-extern void gpio_init();
+extern void GPIO_init();
 
 #ifdef __cplusplus
 }

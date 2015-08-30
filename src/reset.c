@@ -39,7 +39,7 @@ extern uint32_t __init_array_end;
 /// * SysTick Configuration
 ///
 /// \ingroup StartSequence
-void isr_reset()
+void RESET_isr()
 {
     uint32_t *src, *dest;
     // ------------------------------------------------------------------------------

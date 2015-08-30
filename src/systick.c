@@ -10,7 +10,7 @@
 
 /// \brief System tick interrupt service routine.
 /// This function is called when a systick irq is raised.
-void isr_systick()
+void SYSTICK_isr()
 {
     GPIO_TOGGLE(DEBUGPIN_1);
 }

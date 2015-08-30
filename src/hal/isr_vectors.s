@@ -40,22 +40,22 @@ _isr_vector_m:
 	//
 	// This is done automatically by as. The jump itself ignores this bit, therefore all jumps are 32 Bit aligned.
 	.align 2 // make sure the alignment is correct
-	.long __stack_top        // This entry is used at startup to initialize the top address of the stack
-	.long reset_trampoline   // 000 - Reset
-	.long hang               // 001 - NMI
-	.long isr_hard_fault     // 002 - Hard Fault
-	.long isr_mpu_fault      // 003 - MPU Fault
-	.long isr_bus_fault      // 004 - Bus Fault
-	.long hang               // 005 - Usage Fault
-	.long hang               // 006 - Reserved
-	.long hang               // 007 - Reserved
-	.long hang               // 008 - Reserved
-	.long hang               // 009 - Reserved
-	.long hang               // 010 - SVCall
-	.long hang               // 011 - Debug Monitor
-	.long hang               // 012 - Reserved
-	.long hang               // 013 - PendSV
-	.long isr_systick	     // 014 - SysTick
+	.long __stack_top         // This entry is used at startup to initialize the top address of the stack
+	.long resetTrampoline     // 000 - Reset
+	.long hang                // 001 - NMI
+	.long FAULTS_isrHardFault // 002 - Hard Fault
+	.long FAULTS_isrMpuFault  // 003 - MPU Fault
+	.long FAULTS_isrBusFault  // 004 - Bus Fault
+	.long hang                // 005 - Usage Fault
+	.long hang                // 006 - Reserved
+	.long hang                // 007 - Reserved
+	.long hang                // 008 - Reserved
+	.long hang                // 009 - Reserved
+	.long hang                // 010 - SVCall
+	.long hang                // 011 - Debug Monitor
+	.long hang                // 012 - Reserved
+	.long hang                // 013 - PendSV
+	.long SYSTICK_isr	      // 014 - SysTick
 
 	// 015 - 143
 	.rept 128                // Currently no fm4 irq is enabled. Fill the vector table with branches to hang
@@ -70,13 +70,13 @@ FUNCTION hang
 ENDFUNC hang
 
 // Trampoline for reset interrupt service routine
-FUNCTION reset_trampoline
-.globl  reset_trampoline // make the reset_trampoline known to other modules
+FUNCTION resetTrampoline
+.globl  resetTrampoline // make the reset_trampoline known to other modules
 	// At this place some initialization can be done in assembler.
 	// This is currently not necessary.
 
 	// The BL and BLX instructions write the address of the next instruction to LR (the link register, R14).
-	BL isr_reset	// Branch with link to "isr_reset()", return address stored in LR (r14)
+	BL RESET_isr// Branch with link to "isr_reset()", return address stored in LR (r14)
 	BL main		// Branch with link to "main()", return address stored in LR (r14)
 	B .			// This should not be reached
-ENDFUNC reset_trampoline
+ENDFUNC resetTrampoline

@@ -1,18 +1,18 @@
-void isr_hard_fault()
+void FAULTS_isrHardFault()
 {
     while (1)
     {
     }
 }
 
-void isr_mpu_fault()
+void FAULTS_isrMpuFault()
 {
     while (1)
     {
     }
 }
 
-void isr_bus_fault()
+void FAULTS_isrBusFault()
 {
     while (1)
     {
