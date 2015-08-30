@@ -37,13 +37,13 @@ SRCS =  src/pre_sections.s \
 		src/syscalls/sbrk.c \
 		src/hal/isr_vectors.s \
 		src/hal/gpio.c \
-		src/hal/target/system_mb9b560r.c
+		ext/cypress/mb9bf56xr/system_mb9b560r.c
 			
 # Include directories
 INC_DIRS = 	./include \
 			./include/hal \
 			./ext/cmsis \
-			./include/hal/target
+			./ext/cypress/mb9bf56xr
 			   
 # Object directory
 OBJ_DIR = objs
