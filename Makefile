@@ -40,8 +40,8 @@ SRCS =  src/pre_sections.s \
 		ext/cypress/mb9bf56xr/system_mb9b560r.c
 			
 # Include directories
-INC_DIRS = 	./include \
-			./include/hal \
+INC_DIRS = 	./src \
+			./src/hal \
 			./ext/cmsis \
 			./ext/cypress/mb9bf56xr
 			   
