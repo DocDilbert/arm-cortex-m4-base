@@ -96,7 +96,7 @@ int _stat(const char *filepath, struct stat *st)
     return 0;
 }
 
-/// Timing information for current process. Minimal implementation:
+/// Timing information for current process
 ///
 /// \ingroup SystemCalls
 clock_t _times(struct tms *buf)
@@ -131,7 +131,7 @@ int _wait(int *status)
     return -1;
 }
 
-/// Query whether output stream is a terminal.
+/// Query whether output stream is a terminal
 ///
 /// \ingroup SystemCalls
 int _isatty(int fildes)
@@ -149,7 +149,9 @@ int _isatty(int fildes)
     }
 
 }
-/// Write a character to a file. `libc' subroutines will use this system routine for output to all files, including stdout
+/// Write a character to a file.
+///
+/// `libc' subroutines will use this system routine for output to all files, including stdout
 /// Returns -1 on error or number of bytes sent.
 ///
 /// \ingroup SystemCalls
