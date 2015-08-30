@@ -11,8 +11,8 @@
 
 // A pointer to a list of environment variables and their values.
 // For a minimal environment, this empty list is adequate:
-char *__env[1] = { 0 }; //< A pointer to a list of environment variables and their values.
-char **environ = __env; //< A pointer to a list of environment variables and their values.
+char *__env[1] = { 0 }; ///< A pointer to a list of environment variables and their values.
+char **environ = __env; ///< A pointer to a list of environment variables and their values.
 
 /// The newlibc and stdlibc++ do need some basic functions which the user must supply.
 /// Without these functions there are undefined symbols after linking. Most of
