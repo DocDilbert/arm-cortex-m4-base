@@ -15,7 +15,7 @@ directory of the compiler. On windows this path should not contain any whitespac
 
 To build:
 ```
-set ARM_GCC_PATH=...path-to-builchain...
+set ARM_GCC_PATH=...path-to-buildchain...
 make
 ```
 # Doxygen
