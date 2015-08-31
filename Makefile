@@ -165,6 +165,7 @@ info: $(TARGET)
 	@$(SIZE) --format=sysv -x $(TARGET)
 
 doc:
+	mkdir -p doc
 	@$(DOXYGEN) cmsis.config
 	@$(DOXYGEN) doxygen.config
 	
