@@ -1,7 +1,10 @@
+# GDB initialization script. 
+# Usage: arm-none-eabi-gdb -x gdb.init
+
 file arm-cortex-m4-base.elf
 target remote localhost:2331
 monitor reset
 load
 break main
-break reset_trampoline
+#break reset_trampoline
 c
