@@ -164,10 +164,15 @@ $(OBJ_DIR):
 info: $(TARGET)
 	@$(SIZE) --format=sysv -x $(TARGET)
 
-doc:
+doc: doc/cmsis
+	mkdir -p doc	
+	@$(DOXYGEN) doxygen.config
+
+# This is intentionally not a phony target. The cmsis documentation is only generated
+# once. 
+doc/cmsis:	
 	mkdir -p doc
 	@$(DOXYGEN) cmsis.config
-	@$(DOXYGEN) doxygen.config
 	
 clean:
 	rm -f $(TARGET)
