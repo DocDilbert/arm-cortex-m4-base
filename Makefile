@@ -28,15 +28,15 @@ LD_SCRIPT = src/hal/linker.ld
 # Source files          
 SRCS =  src/pre_sections.s \
 		src/main.cpp \
-		src/systick.c \
-		src/utils.c \
-		src/reset.c \
-		src/faults.c \
+		src/systick.cpp \
+		src/utils.cpp \
+		src/reset.cpp \
+		src/faults.cpp \
 		src/syscalls/malloc.c \
 		src/syscalls/general.c \
 		src/syscalls/sbrk.c \
 		src/hal/isr_vectors.s \
-		src/hal/gpio.c \
+		src/hal/gpio.cpp \
 		ext/cypress/mb9bf56xr/system_mb9b560r.c
 			
 # Include directories

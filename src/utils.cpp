@@ -1,4 +1,4 @@
-/// \file utils.h
+/// \file utils.cpp
 ///
 /// File containing utility functions.
 ///

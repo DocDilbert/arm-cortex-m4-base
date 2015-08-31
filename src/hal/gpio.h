@@ -119,15 +119,7 @@
     _PIN_##_PFR=0u;  /* Set pin to gpio*/ \
 }
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
 /// This function initializes the gpio peripheral unit.
 extern void GPIO_init();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

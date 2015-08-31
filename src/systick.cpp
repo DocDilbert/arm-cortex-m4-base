@@ -1,4 +1,4 @@
-/// \file systick.c
+/// \file systick.cpp
 ///
 /// File contains systick related initialization and handling.
 ///
@@ -9,8 +9,9 @@
 #include "gpio.h"
 
 /// \brief System tick interrupt service routine.
+///
 /// This function is called when a systick irq is raised.
-void SYSTICK_isr()
+extern "C" void SYSTICK_isr()
 {
     GPIO_TOGGLE(DEBUGPIN_1);
 }
