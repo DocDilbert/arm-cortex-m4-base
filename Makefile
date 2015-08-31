@@ -31,7 +31,7 @@ SRCS =  src/pre_sections.s \
 		src/systick.cpp \
 		src/utils.cpp \
 		src/reset.cpp \
-		src/faults.cpp \
+		src/exceptions.cpp \
 		src/syscalls/malloc.c \
 		src/syscalls/general.c \
 		src/syscalls/sbrk.c \
@@ -140,7 +140,7 @@ LD_FLAGS += -Wl,-Map=$(OBJ_DIR)/$(TARGET).map,--cref,--gc-sections
 LD_FLAGS := $(strip $(LD_FLAGS))
 
 # All phony targets
-.PHONY: all info clean doc
+.PHONY: all info clean cleandoc doc
 
 all: $(TARGET)              
 
@@ -175,8 +175,11 @@ doc/cmsis:
 clean:
 	rm -f $(TARGET)
 	rm -rf $(OBJ_DIR)
+
+cleandoc:
 	rm -rf ./doc/base
 	rm -rf ./doc/cmsis
+
 
 # Include auto dependencies
 -include $(DEPS)
