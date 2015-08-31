@@ -1,4 +1,4 @@
-/// \file reset.c
+/// \file reset.cpp
 ///
 /// File contains all code related to system reset.
 ///
@@ -37,6 +37,8 @@ extern uint32_t __init_array_end;
 /// * Initialize the bss ram section with 0.
 /// * PLL Configuration
 /// * SysTick Configuration
+///
+/// \attention C Linkage is required for interrupt service routines.
 ///
 /// \ingroup StartSequence
 extern "C" void RESET_isr()

@@ -11,6 +11,8 @@
 /// \brief System tick interrupt service routine.
 ///
 /// This function is called when a systick irq is raised.
+///
+/// \attention C Linkage is required for interrupt service routines.
 extern "C" void SYSTICK_isr()
 {
     GPIO_TOGGLE(DEBUGPIN_1);
