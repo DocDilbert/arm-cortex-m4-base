@@ -39,7 +39,7 @@
 
 
 //@{
-/// Pin macro
+/// Aliases for bit banding registers
 #define DEBUGPIN_1_DDR          bFM4_GPIO_DDR1_PF
 #define DEBUGPIN_1_PDOR         bFM4_GPIO_PDOR1_PF
 #define DEBUGPIN_1_PFR          bFM4_GPIO_PFR1_PF
@@ -108,21 +108,15 @@
     _PIN_##_ADE =0; /* deactivate usage of the pin as analog input*/ \
 }
 
-/// A macrot that configures a pin as a gpio output. 
+/// A macro that configures a pin as a gpio output.
 ///
-/// Attention: adc functionality of a pin must be deactivated separatly by using
+/// Attention: adc functionality of a pin must be deactivated separately by using
 /// the macro HW_GPIO_ADC_OFF .
 #define GPIO_INIT_OUT(_PIN_, _INITIAL_VALUE_)\
 { \
     GPIO_PUT(_PIN_,_INITIAL_VALUE_); /* Set initial value of the output */ \
     _PIN_##_DDR=1u;  /* Set data direction to output*/ \
-    _PIN_##_PFR=0u; /* Set pin to gpio*/ \
-}
-
-#define GPIO_INIT_PERIPH_FUNC(_PIN_)\
-{ \
-    _PIN_##_DDR=1u;  /* Set data direction to output*/ \
-    _PIN_##_PFR=1u; /* Uses a pin as an input/output pin of peripheral functions. */ \
+    _PIN_##_PFR=0u;  /* Set pin to gpio*/ \
 }
 
 #ifdef __cplusplus
