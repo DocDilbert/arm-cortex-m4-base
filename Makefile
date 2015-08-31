@@ -165,6 +165,7 @@ info: $(TARGET)
 	@$(SIZE) --format=sysv -x $(TARGET)
 
 doc:
+	@$(DOXYGEN) cmsis.config
 	@$(DOXYGEN) doxygen.config
 	
 clean:
