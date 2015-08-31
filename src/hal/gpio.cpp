@@ -10,6 +10,7 @@
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
+#include <stdio.h>
 #include "gpio.h"
 
 void GPIO_init()

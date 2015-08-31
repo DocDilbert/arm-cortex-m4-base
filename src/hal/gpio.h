@@ -13,7 +13,9 @@
 #ifndef __GPIO_H__
 #define __GPIO_H__
 
+#include <stdio.h>
 #include "mcu.h"
+#include "base_types.h"
 
 // IMPORTANT GPIO REGISTER DESCRIPTIONS
 // 
@@ -36,7 +38,6 @@
 // Note: If a pin is selected as GPIO input or input/output of peripheral functions, a setting value is invalid.
 
 // DEFINE GPIO MACROS
-
 
 //@{
 /// Aliases for bit banding registers
@@ -87,7 +88,6 @@
 #define RTO03_0_PFR             bFM4_GPIO_PFR3_PD
 //@}
 
-
 /// A macro that toggles the logic-level of an output pin. The pin must be 
 /// configured as gpio-output beforehand.
 #define GPIO_TOGGLE(_PIN_) \
@@ -119,6 +119,25 @@
     _PIN_##_PFR=0u;  /* Set pin to gpio*/ \
 }
 
+enum Pins
+{
+    DebugPin1, DebugPin2
+};
+
+template<Pins pin>
+    void setDDR();
+
+template<>
+    inline void setDDR<DebugPin1>()
+    {
+        printf("DebugPin1\n");
+    }
+
+template<>
+    inline void setDDR<DebugPin2>()
+    {
+        printf("DebugPin2\n");
+    }
 /// This function initializes the gpio peripheral unit.
 extern void GPIO_init();
 

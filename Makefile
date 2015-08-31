@@ -6,7 +6,7 @@ PROJECT = arm-cortex-m4-base
 MAKEFLAGS += --no-builtin-rules
 
 # Optimization related flags supplied to the compiler
-OPT_FLAGS = -O0
+OPT_FLAGS = -O2
 
 # Debug related flags supplied to the compiler
 DEBUG_FLAGS = -gdwarf-2 -g3

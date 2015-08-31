@@ -66,6 +66,9 @@ int main()
     A* a, *b;
     void* malloc_test[7];
 
+    // Initialize gpios.
+    GPIO_init();
+
     // turn off buffers, so IO occurs immediately
     setvbuf(stdin, NULL, _IONBF, 0);
     setvbuf(stdout, NULL, _IONBF, 0);
@@ -74,8 +77,6 @@ int main()
     memset(array_test, 1, 5);
 
     abs_out = fabs(abs_in);
-    // Initialize gpios.
-    GPIO_init();
 
     a = new A(10);
     delete (a);
@@ -91,6 +92,10 @@ int main()
     malloc_test[4] = malloc(0x500);
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
+
+
+    setDDR<DebugPin1>();
+    setDDR<DebugPin2>();
 
     while (1)
     {
