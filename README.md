@@ -1,4 +1,4 @@
-# ARM Cortex-M4 Base Project
+# ARM Cortex-M4 Base Documentation
 This project gives a good starting point for developing a bare metal embedded program on the arm cortex m3/m4. 
 It uses the gnu c and c++ compiler for building, therefore no expenses are necessary to get it running.
 
