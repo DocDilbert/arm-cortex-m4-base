@@ -164,20 +164,19 @@ $(OBJ_DIR):
 info: $(TARGET)
 	@$(SIZE) --format=sysv -x $(TARGET)
 
-doc: doc/cmsis
-	mkdir -p doc	
-	@$(DOXYGEN) doxygen.config
+doc: doc/cmsis	
+	@$(DOXYGEN) doc/doxygen.config
 
 # This is intentionally not a phony target. The cmsis documentation is only generated
 # once. 
 doc/cmsis:	
-	mkdir -p doc
-	@$(DOXYGEN) cmsis.config
+	@$(DOXYGEN) doc/cmsis.config
 	
 clean:
 	rm -f $(TARGET)
 	rm -rf $(OBJ_DIR)
-	rm -rf ./doc
+	rm -rf ./doc/base
+	rm -rf ./doc/cmsis
 
 # Include auto dependencies
 -include $(DEPS)

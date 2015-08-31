@@ -38,4 +38,5 @@
 *.dSYM/
 
 # Doxygen output directory
-doc/**
+doc/base/**
+doc/cmsis/**
