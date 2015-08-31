@@ -1,5 +1,4 @@
-# ARM Cortex-M4 Base Project {#mainpage}
-## Introduction
+# ARM Cortex-M4 Base Project
 This project gives a good starting point for developing a bare metal embedded program on the arm cortex m3/m4. 
 It uses the gnu c and c++ compiler for building, therefore no expenses are necessary to get it running.
 
@@ -10,7 +9,7 @@ The following programs are used for development:
 * Unix tools (make, rm, grep ...) - [Cygwin](https://www.cygwin.com/) or [MinGW - MSYS](https://www.cygwin.com/)
 * Documentation - [Doxygen](http://www.stack.nl/~dimitri/doxygen/) 
 
-## Building
+## Building binaries
 The Makefile uses the environment variable **ARM_GCC_PATH** to locate the arm gcc compiler. This variable must be set to the installation
 directory of the compiler. On windows this path should not contain any whitespaces. 
 
@@ -19,12 +18,21 @@ To build:
 set ARM_GCC_PATH=...path-to-buildchain...
 make
 ```
-## Doxygen
-To build the docs:
+
+To get further information on the built elf file:
+```
+make info
+```
+
+## Building the documentation
+To build the documentation:
 ```
 make doc
 ```
-## References
+
+
+## Usefull resources
+This section lists some usefull resources which I constantly use when working on an cortex m4 target.
 ### Cortex M4 Technical Reference Manual 
 The "Cortex M4 Technical Reference Manual" can be found [here](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0439b/index.html).
 
