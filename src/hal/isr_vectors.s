@@ -40,26 +40,26 @@ _isr_vector_m:
 	//
 	// This is done automatically by as. The jump itself ignores this bit, therefore all jumps are 32 Bit aligned.
 	.align 2 // make sure the alignment is correct
-	.long __stack_top         // This entry is used at startup to initialize the top address of the stack
-	.long resetTrampoline     // 000 - Reset
-	.long hang                // 001 - NMI
-	.long FAULTS_isrHardFault // 002 - Hard Fault
-	.long FAULTS_isrMpuFault  // 003 - MPU Fault
-	.long FAULTS_isrBusFault  // 004 - Bus Fault
-	.long hang                // 005 - Usage Fault
-	.long hang                // 006 - Reserved
-	.long hang                // 007 - Reserved
-	.long hang                // 008 - Reserved
-	.long hang                // 009 - Reserved
-	.long hang                // 010 - SVCall
-	.long hang                // 011 - Debug Monitor
-	.long hang                // 012 - Reserved
-	.long hang                // 013 - PendSV
-	.long SYSTICK_isr	      // 014 - SysTick
+	.long __stack_top              // This entry is used at startup to initialize the top address of the stack
+	.long resetTrampoline          // 000 - Reset
+	.long hang                     // 001 - NMI
+	.long FAULTS_isrHardFault      // 002 - Hard Fault
+	.long FAULTS_isrMemManageFault // 003 - Mem manage Fault
+	.long FAULTS_isrBusFault       // 004 - Bus Fault
+	.long FAULTS_isrUsageFault     // 005 - Usage Fault
+	.long hang                     // 006 - Reserved
+	.long hang                     // 007 - Reserved
+	.long hang                     // 008 - Reserved
+	.long hang                     // 009 - Reserved
+	.long hang                     // 010 - SVCall
+	.long hang                     // 011 - Debug Monitor
+	.long hang                     // 012 - Reserved
+	.long hang                     // 013 - PendSV
+	.long SYSTICK_isr	           // 014 - SysTick
 
 	// 015 - 143
-	.rept 128                // Currently no fm4 irq is enabled. Fill the vector table with branches to hang
-	.long hang               // xxx - IRQx_Handler
+	.rept 128                      // Currently no fm4 irq is enabled. Fill the vector table with branches to hang
+	.long hang                     // xxx - IRQx_Handler
 	.endr
 
 .text // Place the following assembler instructions into the text section (code)
