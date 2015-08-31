@@ -165,10 +165,10 @@ info: $(TARGET)
 	@$(SIZE) --format=sysv -x $(TARGET)
 
 doc: doc/cmsis	
-	@$(DOXYGEN) doc/doxygen.config
+	@$(DOXYGEN) doc/base.config
 
-# This is intentionally not a phony target. The cmsis documentation is only generated
-# once. 
+# This is intentionally not a phony target. When the directory not exists the documentation
+# is generated. If it exists, nothing is generated.
 doc/cmsis:	
 	@$(DOXYGEN) doc/cmsis.config
 	
