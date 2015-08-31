@@ -31,7 +31,7 @@ SRCS =  src/pre_sections.s \
 		src/systick.cpp \
 		src/utils.cpp \
 		src/reset.cpp \
-		src/exceptions.cpp \
+		src/faults.cpp \
 		src/syscalls/malloc.c \
 		src/syscalls/general.c \
 		src/syscalls/sbrk.c \
