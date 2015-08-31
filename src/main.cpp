@@ -13,7 +13,7 @@
 #include "base_types.h"
 #include "gpio.h"
 #include "utils.h"
-
+#include "gpio.h"
 /// \cond TEST
 class A
 {
@@ -50,6 +50,9 @@ uint16_t array_test2[10] = { 50, 60, 10 };
 const uint16_t array_test3[10] = { 50, 60, 10 };
 
 volatile A a_static(50);
+
+GPIOController gpioCtrl;
+
 /// \endcond
 
 /// \brief This function is the starting point of the program. 
@@ -93,10 +96,10 @@ int main()
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
 
-
-    setDDR<DebugPin1>();
-    setDDR<DebugPin2>();
-
+    GPIO* gpio4 = gpioCtrl.get(DebugPin1);
+    __asm__("nop");
+    gpio4->setDDR();
+    __asm__("nop");
     while (1)
     {
         printf("Hello World %i\n", cycles);

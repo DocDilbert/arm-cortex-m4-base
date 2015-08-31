@@ -13,6 +13,33 @@
 #include <stdio.h>
 #include "gpio.h"
 
+class GPIO_P1F : public GPIO
+{
+public:
+    void setDDR()
+    {
+        printf("DebugPin1\n");
+    }
+};
+
+class GPIODebugPin2 : public GPIO
+{
+public:
+    void setDDR()
+    {
+        printf("DebugPin2\n");
+    }
+};
+
+static GPIO_P1F gpio_P1F;
+
+GPIO* gpios[PinsCount] = { &gpio_P1F };
+
+GPIO* GPIOController::get(Pins pin)
+{
+    return gpios[pin];
+}
+
 void GPIO_init()
 {
     // INITIALIZE DEBUG PINS

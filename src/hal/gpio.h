@@ -121,24 +121,24 @@
 
 enum Pins
 {
-    DebugPin1, DebugPin2
+    DebugPin1,
+    DebugPin2,
+    PinsCount
 };
 
-template<Pins pin>
-    void setDDR();
+class GPIO
+{
+public:
+    virtual void setDDR() = 0;
 
-template<>
-    inline void setDDR<DebugPin1>()
-    {
-        printf("DebugPin1\n");
-    }
+};
 
-template<>
-    inline void setDDR<DebugPin2>()
-    {
-        printf("DebugPin2\n");
-    }
 /// This function initializes the gpio peripheral unit.
 extern void GPIO_init();
 
+class GPIOController
+{
+public:
+    GPIO* get(Pins pin);
+};
 #endif
