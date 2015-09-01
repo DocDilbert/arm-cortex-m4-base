@@ -30,6 +30,10 @@ To build the documentation:
 make doc
 ```
 
+## Thread safety
+Depending on the enabled options during newlibc building the function malloc is able to lock and unlock interrupts. To
+the time of writing this locking mechanismn is disabled when using the newlibc-nano prebuilts. Therefore calls to malloc and new
+are not thread safe. Do not call them from different interrupts or threads.
 
 ## Usefull resources
 This section lists some usefull resources which I constantly use when working on an cortex m4 target.
