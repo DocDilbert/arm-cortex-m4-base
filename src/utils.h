@@ -48,7 +48,7 @@ template<unsigned count>
         NopUnroller<count>::nop();
     }
 
-/// This function waits "cycles_10" x 10 cpu cycles.
+/// This function simulates a cpu load. It will exit after approximatly "cycles_10" x 10 cpu cycles.
 ///
 /// This function actively wait "cycles_10" x 10 cpu cycles. It is intentionally
 /// placed in ram to prevent stall cycles which can occur when executing it from flash.
@@ -58,6 +58,6 @@ template<unsigned count>
 ///
 /// \param cycles_10 Number of 10 times cycles to wait. All values equal or less than 1 are ignored.
 ///
- extern "C" RAMFUNC  __attribute__((optimize("O0"))) void UTILS_burn(const unsigned cycles_10);
+ extern "C" RAMFUNC  __attribute__((optimize("O0"))) void UTILS_simulateLoad(const unsigned cycles_10);
 
 #endif

@@ -56,14 +56,14 @@ volatile A a_static(50);
 RAMFUNC void ramTrampoline1()
 {
     // This prevents that veneers are included to call UTILS_burn
-    UTILS_burn(1000000);
+    UTILS_simulateLoad(1000000);
 }
 
 RAMFUNC void ramTrampoline2()
 {
     GPIO_PUT(DEBUGPIN_3, 1);
     // This prevents that veneers are included to call UTILS_burn
-    UTILS_burn(1000000);
+    UTILS_simulateLoad(1000000);
     GPIO_PUT(DEBUGPIN_3, 0);
 }
 /// \brief This function is the starting point of the program. 
