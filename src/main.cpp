@@ -111,10 +111,12 @@ int main()
 
         GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
 
-        GPIO_PUT(DEBUGPIN_2, 1);
+       /* GPIO_PUT(DEBUGPIN_2, 1);
+        UTILS_nopUnroll<500>();
+        UTILS_nopUnroll<500>();
+        GPIO_PUT(DEBUGPIN_2, 0);*/
         GPIO_PUT(DEBUGPIN_3, 1);
         UTILS_burn(1000000);
-        GPIO_PUT(DEBUGPIN_2, 0);
         GPIO_PUT(DEBUGPIN_3, 0);
 
     }

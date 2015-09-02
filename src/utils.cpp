@@ -10,10 +10,10 @@
 
 void UTILS_burn(const unsigned cycles_10)
 {
-    __asm__("sub %0, #1      \n\t"// 1 cycle
+    __asm__("CMP %0, #2      \n\t"// 1 cycle
+            "BLS end_%=      \n\t"// 1 cycle / if %0 <= 4 then go to end_%
+            "sub %0, #4      \n\t"// 1 cycle %0 = %0 - 4 : -4 was measured.
             "nop             \n\t"// 1 cycle
-            "CMP %0, #0      \n\t"// 1 cycle
-            "BEQ end_%=      \n\t"// 1 cycle when no branch
             "loop_%=:        \n\t"
             "   sub %0, #1   \n\t"// 1 cycle / %0 - 1
             "   nop          \n\t"// 1 cycle

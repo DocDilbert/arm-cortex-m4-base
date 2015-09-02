@@ -10,6 +10,9 @@
 /// Convenience macro. This macro sets the gcc attribute "alway_inline" and makes the function/method static inline.
 #define STATIC_INLINE __attribute__( ( always_inline ) ) static inline
 
+/// This macro moves a function into the .ramfuncs section
+#define RAMFUNC __attribute__ ((section (".ramfuncs")))
+
 /// This class injects a given number of nop's into the code.
 ///
 /// \tparam count Number of nops which will be injected into the code.
@@ -47,13 +50,11 @@ template<unsigned count>
 
 /// This function waits "cycles_10" x 10 cpu cycles.
 ///
-/// This function actively wait "cycles_10" x 10 instruction cycles. Beware,
-/// the actual time this function waits depends on a lot of factors. For example it
-/// is important if the code is execute from flash or is it executed from ram.
+/// This function actively wait "cycles_10" x 10 instruction cycles. It is intentionally
+/// placed in ram to prevent stall cycles which can occur executing it from flash.
 ///
-/// \param cycles_10 Number of 10 times cycles to wait.
+/// \param cycles_10 Number of 10 times cycles to wait. All values equal or less than 4 are ignored.
 ///
-/// \attention cycles_10 should never be zero.
- void UTILS_burn(const unsigned cycles_10);
+ extern "C" RAMFUNC  __attribute__((optimize("O0"))) void UTILS_burn(const unsigned cycles_10);
 
 #endif
