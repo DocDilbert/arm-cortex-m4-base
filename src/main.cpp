@@ -92,6 +92,7 @@ int main()
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
 
+    UTILS_nopUnroll<10>();
     while (1)
     {
         printf("Hello World %i\n", cycles);
