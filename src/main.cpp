@@ -83,7 +83,6 @@ int main()
     b = new A[10];
     delete[] (b);
 
-    UTILS_burnCpuTime();
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
     malloc_test[2] = malloc(0x100);
@@ -92,7 +91,6 @@ int main()
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
 
-    UTILS_nopUnroll<10>();
     while (1)
     {
         printf("Hello World %i\n", cycles);
@@ -105,13 +103,19 @@ int main()
         data_test++;
         data_test2++;
         data_test3++;
-        GPIO_TOGGLE(DEBUGPIN_2);
-        GPIO_TOGGLE(DEBUGPIN_3);
+
         GPIO_TOGGLE(DEBUGPIN_4);
+
         GPIO_PUT(LED_RED, 0); // red led on - inverse logic.
-        UTILS_burnCpuTime();
+        UTILS_burn(1000000);
+
         GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
-        UTILS_burnCpuTime();
+
+        GPIO_PUT(DEBUGPIN_2, 1);
+        GPIO_PUT(DEBUGPIN_3, 1);
+        UTILS_burn(1000000);
+        GPIO_PUT(DEBUGPIN_2, 0);
+        GPIO_PUT(DEBUGPIN_3, 0);
 
     }
     // never leave this function

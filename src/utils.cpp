@@ -8,12 +8,25 @@
 #include <stdint.h>
 #include "utils.h"
 
-void UTILS_burnCpuTime()
+void UTILS_burn(const unsigned cycles_10)
 {
-    uint32_t i = 0;
-
-    for (i = 0; i < 1000000; i++)
-    {
-        __asm__("nop");
-    }
+    __asm__("sub %0, #1      \n\t"// 1 cycle
+            "nop             \n\t"// 1 cycle
+            "CMP %0, #0      \n\t"// 1 cycle
+            "BEQ end_%=      \n\t"// 1 cycle when no branch
+            "loop_%=:        \n\t"
+            "   sub %0, #1   \n\t"// 1 cycle / %0 - 1
+            "   nop          \n\t"// 1 cycle
+            "   nop          \n\t"// 1 cycle
+            "   nop          \n\t"// 1 cycle
+            "   nop          \n\t"// 1 cycle
+            "   nop          \n\t"// 1 cycle
+            "   nop          \n\t"// 1 cycle
+            "   CMP %0, #0   \n\t"// 1 cycle / %0 = 0
+            "   BNE loop_%=  \n\t"// 2 cycles when branch / 1 cycle when not
+            "nop             \n\t"// 1 cycle
+            "end_%=:             "
+            : /* out */
+            : "r"(cycles_10)/* in */
+            :  /* clobbers */);
 }
