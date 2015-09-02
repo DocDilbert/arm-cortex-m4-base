@@ -52,6 +52,20 @@ const uint16_t array_test3[10] = { 50, 60, 10 };
 volatile A a_static(50);
 /// \endcond
 
+
+RAMFUNC void ramTrampoline1()
+{
+    // This prevents that veneers are included to call UTILS_burn
+    UTILS_burn(1000000);
+}
+
+RAMFUNC void ramTrampoline2()
+{
+    GPIO_PUT(DEBUGPIN_3, 1);
+    // This prevents that veneers are included to call UTILS_burn
+    UTILS_burn(1000000);
+    GPIO_PUT(DEBUGPIN_3, 0);
+}
 /// \brief This function is the starting point of the program. 
 ///
 /// The function is called after the reset irq was handled by isr_reset().
@@ -107,17 +121,16 @@ int main()
         GPIO_TOGGLE(DEBUGPIN_4);
 
         GPIO_PUT(LED_RED, 0); // red led on - inverse logic.
-        UTILS_burn(1000000);
-
+        ramTrampoline1();
         GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
 
-       /* GPIO_PUT(DEBUGPIN_2, 1);
+        /*GPIO_PUT(DEBUGPIN_2, 1);
         UTILS_nopUnroll<500>();
         UTILS_nopUnroll<500>();
         GPIO_PUT(DEBUGPIN_2, 0);*/
-        GPIO_PUT(DEBUGPIN_3, 1);
-        UTILS_burn(1000000);
-        GPIO_PUT(DEBUGPIN_3, 0);
+
+        ramTrampoline2();
+
 
     }
     // never leave this function

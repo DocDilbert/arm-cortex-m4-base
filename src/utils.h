@@ -50,10 +50,13 @@ template<unsigned count>
 
 /// This function waits "cycles_10" x 10 cpu cycles.
 ///
-/// This function actively wait "cycles_10" x 10 instruction cycles. It is intentionally
-/// placed in ram to prevent stall cycles which can occur executing it from flash.
+/// This function actively wait "cycles_10" x 10 cpu cycles. It is intentionally
+/// placed in ram to prevent stall cycles which can occur when executing it from flash.
+/// Eventual overhead caused by the branch to this function and the return code which is
+/// placed by gcc automatically is not considered. Therefore don't expect 100 % accurate results.
+/// For big cycles_10 counts this can be neglected.
 ///
-/// \param cycles_10 Number of 10 times cycles to wait. All values equal or less than 4 are ignored.
+/// \param cycles_10 Number of 10 times cycles to wait. All values equal or less than 1 are ignored.
 ///
  extern "C" RAMFUNC  __attribute__((optimize("O0"))) void UTILS_burn(const unsigned cycles_10);
 
