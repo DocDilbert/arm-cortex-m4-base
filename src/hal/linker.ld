@@ -1,7 +1,7 @@
 SEARCH_DIR(.)
 
 MEMORY {
-    FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x2000    /* 8 KByte */
+    FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x20000    /* 80 KByte */
     SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x4000 /* 16 KByte */
 }
 ENTRY(resetTrampoline)
@@ -80,6 +80,14 @@ SECTIONS
     	*(COMMON) /* Place common symbols into bss (e.g. unitialized globals). Attention they will be initialized with 0. */
 		__bss_end = .;
 	} > SRAM1
+	
+	.ramfuncs :  ALIGN(4) {
+		__ramfuncs_start = .;
+		KEEP(*(.ramfuncs ))
+		__ramfuncs_end = .;
+	} > SRAM1 AT>FLASH
+	
+	__ramfuncs_lma_start = LOADADDR(.ramfuncs);
 	
 	PROVIDE(__bss_start__ = __bss_start);
 	PROVIDE(__bss_end__ = __bss_end);
