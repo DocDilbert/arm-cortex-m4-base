@@ -50,7 +50,7 @@ uint16_t array_test2[10] = { 50, 60, 10 };
 const uint16_t array_test3[10] = { 50, 60, 10 };
 
 volatile A a_static(50);
-/// \endcond
+
 
 
 RAMFUNC void ramTrampoline1()
@@ -66,6 +66,8 @@ RAMFUNC void ramTrampoline2()
     UTILS_simulateLoad(1000000);
     GPIO_PUT(DEBUGPIN_3, 0);
 }
+
+/// \endcond
 /// \brief This function is the starting point of the program. 
 ///
 /// The function is called after the reset irq was handled by isr_reset().

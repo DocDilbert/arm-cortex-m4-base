@@ -58,6 +58,6 @@ template<unsigned count>
 ///
 /// \param cycles_10 Number of 10 times cycles to wait. All values equal or less than 1 are ignored.
 ///
- extern "C" RAMFUNC  __attribute__((optimize("O0"))) void UTILS_simulateLoad(const unsigned cycles_10);
+extern void UTILS_simulateLoad(const unsigned cycles_10);
 
 #endif

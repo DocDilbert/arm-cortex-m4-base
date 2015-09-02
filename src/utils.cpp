@@ -9,7 +9,7 @@
 #include "utils.h"
 #include "gpio.h"
 
-void UTILS_simulateLoad(const unsigned cycles_10)
+RAMFUNC  __attribute__((optimize("O0"))) void UTILS_simulateLoad(const unsigned cycles_10)
 {
     __asm__(
             "CMP %0, #1      \n\t" // 1 cycle
@@ -31,7 +31,7 @@ void UTILS_simulateLoad(const unsigned cycles_10)
             "   nop          \n\t"// 1 cycle
             "   nop          \n\t"// 1 cycle
             "   CMP %0, #0   \n\t"// 1 cycle / %0 = 0
-            "   BNE loop_%=  \n\t"// 2 cycles when branch                          => 10 + cycles_10 * 10 - 1 cycles
+            "   BNE loop_%=  \n\t"// 2 cycles when branch ALIGNED(2)               => 10 + cycles_10 * 10 - 1 cycles
             "nop             \n\t"// 1 cycle                                       => 10 + cycles_10 * 10  cycles
             "end_%=:         \n\t"
 
