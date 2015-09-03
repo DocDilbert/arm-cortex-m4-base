@@ -9,7 +9,7 @@
 #include "utils.h"
 #include "gpio.h"
 
-RAMFUNC  __attribute__((optimize("O0"))) void UTILS_simulateLoad(const unsigned cycles_10)
+RAMFUNC DO_NOT_OPTIMIZE void UTILS_simulateLoad(const unsigned cycles_10)
 {
     __asm__(
             "CMP %0, #1      \n\t" // 1 cycle

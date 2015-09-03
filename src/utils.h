@@ -7,16 +7,19 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
-/// Convenience macro. This macro sets the gcc attribute "alway_inline" and makes the function/method inline.
+/// This macro sets the gcc attribute "alway_inline" and makes the function/method inline.
 #define INLINE __attribute__( ( always_inline ) ) inline
 
-/// Convenience macro. This macro sets the gcc attribute "alway_inline" and makes the function/method static inline.
+/// This macro sets the gcc attribute "alway_inline" and makes the function/method static inline.
 #define STATIC_INLINE __attribute__( ( always_inline ) ) static inline
 
-/// This macro moves a function into the .ramfuncs section
+/// This macro moves a function/method into the .ramfuncs section
 #define RAMFUNC __attribute__ ((section (".ramfuncs")))
 
-/// This class injects a given number of nop's into the code.
+/// This macro sets the gcc attribute "optimize" to O0. It can be used to exclude functions/methods from compiler optimization.
+#define DO_NOT_OPTIMIZE __attribute__((optimize("O0")))
+
+/// This template class injects a given number of nops into the code.
 ///
 /// \tparam count Number of nops which will be injected into the code.
 template<unsigned count>
@@ -29,9 +32,8 @@ template<unsigned count>
             NopUnroller<count - 1>::nop();
         }
     };
-/// This class injects a given number of nop's into the code.
-///
-/// \attention This template finishes the template recursion.
+/// \cond TEMPLATE_DOC
+
 template<>
     struct NopUnroller<0>
     {
@@ -40,6 +42,7 @@ template<>
         {
         }
     };
+/// \endcond
 
 /// Convenience function which uses the NopUnroller class template to inject count
 /// number of nops into the code.
@@ -51,7 +54,7 @@ template<unsigned count>
         NopUnroller<count>::nop();
     }
 
-/// This function simulates a cpu load. It will exit after approximatly "cycles_10" x 10 cpu cycles.
+/// This function simulates a cpu load. It will exit after approximately "cycles_10" x 10 cpu cycles.
 ///
 /// This function actively wait "cycles_10" x 10 cpu cycles. It is intentionally
 /// placed in ram to prevent stall cycles which can occur when executing it from flash.
