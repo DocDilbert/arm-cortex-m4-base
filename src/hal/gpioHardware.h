@@ -24,7 +24,7 @@
 // -  When "1" is set, it outputs High level.
 // Note: If a pin is selected as GPIO input or input/output of peripheral functions, a setting value is invalid.
 
-enum GpioLocation
+enum GpioPin
 {
     DEBUG_PIN1, DEBUG_PIN2, DEBUG_PIN3, DEBUG_PIN4, LED_RED, LED_GREEN, LED_BLUE
 };
@@ -34,16 +34,16 @@ enum GpioFunction
 };
 struct GPIOHardwareAccess
 {
-    template<GpioLocation pin>
+    template<GpioPin pin>
         STATIC_INLINE void init(GpioFunction function);
 
-    template<GpioLocation pin>
+    template<GpioPin pin>
         STATIC_INLINE void set(const boolean_t level);
 
-    template<GpioLocation pin>
+    template<GpioPin pin>
         STATIC_INLINE void toggle();
 
-    template<GpioLocation pin>
+    template<GpioPin pin>
         STATIC_INLINE boolean_t get();
 };
 

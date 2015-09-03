@@ -45,7 +45,7 @@ struct GpioReference
     virtual boolean_t get() const = 0;
 };
 
-template<GpioLocation pin>
+template<GpioPin pin>
     struct GpioReferenceHardware;
 
 /// This class administers all GpioReference objects and their hardware parts.
@@ -53,7 +53,7 @@ struct GPIOController
 {
     /// Get reference to gpio reference object.
     ///
-    template<GpioLocation pin>
+    template<GpioPin pin>
         GpioReference* getRef()
         {
             static GpioReferenceHardware<pin> re;
@@ -61,7 +61,7 @@ struct GPIOController
         }
 };
 
-template<GpioLocation pin>
+template<GpioPin pin>
     struct GpioReferenceHardware : public GpioReference
     {
         INLINE void init(GpioFunction function)
