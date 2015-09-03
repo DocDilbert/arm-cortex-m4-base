@@ -79,13 +79,12 @@ template<GpioPinId pin>
         }
     };
 
-/// This class administers all GpioReference objects and their hardware parts.
+/// This class administers all GpioPin objects and their hardware parts.
 struct GPIOController
 {
     /// Get reference to gpio reference object.
-    ///
     template<GpioPinId pin>
-        GpioPin* getRef()
+        GpioPin* getPin()
         {
             static GpioHardwarePin<pin> re;
             return &re;
