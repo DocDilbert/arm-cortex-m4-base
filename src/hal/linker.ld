@@ -1,7 +1,7 @@
 SEARCH_DIR(.)
 
 MEMORY {
-    FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x20000    /* 80 KByte */
+    FLASH (rx): ORIGIN = 0x00000, LENGTH = 0x28000    /* 160 KByte */
     SRAM1 (rwx): ORIGIN = 0x1FFF0000, LENGTH = 0x4000 /* 16 KByte */
 }
 ENTRY(resetTrampoline)
