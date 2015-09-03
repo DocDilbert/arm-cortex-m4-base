@@ -85,6 +85,7 @@ int main()
     A* a, *b;
     void* malloc_test[7];
 
+
     // Initialize gpios.
     GPIO_init();
 
@@ -103,6 +104,8 @@ int main()
     b = new A[10];
     delete[] (b);
 
+    GpioReference* debug1 = GPIOController::getRef(DebugPin2);
+
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
     malloc_test[2] = malloc(0x100);
@@ -111,10 +114,9 @@ int main()
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
 
-    GPIO* gpio4 = gpioCtrl.get(DebugPin1);
-    __asm__("nop");
-    gpio4->setDDR();
-    __asm__("nop");
+    gpioCtrl.set<DebugPin1>(true);
+    debug1->set(true);
+
     while (1)
     {
         printf("Hello World %i\n", cycles);

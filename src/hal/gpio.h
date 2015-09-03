@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include "mcu.h"
 #include "base_types.h"
-
+#include "utils.h"
 // IMPORTANT GPIO REGISTER DESCRIPTIONS
 // 
 // ADE  
@@ -121,24 +121,41 @@
 
 enum Pins
 {
-    DebugPin1,
-    DebugPin2,
-    PinsCount
+    DebugPin1, DebugPin2, PinsCount
 };
 
-class GPIO
-{
-public:
-    virtual void setDDR() = 0;
-
-};
 
 /// This function initializes the gpio peripheral unit.
 extern void GPIO_init();
 
+struct GpioReference
+{
+    virtual void set(bool state) = 0;
+};
+
+
 class GPIOController
 {
 public:
-    GPIO* get(Pins pin);
+    template<Pins pin>
+        STATIC_INLINE void set(bool state);
+
+    static GpioReference* getRef(Pins pin);
 };
+
+template<>
+    INLINE void GPIOController::set<DebugPin1>(bool state)
+    {
+        printf("DebugPin1\n");
+    }
+
+template<>
+    INLINE void GPIOController::set<DebugPin2>(bool state)
+    {
+        printf("DebugPin2\n");
+    }
+
+
+
+
 #endif

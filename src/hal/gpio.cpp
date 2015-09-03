@@ -13,31 +13,27 @@
 #include <stdio.h>
 #include "gpio.h"
 
-class GPIO_P1F : public GPIO
-{
-public:
-    void setDDR()
+template<Pins pin>
+    struct GpioRef : public GpioReference
     {
-        printf("DebugPin1\n");
-    }
-};
+        virtual void set(bool state)
+        {
+            GPIOController::set<pin>(state);
+        }
+    };
 
-class GPIODebugPin2 : public GPIO
+GpioReference* GPIOController::getRef(Pins pin)
 {
-public:
-    void setDDR()
+    switch (pin)
     {
-        printf("DebugPin2\n");
+        case DebugPin1:
+            static GpioRef<DebugPin1> debugPin1;
+            return &debugPin1;
+
+        case DebugPin2:
+            static GpioRef<DebugPin2> debugPin2;
+            return &debugPin2;
     }
-};
-
-static GPIO_P1F gpio_P1F;
-
-GPIO* gpios[PinsCount] = { &gpio_P1F };
-
-GPIO* GPIOController::get(Pins pin)
-{
-    return gpios[pin];
 }
 
 void GPIO_init()
