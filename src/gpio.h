@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include "base_types.h"
-#include "gpioHardware.h"
+#include "gpioHal.h"
 #include "utils.h"
 
 /// This abstract class is the base object of all GpioHardwarePin objects.
