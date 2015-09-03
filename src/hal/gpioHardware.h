@@ -3,6 +3,7 @@
 
 #include "mcu.h"
 #include "utils.h"
+
 enum GpioLocation
 {
     DebugPin1, DebugPin2, DebugPin3, DebugPin4

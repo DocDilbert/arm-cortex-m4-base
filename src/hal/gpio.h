@@ -73,21 +73,6 @@
 #define LED_BLUE_PDOR           bFM4_GPIO_PDORE_P0
 #define LED_BLUE_PFR            bFM4_GPIO_PFRE_P0
 
-#define RTO00_0_DDR             bFM4_GPIO_DDR3_PA
-#define RTO00_0_PDOR            bFM4_GPIO_PDOR3_PA
-#define RTO00_0_PFR             bFM4_GPIO_PFR3_PA
-
-#define RTO01_0_DDR             bFM4_GPIO_DDR3_PB
-#define RTO01_0_PDOR            bFM4_GPIO_PDOR3_PB
-#define RTO01_0_PFR             bFM4_GPIO_PFR3_PB
-
-#define RTO02_0_DDR             bFM4_GPIO_DDR3_PC
-#define RTO02_0_PDOR            bFM4_GPIO_PDOR3_PC
-#define RTO02_0_PFR             bFM4_GPIO_PFR3_PC
-
-#define RTO03_0_DDR             bFM4_GPIO_DDR3_PD
-#define RTO03_0_PDOR            bFM4_GPIO_PDOR3_PD
-#define RTO03_0_PFR             bFM4_GPIO_PFR3_PD
 //@}
 
 /// A macro that toggles the logic-level of an output pin. The pin must be 
