@@ -36,18 +36,24 @@ enum GpioFunction
 
 struct GPIOHardwareAccess
 {
-    template<GpioPinId pin>
+    /// This template method initializes a gpio pin to be used for a given function.
+    ///
+    /// \tparam pinId The pin identifier.
+    /// \param function The function for what the pin should be used.
+    template<GpioPinId pinId>
         STATIC_INLINE void init(GpioFunction function);
 
-    template<GpioPinId pin>
+    template<GpioPinId pinId>
         STATIC_INLINE void set(const boolean_t level);
 
-    template<GpioPinId pin>
+    template<GpioPinId pinId>
         STATIC_INLINE void toggle();
 
-    template<GpioPinId pin>
+    template<GpioPinId pinId>
         STATIC_INLINE boolean_t get();
 };
+
+/// \cond TEMPLATE_DOC
 
 // *********************************************************************
 // DebugPin1 hardware access
@@ -71,6 +77,7 @@ template<>
         // not implemented
         return false;
     }
+
 template<>
     INLINE void GPIOHardwareAccess::init<DEBUG_PIN1>(GpioFunction function)
     {
@@ -169,6 +176,7 @@ template<>
 // DebugPin4 hardware access
 // *********************************************************************
 
+
 template<>
     INLINE void GPIOHardwareAccess::set<DEBUG_PIN4>(const boolean_t level)
     {
@@ -226,6 +234,7 @@ template<>
         // not implemented
         return false;
     }
+
 
 template<>
     INLINE void GPIOHardwareAccess::init<LED_RED>(GpioFunction function)
@@ -285,7 +294,6 @@ template<>
 // LED_BLUE hardware access
 // *********************************************************************
 
-
 template<>
     INLINE void GPIOHardwareAccess::set<LED_BLUE>(const boolean_t level)
     {
@@ -320,5 +328,5 @@ template<>
                 break;
         }
     }
-
+/// \endcond
 #endif

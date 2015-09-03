@@ -18,10 +18,10 @@
 #include "gpioHardware.h"
 #include "utils.h"
 
-/// This class is the base object of all GpioHardwarePin objects.
+/// This abstract class is the base object of all GpioHardwarePin objects.
 struct GpioPin
 {
-    /// This methods initializes a gpio pin to be used for a given function.
+    /// This methods initialize a gpio pin to be used for a given function.
     ///
     /// \param function The function for what the pin should be used.
     virtual void init(GpioFunction function) = 0;
