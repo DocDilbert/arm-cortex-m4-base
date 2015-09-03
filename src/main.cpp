@@ -53,8 +53,24 @@ volatile A a_static(50);
 
 GPIOController gpioCtrl;
 
-/// \endcond
 
+
+
+RAMFUNC void ramTrampoline1()
+{
+    // This prevents that veneers are included to call UTILS_burn
+    UTILS_simulateLoad(1000000);
+}
+
+RAMFUNC void ramTrampoline2()
+{
+    GPIO_PUT(DEBUGPIN_3, 1);
+    // This prevents that veneers are included to call UTILS_burn
+    UTILS_simulateLoad(1000000);
+    GPIO_PUT(DEBUGPIN_3, 0);
+}
+
+/// \endcond
 /// \brief This function is the starting point of the program. 
 ///
 /// The function is called after the reset irq was handled by isr_reset().
@@ -87,7 +103,6 @@ int main()
     b = new A[10];
     delete[] (b);
 
-    UTILS_burnCpuTime();
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
     malloc_test[2] = malloc(0x100);
@@ -112,13 +127,20 @@ int main()
         data_test++;
         data_test2++;
         data_test3++;
-        GPIO_TOGGLE(DEBUGPIN_2);
-        GPIO_TOGGLE(DEBUGPIN_3);
+
         GPIO_TOGGLE(DEBUGPIN_4);
+
         GPIO_PUT(LED_RED, 0); // red led on - inverse logic.
-        UTILS_burnCpuTime();
+        ramTrampoline1();
         GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
-        UTILS_burnCpuTime();
+
+        /*GPIO_PUT(DEBUGPIN_2, 1);
+        UTILS_nopUnroll<500>();
+        UTILS_nopUnroll<500>();
+        GPIO_PUT(DEBUGPIN_2, 0);*/
+
+        ramTrampoline2();
+
 
     }
     // never leave this function

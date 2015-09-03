@@ -29,6 +29,17 @@ extern uint32_t __init_array_start;
 /// End address of the .init_array section. This symbol is set by the linker.
 extern uint32_t __init_array_end;
 
+/// Start address of the .ramfuncs initialization section. This symbol is set by the linker.
+extern uint32_t __ramfuncs_lma_start;
+
+/// Start address of the .ramfuncs initialization section. This symbol is set by the linker.
+extern uint32_t __ramfuncs_start;
+
+/// End address of the .ramfuncs section. This symbol is set by the linker.
+extern uint32_t __ramfuncs_end;
+
+
+
 /// \brief This function handles the reset irq
 ///
 /// When a reset is raised (e.g. at startup) this is the first function which gets called.
@@ -50,6 +61,16 @@ extern "C" void RESET_isr()
     src = &__data_lma_start;
     dest = &__data_start;
     while (dest < &__data_end)
+    {
+        *dest++ = *src++;
+    }
+
+    // ------------------------------------------------------------------------------
+    // Initialize the .ramfuncs section in ram with code stored in flash
+    // ------------------------------------------------------------------------------
+    src = &__ramfuncs_lma_start;
+    dest = &__ramfuncs_start;
+    while (dest < &__ramfuncs_end)
     {
         *dest++ = *src++;
     }
