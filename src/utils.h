@@ -7,6 +7,9 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
+/// Convenience macro. This macro sets the gcc attribute "alway_inline" and makes the function/method inline.
+#define INLINE __attribute__( ( always_inline ) ) inline
+
 /// Convenience macro. This macro sets the gcc attribute "alway_inline" and makes the function/method static inline.
 #define STATIC_INLINE __attribute__( ( always_inline ) ) static inline
 
