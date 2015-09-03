@@ -20,7 +20,7 @@
 #include "utils.h"
 
 /// This class represent a reference to a gpio.
-struct GpioReference
+struct GpioPin
 {
     /// This methods initializes a gpio pin to be used for a given function.
     ///
@@ -54,7 +54,7 @@ struct GPIOController
     /// Get reference to gpio reference object.
     ///
     template<GpioPinId pin>
-        GpioReference* getRef()
+        GpioPin* getRef()
         {
             static GpioReferenceHardware<pin> re;
             return &re;
@@ -62,7 +62,7 @@ struct GPIOController
 };
 
 template<GpioPinId pin>
-    struct GpioReferenceHardware : public GpioReference
+    struct GpioReferenceHardware : public GpioPin
     {
         INLINE void init(GpioFunction function)
         {

@@ -7,7 +7,7 @@
 #include "systick.h"
 
 #include "gpio.h"
-extern GpioReference* debug1;
+extern GpioPin* debug1;
 
 /// \brief System tick interrupt service routine.
 ///

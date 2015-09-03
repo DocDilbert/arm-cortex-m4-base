@@ -52,7 +52,7 @@ const uint16_t array_test3[10] = { 50, 60, 10 };
 volatile A a_static(50);
 
 
-RAMFUNC void ramTrampoline(GpioReference* debugPin)
+RAMFUNC void ramTrampoline(GpioPin* debugPin)
 {
     debugPin->setHigh();
     // This prevents that veneers are included to call UTILS_burn
@@ -64,10 +64,10 @@ RAMFUNC void ramTrampoline(GpioReference* debugPin)
 
 GPIOController gpioCtrl; ///< The gpio controller object.
 
-GpioReference* debug1; ///< reference to debug pin 1
-GpioReference* debug2; ///< reference to debug pin 2
-GpioReference* debug3; ///< reference to debug pin 3
-GpioReference* debug4; ///< reference to debug pin 4
+GpioPin* debug1; ///< reference to debug pin 1
+GpioPin* debug2; ///< reference to debug pin 2
+GpioPin* debug3; ///< reference to debug pin 3
+GpioPin* debug4; ///< reference to debug pin 4
 
 
 
@@ -91,7 +91,7 @@ int main()
     debug3 = gpioCtrl.getRef<DEBUG_PIN3>();
     debug4 = gpioCtrl.getRef<DEBUG_PIN4>();
 
-    GpioReference* led_red = gpioCtrl.getRef<LED_RED>();
+    GpioPin* led_red = gpioCtrl.getRef<LED_RED>();
 
     debug1->init(GPIO_OUTPUT_LOW);
     debug2->init(GPIO_OUTPUT_LOW);
