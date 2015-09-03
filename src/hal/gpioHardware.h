@@ -32,6 +32,7 @@ enum GpioFunction
 {
     GPIO_OUTPUT_LOW ///<  Set the gpio function to output with initial low level
 };
+
 struct GPIOHardwareAccess
 {
     template<GpioPinId pin>

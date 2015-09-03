@@ -19,7 +19,7 @@
 #include "gpioHardware.h"
 #include "utils.h"
 
-/// This class is the base object of all GpioHardwarePin objects..
+/// This class is the base object of all GpioHardwarePin objects.
 struct GpioPin
 {
     /// This methods initializes a gpio pin to be used for a given function.
@@ -45,48 +45,54 @@ struct GpioPin
     virtual boolean_t get() const = 0;
 };
 
-template<GpioPinId pin>
+/// This class template is used to build access object to the actual hardware. These access objects do all
+/// share the same base class GpioPin.
+///
+/// \tparam pinId The pin identifier.
+template<GpioPinId pinId>
     struct GpioHardwarePin : public GpioPin
     {
         INLINE void init(GpioFunction function)
         {
-            GPIOHardwareAccess::init<pin>(function);
+            GPIOHardwareAccess::init<pinId>(function);
         }
 
         INLINE void setLevel(const boolean_t level) const
         {
-            GPIOHardwareAccess::set<pin>(level);
+            GPIOHardwareAccess::set<pinId>(level);
         }
 
         INLINE void setHigh() const
         {
-            GPIOHardwareAccess::set<pin>(true);
+            GPIOHardwareAccess::set<pinId>(true);
         }
 
         INLINE void setLow() const
         {
-            GPIOHardwareAccess::set<pin>(false);
+            GPIOHardwareAccess::set<pinId>(false);
         }
 
         INLINE void toggle() const
         {
-            GPIOHardwareAccess::toggle<pin>();
+            GPIOHardwareAccess::toggle<pinId>();
         }
 
         INLINE boolean_t get() const
         {
-            return GPIOHardwareAccess::get<pin>();
+            return GPIOHardwareAccess::get<pinId>();
         }
     };
 
 /// This class administers all GpioPin objects and their hardware parts.
 struct GPIOController
 {
-    /// Get reference to gpio reference object.
-    template<GpioPinId pin>
+    /// Get a pointer to the requested GpioPin object.
+    ///
+    /// \tparam pinId The pin identifier.
+    template<GpioPinId pinId>
         GpioPin* getPin()
         {
-            static GpioHardwarePin<pin> re;
+            static GpioHardwarePin<pinId> re;
             return &re;
         }
 };
