@@ -58,10 +58,10 @@ GPIOController gpioCtrl;
 
 RAMFUNC void ramTrampoline(GpioReference* debugPin)
 {
-    debugPin->set(true);
+    debugPin->setHigh();
     // This prevents that veneers are included to call UTILS_burn
     UTILS_simulateLoad(1000000);
-    debugPin->set(false);
+    debugPin->setLow();
 }
 
 /// \endcond
@@ -103,9 +103,9 @@ int main()
     GpioReference* debug3 = gpioCtrl.getRef<DebugPin3>();
     GpioReference* debug4 = gpioCtrl.getRef<DebugPin4>();
 
-    debug1->set(false);
-    debug2->set(false);
-    debug3->set(false);
+    debug1->setLevel(false);
+    debug2->setLevel(false);
+    debug3->setLevel(false);
 
     debug1->init(GPIO_OUTPUT);
     debug2->init(GPIO_OUTPUT);
@@ -146,8 +146,8 @@ int main()
         GPIO_PUT(DEBUGPIN_2, 0);*/
 
         ramTrampoline(debug3);
-        debug4->set(true);
-        debug4->set(false);
+        debug4->setHigh();
+        debug4->setLow();
     }
     // never leave this function
     return -1;

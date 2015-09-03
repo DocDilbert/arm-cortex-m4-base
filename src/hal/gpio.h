@@ -126,9 +126,11 @@ extern void GPIO_init();
 
 struct GpioReference
 {
-   virtual void init(GpioFunction function) = 0;
-   virtual void set(bool state) = 0;
-   virtual bool get() = 0;
+    virtual void init(GpioFunction function) = 0;
+    virtual void setLevel(const boolean_t state) const = 0;
+    virtual void setHigh() const = 0;
+    virtual void setLow() const = 0;
+    virtual boolean_t get() const = 0;
 };
 
 template<GpioLocation pin>
@@ -153,12 +155,22 @@ template<GpioLocation pin>
             GPIOHardwareAccess::init<pin>(function);
         }
 
-        INLINE void set(bool state)
+        INLINE void setLevel(const boolean_t state) const
         {
             GPIOHardwareAccess::set<pin>(state);
         }
 
-        INLINE bool get()
+        INLINE void setHigh() const
+        {
+            GPIOHardwareAccess::set<pin>(true);
+        }
+
+        INLINE void setLow() const
+        {
+            GPIOHardwareAccess::set<pin>(false);
+        }
+
+        INLINE boolean_t get() const
         {
             return GPIOHardwareAccess::get<pin>();
         }
