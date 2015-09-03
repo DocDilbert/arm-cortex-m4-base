@@ -35,7 +35,6 @@ SRCS =  src/pre_sections.s \
 		src/syscalls/general.c \
 		src/syscalls/sbrk.c \
 		src/hal/isr_vectors.s \
-		src/hal/gpio.cpp \
 		ext/cypress/mb9bf56xr/system_mb9b560r.c
 			
 # Include directories
