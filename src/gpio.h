@@ -1,12 +1,6 @@
 /// \file gpio.h
 ///
-/// File containing the gpio hardware abstraction. 
-///
-/// Each cortex-m4 based microcontroller has its own way dealing with gpios. The functions
-/// in this file should deliver an hardware independent interface to access these. 
-///
-/// This file is written for the spansion/cypress MB9BF568R. But is should be easily
-/// adaptable to other microcontrollers.
+/// File containing an abstract gpio access layer.
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
 
@@ -21,26 +15,28 @@
 /// This abstract class is the base object of all GpioHardwarePin objects.
 struct GpioPin
 {
-    /// This methods initialize a gpio pin to be used for a given function.
+    /// This abstract methods initialize a gpio pin to be used for a given function.
     ///
     /// \param function The function for what the pin should be used.
     virtual void init(GpioFunction function) = 0;
 
-    /// This method sets the logic level of a gpio pin. This only works when the pin is configured as output.
+    /// This abstract method sets the logic level of a gpio pin. It only works when the pin is configured as output.
     ///
-    /// \param level The logic level.
+    /// \param level The new logic level.
     virtual void setLevel(const boolean_t level) const = 0;
 
-    /// This method sets the logic level of a gpio pin to high. This only works when the pin is configured as output.
+    /// This abstract method sets the logic level of a gpio pin to high. It only works when the pin is configured as output.
     virtual void setHigh() const = 0;
 
-    /// This method sets the logic level of a gpio pin to low. This only works when the pin is configured as output.
+    /// This abstract method sets the logic level of a gpio pin to low. It only works when the pin is configured as output.
     virtual void setLow() const = 0;
 
-    /// This method toggles the logic level of a gpio pin. This only works when the pin is configured as output.
+    /// This abstract method toggles the logic level of a gpio pin. It only works when the pin is configured as output.
     virtual void toggle() const = 0;
 
-    /// This method gets the logic level of a gpio pin. This only works when the pin is configured as input.
+    /// This abstract method gets the logic level of a gpio pin. It only works when the pin is configured as input.
+    ///
+    /// \return The measured logic level.
     virtual boolean_t get() const = 0;
 };
 

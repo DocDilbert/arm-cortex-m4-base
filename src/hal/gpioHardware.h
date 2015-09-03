@@ -1,3 +1,15 @@
+/// \file gpioHardware.h
+///
+/// File containing the gpio hardware abstraction.
+///
+/// Each cortex-m4 based microcontroller has its own way dealing with gpios. The functions
+/// in this file should deliver an hardware independent interface to access these.
+///
+/// This file is written for the spansion/cypress MB9BF568R. But is should be easily
+/// adaptable to other microcontrollers.
+///
+/// \author Christian Groeling <ch.groeling@gmail.com>
+
 #ifndef __GPIO_DEF_H__
 #define __GPIO_DEF_H__
 
@@ -25,15 +37,20 @@
 // -  When "1" is set, it outputs High level.
 // Note: If a pin is selected as GPIO input or input/output of peripheral functions, a setting value is invalid.
 
+/// This enum lists all currently supported Pins.
 enum GpioPinId
 {
     DEBUG_PIN1, DEBUG_PIN2, DEBUG_PIN3, DEBUG_PIN4, LED_RED, LED_GREEN, LED_BLUE
 };
+
+/// This enum lists all possible gpio functions.
 enum GpioFunction
 {
     GPIO_OUTPUT_LOW ///<  Set the gpio function to output with initial low level
 };
 
+/// This class contains static template methods which perform the actual hardware accesses. For each pin identifier
+/// all methods contained in this class must be specialized.
 struct GPIOHardwareAccess
 {
     /// This template method initializes a gpio pin to be used for a given function.
@@ -43,12 +60,23 @@ struct GPIOHardwareAccess
     template<GpioPinId pinId>
         STATIC_INLINE void init(GpioFunction function);
 
+    /// This template method sets the logic level of a gpio pin. It only works when the pin is configured as output.
+    ///
+    /// \tparam pinId The pin identifier.
+    /// \param level The new logic level.
     template<GpioPinId pinId>
         STATIC_INLINE void set(const boolean_t level);
 
+    /// This template method toggles the logic level of a gpio pin. It only works when the pin is configured as output.
+    ///
+    /// \tparam pinId The pin identifier.
     template<GpioPinId pinId>
         STATIC_INLINE void toggle();
 
+    /// This template method gets the logic level of a gpio pin. It only works when the pin is configured as input.
+    ///
+    /// \tparam pinId The pin identifier.
+    /// \returns The measured logic level.
     template<GpioPinId pinId>
         STATIC_INLINE boolean_t get();
 };
@@ -176,7 +204,6 @@ template<>
 // DebugPin4 hardware access
 // *********************************************************************
 
-
 template<>
     INLINE void GPIOHardwareAccess::set<DEBUG_PIN4>(const boolean_t level)
     {
@@ -234,7 +261,6 @@ template<>
         // not implemented
         return false;
     }
-
 
 template<>
     INLINE void GPIOHardwareAccess::init<LED_RED>(GpioFunction function)
