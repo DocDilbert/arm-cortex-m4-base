@@ -14,7 +14,6 @@
 #define __GPIO_H__
 
 #include <stdio.h>
-#include "mcu.h"
 #include "base_types.h"
 #include "gpioHardware.h"
 #include "utils.h"

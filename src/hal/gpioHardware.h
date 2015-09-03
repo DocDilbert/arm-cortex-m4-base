@@ -2,6 +2,7 @@
 #define __GPIO_DEF_H__
 
 #include "mcu.h"
+#include "base_types.h"
 #include "utils.h"
 
 // IMPORTANT GPIO REGISTER DESCRIPTIONS
