@@ -13,40 +13,11 @@
 #include <stdio.h>
 #include "gpio.h"
 
-template<Pins pin>
-    struct GpioRef : public GpioReference
-    {
-        virtual void set(bool state)
-        {
-            GPIOController::set<pin>(state);
-        }
-    };
 
-GpioReference* GPIOController::getRef(Pins pin)
-{
-    switch (pin)
-    {
-        case DebugPin1:
-            static GpioRef<DebugPin1> debugPin1;
-            return &debugPin1;
 
-        case DebugPin2:
-            static GpioRef<DebugPin2> debugPin2;
-            return &debugPin2;
-    }
-}
 
 void GPIO_init()
 {
-    // INITIALIZE DEBUG PINS
-    GPIO_INIT_OUT(DEBUGPIN_1, 0);
-
-    GPIO_ADC_OFF(DEBUGPIN_2);
-    GPIO_INIT_OUT(DEBUGPIN_2, 0);
-
-    GPIO_ADC_OFF(DEBUGPIN_3);
-    GPIO_INIT_OUT(DEBUGPIN_3, 0);
-
     GPIO_INIT_OUT(DEBUGPIN_4, 0);
 
     // INITIALIZE LEDS

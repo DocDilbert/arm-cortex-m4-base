@@ -56,18 +56,12 @@ GPIOController gpioCtrl;
 
 
 
-RAMFUNC void ramTrampoline1()
+RAMFUNC void ramTrampoline(GpioReference* debugPin)
 {
+    debugPin->set(true);
     // This prevents that veneers are included to call UTILS_burn
     UTILS_simulateLoad(1000000);
-}
-
-RAMFUNC void ramTrampoline2()
-{
-    GPIO_PUT(DEBUGPIN_3, 1);
-    // This prevents that veneers are included to call UTILS_burn
-    UTILS_simulateLoad(1000000);
-    GPIO_PUT(DEBUGPIN_3, 0);
+    debugPin->set(false);
 }
 
 /// \endcond
@@ -104,7 +98,19 @@ int main()
     b = new A[10];
     delete[] (b);
 
-    GpioReference* debug1 = GPIOController::getRef(DebugPin2);
+    GpioReference* debug1 = gpioCtrl.getRef<DebugPin1>();
+    GpioReference* debug2 = gpioCtrl.getRef<DebugPin2>();
+    GpioReference* debug3 = gpioCtrl.getRef<DebugPin3>();
+    GpioReference* debug4 = gpioCtrl.getRef<DebugPin4>();
+
+    debug1->set(false);
+    debug2->set(false);
+    debug3->set(false);
+
+    debug1->init(GPIO_OUTPUT);
+    debug2->init(GPIO_OUTPUT);
+    debug3->init(GPIO_OUTPUT);
+    debug4->init(GPIO_OUTPUT);
 
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
@@ -114,9 +120,8 @@ int main()
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
 
-    gpioCtrl.set<DebugPin1>(true);
-    debug1->set(true);
-
+    debug1->get();
+    debug2->get();
     while (1)
     {
         printf("Hello World %i\n", cycles);
@@ -130,10 +135,9 @@ int main()
         data_test2++;
         data_test3++;
 
-        GPIO_TOGGLE(DEBUGPIN_4);
 
         GPIO_PUT(LED_RED, 0); // red led on - inverse logic.
-        ramTrampoline1();
+        ramTrampoline(debug2);
         GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
 
         /*GPIO_PUT(DEBUGPIN_2, 1);
@@ -141,10 +145,12 @@ int main()
         UTILS_nopUnroll<500>();
         GPIO_PUT(DEBUGPIN_2, 0);*/
 
-        ramTrampoline2();
-
-
+        ramTrampoline(debug3);
+        debug4->set(true);
+        debug4->set(false);
     }
     // never leave this function
     return -1;
 }
+
+

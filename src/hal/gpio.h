@@ -17,6 +17,8 @@
 #include "mcu.h"
 #include "base_types.h"
 #include "utils.h"
+
+#include "gpioDef.h"
 // IMPORTANT GPIO REGISTER DESCRIPTIONS
 // 
 // ADE  
@@ -119,43 +121,47 @@
     _PIN_##_PFR=0u;  /* Set pin to gpio*/ \
 }
 
-enum Pins
-{
-    DebugPin1, DebugPin2, PinsCount
-};
-
-
 /// This function initializes the gpio peripheral unit.
 extern void GPIO_init();
 
 struct GpioReference
 {
-    virtual void set(bool state) = 0;
+   virtual void init(GpioFunction function) = 0;
+   virtual void set(bool state) = 0;
+   virtual bool get() = 0;
 };
 
+template<GpioLocation pin>
+    struct GpioReferenceHardware;
 
 class GPIOController
 {
 public:
-    template<Pins pin>
-        STATIC_INLINE void set(bool state);
-
-    static GpioReference* getRef(Pins pin);
+    template<GpioLocation pin>
+        GpioReference* getRef()
+        {
+            static GpioReferenceHardware<pin> re;
+            return &re;
+        }
 };
 
-template<>
-    INLINE void GPIOController::set<DebugPin1>(bool state)
+template<GpioLocation pin>
+    struct GpioReferenceHardware : public GpioReference
     {
-        printf("DebugPin1\n");
-    }
+        INLINE void init(GpioFunction function)
+        {
+            GPIOHardwareAccess::init<pin>(function);
+        }
 
-template<>
-    INLINE void GPIOController::set<DebugPin2>(bool state)
-    {
-        printf("DebugPin2\n");
-    }
+        INLINE void set(bool state)
+        {
+            GPIOHardwareAccess::set<pin>(state);
+        }
 
-
-
+        INLINE bool get()
+        {
+            return GPIOHardwareAccess::get<pin>();
+        }
+    };
 
 #endif
