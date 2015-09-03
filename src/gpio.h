@@ -49,32 +49,32 @@ template<GpioPinId pinId>
     {
         INLINE void init(GpioFunction function)
         {
-            GPIOHardwareAccess::init<pinId>(function);
+            GpioHal::init<pinId>(function);
         }
 
         INLINE void setLevel(const boolean_t level) const
         {
-            GPIOHardwareAccess::set<pinId>(level);
+            GpioHal::set<pinId>(level);
         }
 
         INLINE void setHigh() const
         {
-            GPIOHardwareAccess::set<pinId>(true);
+            GpioHal::set<pinId>(true);
         }
 
         INLINE void setLow() const
         {
-            GPIOHardwareAccess::set<pinId>(false);
+            GpioHal::set<pinId>(false);
         }
 
         INLINE void toggle() const
         {
-            GPIOHardwareAccess::toggle<pinId>();
+            GpioHal::toggle<pinId>();
         }
 
         INLINE boolean_t get() const
         {
-            return GPIOHardwareAccess::get<pinId>();
+            return GpioHal::get<pinId>();
         }
     };
 

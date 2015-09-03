@@ -51,7 +51,7 @@ enum GpioFunction
 
 /// This class contains static template methods which perform the actual hardware accesses. For each pin identifier
 /// all methods contained in this class must be specialized.
-struct GPIOHardwareAccess
+struct GpioHal
 {
     /// This template method initializes a gpio pin to be used for a given function.
     ///
@@ -88,26 +88,26 @@ struct GPIOHardwareAccess
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DEBUG_PIN1>(const boolean_t level)
+    INLINE void GpioHal::set<DEBUG_PIN1>(const boolean_t level)
     {
         bFM4_GPIO_PDOR1_PF = level;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<DEBUG_PIN1>()
+    INLINE void GpioHal::toggle<DEBUG_PIN1>()
     {
         bFM4_GPIO_PDOR1_PF ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<DEBUG_PIN1>()
+    INLINE boolean_t GpioHal::get<DEBUG_PIN1>()
     {
         // not implemented
         return false;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::init<DEBUG_PIN1>(GpioFunction function)
+    INLINE void GpioHal::init<DEBUG_PIN1>(GpioFunction function)
     {
         switch (function)
         {
@@ -126,26 +126,26 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DEBUG_PIN2>(const boolean_t level)
+    INLINE void GpioHal::set<DEBUG_PIN2>(const boolean_t level)
     {
         bFM4_GPIO_PDOR1_PA = level;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<DEBUG_PIN2>()
+    INLINE void GpioHal::toggle<DEBUG_PIN2>()
     {
         bFM4_GPIO_PDOR1_PA ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<DEBUG_PIN2>()
+    INLINE boolean_t GpioHal::get<DEBUG_PIN2>()
     {
         // not implemented
         return false;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::init<DEBUG_PIN2>(GpioFunction function)
+    INLINE void GpioHal::init<DEBUG_PIN2>(GpioFunction function)
     {
         switch (function)
         {
@@ -165,26 +165,26 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DEBUG_PIN3>(const boolean_t level)
+    INLINE void GpioHal::set<DEBUG_PIN3>(const boolean_t level)
     {
         bFM4_GPIO_PDOR1_P9 = level;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<DEBUG_PIN3>()
+    INLINE void GpioHal::toggle<DEBUG_PIN3>()
     {
         bFM4_GPIO_PDOR1_P9 ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<DEBUG_PIN3>()
+    INLINE boolean_t GpioHal::get<DEBUG_PIN3>()
     {
         // not implemented
         return false;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::init<DEBUG_PIN3>(GpioFunction function)
+    INLINE void GpioHal::init<DEBUG_PIN3>(GpioFunction function)
     {
         switch (function)
         {
@@ -205,26 +205,26 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DEBUG_PIN4>(const boolean_t level)
+    INLINE void GpioHal::set<DEBUG_PIN4>(const boolean_t level)
     {
         bFM4_GPIO_PDOR2_P5 = level;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<DEBUG_PIN4>()
+    INLINE void GpioHal::toggle<DEBUG_PIN4>()
     {
         bFM4_GPIO_PDOR2_P5 ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<DEBUG_PIN4>()
+    INLINE boolean_t GpioHal::get<DEBUG_PIN4>()
     {
         // not implemented
         return false;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::init<DEBUG_PIN4>(GpioFunction function)
+    INLINE void GpioHal::init<DEBUG_PIN4>(GpioFunction function)
     {
         switch (function)
         {
@@ -244,26 +244,26 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<LED_RED>(const boolean_t level)
+    INLINE void GpioHal::set<LED_RED>(const boolean_t level)
     {
         bFM4_GPIO_PDOR2_P7 = level;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<LED_RED>()
+    INLINE void GpioHal::toggle<LED_RED>()
     {
         bFM4_GPIO_PDOR2_P7 ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<LED_RED>()
+    INLINE boolean_t GpioHal::get<LED_RED>()
     {
         // not implemented
         return false;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::init<LED_RED>(GpioFunction function)
+    INLINE void GpioHal::init<LED_RED>(GpioFunction function)
     {
         switch (function)
         {
@@ -283,26 +283,26 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<LED_GREEN>(const boolean_t level)
+    INLINE void GpioHal::set<LED_GREEN>(const boolean_t level)
     {
         bFM4_GPIO_PDOR3_P8 = level;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<LED_GREEN>()
+    INLINE void GpioHal::toggle<LED_GREEN>()
     {
         bFM4_GPIO_PDOR3_P8 ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<LED_GREEN>()
+    INLINE boolean_t GpioHal::get<LED_GREEN>()
     {
         // not implemented
         return false;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::init<LED_GREEN>(GpioFunction function)
+    INLINE void GpioHal::init<LED_GREEN>(GpioFunction function)
     {
         switch (function)
         {
@@ -321,26 +321,26 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<LED_BLUE>(const boolean_t level)
+    INLINE void GpioHal::set<LED_BLUE>(const boolean_t level)
     {
         bFM4_GPIO_PDORE_P0 = level;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<LED_BLUE>()
+    INLINE void GpioHal::toggle<LED_BLUE>()
     {
         bFM4_GPIO_PDORE_P0 ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<LED_BLUE>()
+    INLINE boolean_t GpioHal::get<LED_BLUE>()
     {
         // not implemented
         return false;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::init<LED_BLUE>(GpioFunction function)
+    INLINE void GpioHal::init<LED_BLUE>(GpioFunction function)
     {
         switch (function)
         {
