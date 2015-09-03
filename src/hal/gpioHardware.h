@@ -1,8 +1,9 @@
 #ifndef __GPIO_DEF_H__
 #define __GPIO_DEF_H__
 
-#include "mcu.h"
 
+#include "mcu.h"
+#include "utils.h"
 enum GpioLocation
 {
     DebugPin1, DebugPin2, DebugPin3, DebugPin4

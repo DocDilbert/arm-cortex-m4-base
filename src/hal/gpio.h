@@ -16,9 +16,9 @@
 #include <stdio.h>
 #include "mcu.h"
 #include "base_types.h"
+#include "gpioHardware.h"
 #include "utils.h"
 
-#include "gpioDef.h"
 // IMPORTANT GPIO REGISTER DESCRIPTIONS
 // 
 // ADE  
