@@ -19,7 +19,7 @@
 #include "gpioHardware.h"
 #include "utils.h"
 
-/// This class represent a reference to a gpio.
+/// This class is the base object of all GpioHardwarePin objects..
 struct GpioPin
 {
     /// This methods initializes a gpio pin to be used for a given function.
@@ -46,23 +46,7 @@ struct GpioPin
 };
 
 template<GpioPinId pin>
-    struct GpioReferenceHardware;
-
-/// This class administers all GpioReference objects and their hardware parts.
-struct GPIOController
-{
-    /// Get reference to gpio reference object.
-    ///
-    template<GpioPinId pin>
-        GpioPin* getRef()
-        {
-            static GpioReferenceHardware<pin> re;
-            return &re;
-        }
-};
-
-template<GpioPinId pin>
-    struct GpioReferenceHardware : public GpioPin
+    struct GpioHardwarePin : public GpioPin
     {
         INLINE void init(GpioFunction function)
         {
@@ -94,5 +78,19 @@ template<GpioPinId pin>
             return GPIOHardwareAccess::get<pin>();
         }
     };
+
+/// This class administers all GpioReference objects and their hardware parts.
+struct GPIOController
+{
+    /// Get reference to gpio reference object.
+    ///
+    template<GpioPinId pin>
+        GpioPin* getRef()
+        {
+            static GpioHardwarePin<pin> re;
+            return &re;
+        }
+};
+
 
 #endif
