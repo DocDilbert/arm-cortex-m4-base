@@ -26,7 +26,7 @@
 
 enum GpioLocation
 {
-    DebugPin1, DebugPin2, DebugPin3, DebugPin4, LED_RED, LED_GREEN, LED_BLUE
+    DEBUG_PIN1, DEBUG_PIN2, DEBUG_PIN3, DEBUG_PIN4, LED_RED, LED_GREEN, LED_BLUE
 };
 enum GpioFunction
 {
@@ -51,7 +51,7 @@ struct GPIOHardwareAccess
 // DebugPin1 hardware access
 // *********************************************************************
 template<>
-    INLINE void GPIOHardwareAccess::init<DebugPin1>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<DEBUG_PIN1>(GpioFunction function)
     {
         switch (function)
         {
@@ -66,19 +66,19 @@ template<>
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DebugPin1>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<DEBUG_PIN1>(const boolean_t state)
     {
         bFM4_GPIO_PDOR1_PF = state;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<DebugPin1>()
+    INLINE void GPIOHardwareAccess::toggle<DEBUG_PIN1>()
     {
         bFM4_GPIO_PDOR1_PF ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<DebugPin1>()
+    INLINE boolean_t GPIOHardwareAccess::get<DEBUG_PIN1>()
     {
         // not implemented
         return false;
@@ -89,7 +89,7 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::init<DebugPin2>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<DEBUG_PIN2>(GpioFunction function)
     {
         switch (function)
         {
@@ -105,19 +105,19 @@ template<>
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DebugPin2>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<DEBUG_PIN2>(const boolean_t state)
     {
         bFM4_GPIO_PDOR1_PA = state;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<DebugPin2>()
+    INLINE void GPIOHardwareAccess::toggle<DEBUG_PIN2>()
     {
         bFM4_GPIO_PDOR1_PA ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<DebugPin2>()
+    INLINE boolean_t GPIOHardwareAccess::get<DEBUG_PIN2>()
     {
         // not implemented
         return false;
@@ -128,7 +128,7 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::init<DebugPin3>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<DEBUG_PIN3>(GpioFunction function)
     {
         switch (function)
         {
@@ -144,19 +144,19 @@ template<>
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DebugPin3>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<DEBUG_PIN3>(const boolean_t state)
     {
         bFM4_GPIO_PDOR1_P9 = state;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<DebugPin3>()
+    INLINE void GPIOHardwareAccess::toggle<DEBUG_PIN3>()
     {
         bFM4_GPIO_PDOR1_P9 ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<DebugPin3>()
+    INLINE boolean_t GPIOHardwareAccess::get<DEBUG_PIN3>()
     {
         // not implemented
         return false;
@@ -167,7 +167,7 @@ template<>
 // *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::init<DebugPin4>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<DEBUG_PIN4>(GpioFunction function)
     {
         switch (function)
         {
@@ -182,19 +182,19 @@ template<>
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DebugPin4>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<DEBUG_PIN4>(const boolean_t state)
     {
         bFM4_GPIO_PDOR2_P5 = state;
     }
 
 template<>
-    INLINE void GPIOHardwareAccess::toggle<DebugPin4>()
+    INLINE void GPIOHardwareAccess::toggle<DEBUG_PIN4>()
     {
         bFM4_GPIO_PDOR2_P5 ^= 0x1u;
     }
 
 template<>
-    INLINE boolean_t GPIOHardwareAccess::get<DebugPin4>()
+    INLINE boolean_t GPIOHardwareAccess::get<DEBUG_PIN4>()
     {
         // not implemented
         return false;

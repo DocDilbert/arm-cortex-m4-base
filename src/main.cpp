@@ -86,10 +86,10 @@ int main()
     void* malloc_test[7];
 
     // Initialize gpios.
-    debug1 = gpioCtrl.getRef<DebugPin1>();
-    debug2 = gpioCtrl.getRef<DebugPin2>();
-    debug3 = gpioCtrl.getRef<DebugPin3>();
-    debug4 = gpioCtrl.getRef<DebugPin4>();
+    debug1 = gpioCtrl.getRef<DEBUG_PIN1>();
+    debug2 = gpioCtrl.getRef<DEBUG_PIN2>();
+    debug3 = gpioCtrl.getRef<DEBUG_PIN3>();
+    debug4 = gpioCtrl.getRef<DEBUG_PIN4>();
 
     GpioReference* led_red = gpioCtrl.getRef<LED_RED>();
 
