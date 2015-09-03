@@ -51,10 +51,6 @@ const uint16_t array_test3[10] = { 50, 60, 10 };
 
 volatile A a_static(50);
 
-GPIOController gpioCtrl;
-
-
-
 
 RAMFUNC void ramTrampoline(GpioReference* debugPin)
 {
@@ -65,6 +61,16 @@ RAMFUNC void ramTrampoline(GpioReference* debugPin)
 }
 
 /// \endcond
+
+GPIOController gpioCtrl;
+
+GpioReference* debug1;
+GpioReference* debug2;
+GpioReference* debug3;
+GpioReference* debug4;
+
+
+
 /// \brief This function is the starting point of the program. 
 ///
 /// The function is called after the reset irq was handled by isr_reset().
@@ -79,9 +85,24 @@ int main()
     A* a, *b;
     void* malloc_test[7];
 
-
     // Initialize gpios.
-    GPIO_init();
+    debug1 = gpioCtrl.getRef<DebugPin1>();
+    debug2 = gpioCtrl.getRef<DebugPin2>();
+    debug3 = gpioCtrl.getRef<DebugPin3>();
+    debug4 = gpioCtrl.getRef<DebugPin4>();
+
+    GpioReference* led_red = gpioCtrl.getRef<LED_RED>();
+
+    debug1->setLevel(FALSE);
+    debug2->setLevel(FALSE);
+    debug3->setLevel(FALSE);
+    led_red->setLevel(FALSE);
+
+    debug1->init(GPIO_OUTPUT);
+    debug2->init(GPIO_OUTPUT);
+    debug3->init(GPIO_OUTPUT);
+    debug4->init(GPIO_OUTPUT);
+    led_red->init(GPIO_OUTPUT);
 
     // turn off buffers, so IO occurs immediately
     setvbuf(stdin, NULL, _IONBF, 0);
@@ -97,20 +118,6 @@ int main()
 
     b = new A[10];
     delete[] (b);
-
-    GpioReference* debug1 = gpioCtrl.getRef<DebugPin1>();
-    GpioReference* debug2 = gpioCtrl.getRef<DebugPin2>();
-    GpioReference* debug3 = gpioCtrl.getRef<DebugPin3>();
-    GpioReference* debug4 = gpioCtrl.getRef<DebugPin4>();
-
-    debug1->setLevel(false);
-    debug2->setLevel(false);
-    debug3->setLevel(false);
-
-    debug1->init(GPIO_OUTPUT);
-    debug2->init(GPIO_OUTPUT);
-    debug3->init(GPIO_OUTPUT);
-    debug4->init(GPIO_OUTPUT);
 
     malloc_test[0] = malloc(10);
     malloc_test[1] = malloc(13);
@@ -135,22 +142,24 @@ int main()
         data_test2++;
         data_test3++;
 
+        led_red->setLow(); // red led on - inverse logic.
 
-        GPIO_PUT(LED_RED, 0); // red led on - inverse logic.
         ramTrampoline(debug2);
-        GPIO_PUT(LED_RED, 1); // red led off - inverse logic.
+
+        led_red->setHigh(); // red led off - inverse logic.
 
         /*GPIO_PUT(DEBUGPIN_2, 1);
-        UTILS_nopUnroll<500>();
-        UTILS_nopUnroll<500>();
-        GPIO_PUT(DEBUGPIN_2, 0);*/
+         UTILS_nopUnroll<500>();
+         UTILS_nopUnroll<500>();
+         GPIO_PUT(DEBUGPIN_2, 0);*/
 
         ramTrampoline(debug3);
+
         debug4->setHigh();
+
         debug4->setLow();
     }
     // never leave this function
     return -1;
 }
-
 

@@ -12,16 +12,3 @@
 
 #include <stdio.h>
 #include "gpio.h"
-
-
-
-
-void GPIO_init()
-{
-    GPIO_INIT_OUT(DEBUGPIN_4, 0);
-
-    // INITIALIZE LEDS
-    GPIO_INIT_OUT(LED_RED, 1);
-    GPIO_INIT_OUT(LED_GREEN, 1);
-    GPIO_INIT_OUT(LED_BLUE, 1);
-}

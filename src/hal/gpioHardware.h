@@ -4,9 +4,29 @@
 #include "mcu.h"
 #include "utils.h"
 
+// IMPORTANT GPIO REGISTER DESCRIPTIONS
+//
+// ADE
+// A register to set whether the I/O port will be used as a special pin (an analog input pin) or a digital input/output pin.
+//
+// PFR
+// A register to set whether the I/O port will be used as an input/output pin of GPIO function or an input/output pin of
+// peripheral functions.
+//
+// DDR
+// A register to set whether the I/O port will be used as an input pin or an output pin if the I/O port is used as a GPIO
+// function pin.
+// Note: If a pin is selected as an I/O pin of peripheral functions, a setting value is invalid.
+//
+// PDOR
+// A register to set output level if the I/O port is used as an output pin of GPIO function.
+// -  When "0" is set, it outputs Low level.
+// -  When "1" is set, it outputs High level.
+// Note: If a pin is selected as GPIO input or input/output of peripheral functions, a setting value is invalid.
+
 enum GpioLocation
 {
-    DebugPin1, DebugPin2, DebugPin3, DebugPin4
+    DebugPin1, DebugPin2, DebugPin3, DebugPin4, LED_RED, LED_GREEN, LED_BLUE
 };
 enum GpioFunction
 {
@@ -19,6 +39,9 @@ struct GPIOHardwareAccess
 
     template<GpioLocation pin>
         STATIC_INLINE void set(const boolean_t state);
+
+    template<GpioLocation pin>
+        STATIC_INLINE void toggle();
 
     template<GpioLocation pin>
         STATIC_INLINE boolean_t get();
@@ -46,6 +69,12 @@ template<>
     INLINE void GPIOHardwareAccess::set<DebugPin1>(const boolean_t state)
     {
         bFM4_GPIO_PDOR1_PF = state;
+    }
+
+template<>
+    INLINE void GPIOHardwareAccess::toggle<DebugPin1>()
+    {
+        bFM4_GPIO_PDOR1_PF ^= 0x1u;
     }
 
 template<>
@@ -82,6 +111,12 @@ template<>
     }
 
 template<>
+    INLINE void GPIOHardwareAccess::toggle<DebugPin2>()
+    {
+        bFM4_GPIO_PDOR1_PA ^= 0x1u;
+    }
+
+template<>
     INLINE boolean_t GPIOHardwareAccess::get<DebugPin2>()
     {
         // not implemented
@@ -112,6 +147,12 @@ template<>
     INLINE void GPIOHardwareAccess::set<DebugPin3>(const boolean_t state)
     {
         bFM4_GPIO_PDOR1_P9 = state;
+    }
+
+template<>
+    INLINE void GPIOHardwareAccess::toggle<DebugPin3>()
+    {
+        bFM4_GPIO_PDOR1_P9 ^= 0x1u;
     }
 
 template<>
@@ -147,10 +188,129 @@ template<>
     }
 
 template<>
+    INLINE void GPIOHardwareAccess::toggle<DebugPin4>()
+    {
+        bFM4_GPIO_PDOR2_P5 ^= 0x1u;
+    }
+
+template<>
     INLINE boolean_t GPIOHardwareAccess::get<DebugPin4>()
     {
         // not implemented
         return false;
     }
 
+// *********************************************************************
+// LED_RED hardware access
+// *********************************************************************
+
+template<>
+    INLINE void GPIOHardwareAccess::init<LED_RED>(GpioFunction function)
+    {
+        switch (function)
+        {
+            case GPIO_OUTPUT:
+                bFM4_GPIO_DDR2_P7 = 1;
+                bFM4_GPIO_PFR2_P7 = 0;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+template<>
+    INLINE void GPIOHardwareAccess::set<LED_RED>(const boolean_t state)
+    {
+        bFM4_GPIO_PDOR2_P7 = state;
+    }
+
+template<>
+    INLINE void GPIOHardwareAccess::toggle<LED_RED>()
+    {
+        bFM4_GPIO_PDOR2_P7 ^= 0x1u;
+    }
+
+template<>
+    INLINE boolean_t GPIOHardwareAccess::get<LED_RED>()
+    {
+        // not implemented
+        return false;
+    }
+
+// *********************************************************************
+// LED_GREEN hardware access
+// *********************************************************************
+
+template<>
+    INLINE void GPIOHardwareAccess::init<LED_GREEN>(GpioFunction function)
+    {
+        switch (function)
+        {
+            case GPIO_OUTPUT:
+                bFM4_GPIO_DDR3_P8 = 1;
+                bFM4_GPIO_PFR3_P8 = 0;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+template<>
+    INLINE void GPIOHardwareAccess::set<LED_GREEN>(const boolean_t state)
+    {
+        bFM4_GPIO_PDOR3_P8 = state;
+    }
+
+template<>
+    INLINE void GPIOHardwareAccess::toggle<LED_GREEN>()
+    {
+        bFM4_GPIO_PDOR3_P8 ^= 0x1u;
+    }
+
+template<>
+    INLINE boolean_t GPIOHardwareAccess::get<LED_GREEN>()
+    {
+        // not implemented
+        return false;
+    }
+
+// *********************************************************************
+// LED_BLUE hardware access
+// *********************************************************************
+
+template<>
+    INLINE void GPIOHardwareAccess::init<LED_BLUE>(GpioFunction function)
+    {
+        switch (function)
+        {
+            case GPIO_OUTPUT:
+                bFM4_GPIO_DDRE_P0 = 1;
+                bFM4_GPIO_PFRE_P0 = 0;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+template<>
+    INLINE void GPIOHardwareAccess::set<LED_BLUE>(const boolean_t state)
+    {
+        bFM4_GPIO_PDORE_P0 = state;
+    }
+
+template<>
+    INLINE void GPIOHardwareAccess::toggle<LED_BLUE>()
+    {
+        bFM4_GPIO_PDORE_P0 ^= 0x1u;
+    }
+
+template<>
+    INLINE boolean_t GPIOHardwareAccess::get<LED_BLUE>()
+    {
+        // not implemented
+        return false;
+    }
 #endif
