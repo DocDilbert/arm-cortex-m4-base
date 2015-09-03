@@ -48,9 +48,11 @@ struct GpioReference
 template<GpioLocation pin>
     struct GpioReferenceHardware;
 
-class GPIOController
+/// This class administers all GpioReference objects and their hardware parts.
+struct GPIOController
 {
-public:
+    /// Get reference to gpio reference object.
+    ///
     template<GpioLocation pin>
         GpioReference* getRef()
         {
