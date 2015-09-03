@@ -93,16 +93,11 @@ int main()
 
     GpioReference* led_red = gpioCtrl.getRef<LED_RED>();
 
-    debug1->setLevel(FALSE);
-    debug2->setLevel(FALSE);
-    debug3->setLevel(FALSE);
-    led_red->setLevel(FALSE);
-
-    debug1->init(GPIO_OUTPUT);
-    debug2->init(GPIO_OUTPUT);
-    debug3->init(GPIO_OUTPUT);
-    debug4->init(GPIO_OUTPUT);
-    led_red->init(GPIO_OUTPUT);
+    debug1->init(GPIO_OUTPUT_LOW);
+    debug2->init(GPIO_OUTPUT_LOW);
+    debug3->init(GPIO_OUTPUT_LOW);
+    debug4->init(GPIO_OUTPUT_LOW);
+    led_red->init(GPIO_OUTPUT_LOW);
 
     // turn off buffers, so IO occurs immediately
     setvbuf(stdin, NULL, _IONBF, 0);

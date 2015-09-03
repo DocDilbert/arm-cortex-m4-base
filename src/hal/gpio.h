@@ -19,13 +19,29 @@
 #include "gpioHardware.h"
 #include "utils.h"
 
+/// This class represent a reference to a gpio.
 struct GpioReference
 {
+    /// This methods initializes a gpio pin to be used for a given function.
+    ///
+    /// \param function The function for what the pin should be used.
     virtual void init(GpioFunction function) = 0;
-    virtual void setLevel(const boolean_t state) const = 0;
+
+    /// This method sets the logic level of a gpio pin. This only works when the pin is configured as output.
+    ///
+    /// \param level The logic level.
+    virtual void setLevel(const boolean_t level) const = 0;
+
+    /// This method sets the logic level of a gpio pin to high. This only works when the pin is configured as output.
     virtual void setHigh() const = 0;
+
+    /// This method sets the logic level of a gpio pin to low. This only works when the pin is configured as output.
     virtual void setLow() const = 0;
+
+    /// This method toggles the logic level of a gpio pin. This only works when the pin is configured as output.
     virtual void toggle() const = 0;
+
+    /// This method gets the logic level of a gpio pin. This only works when the pin is configured as input.
     virtual boolean_t get() const = 0;
 };
 
@@ -51,9 +67,9 @@ template<GpioLocation pin>
             GPIOHardwareAccess::init<pin>(function);
         }
 
-        INLINE void setLevel(const boolean_t state) const
+        INLINE void setLevel(const boolean_t level) const
         {
-            GPIOHardwareAccess::set<pin>(state);
+            GPIOHardwareAccess::set<pin>(level);
         }
 
         INLINE void setHigh() const

@@ -30,7 +30,7 @@ enum GpioLocation
 };
 enum GpioFunction
 {
-    GPIO_OUTPUT
+    GPIO_OUTPUT_LOW ///<  Set the gpio function to output with initial low level
 };
 struct GPIOHardwareAccess
 {
@@ -38,7 +38,7 @@ struct GPIOHardwareAccess
         STATIC_INLINE void init(GpioFunction function);
 
     template<GpioLocation pin>
-        STATIC_INLINE void set(const boolean_t state);
+        STATIC_INLINE void set(const boolean_t level);
 
     template<GpioLocation pin>
         STATIC_INLINE void toggle();
@@ -50,25 +50,11 @@ struct GPIOHardwareAccess
 // *********************************************************************
 // DebugPin1 hardware access
 // *********************************************************************
-template<>
-    INLINE void GPIOHardwareAccess::init<DEBUG_PIN1>(GpioFunction function)
-    {
-        switch (function)
-        {
-            case GPIO_OUTPUT:
-                bFM4_GPIO_DDR1_PF = 1;
-                bFM4_GPIO_PFR1_PF = 0;
-                break;
-
-            default:
-                break;
-        }
-    }
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DEBUG_PIN1>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<DEBUG_PIN1>(const boolean_t level)
     {
-        bFM4_GPIO_PDOR1_PF = state;
+        bFM4_GPIO_PDOR1_PF = level;
     }
 
 template<>
@@ -83,31 +69,29 @@ template<>
         // not implemented
         return false;
     }
-
-// *********************************************************************
-// DebugPin2 hardware access
-// *********************************************************************
-
 template<>
-    INLINE void GPIOHardwareAccess::init<DEBUG_PIN2>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<DEBUG_PIN1>(GpioFunction function)
     {
         switch (function)
         {
-            case GPIO_OUTPUT:
-                bFM4_GPIO_DDR1_PA = 1;
-                bFM4_GPIO_PFR1_PA = 0;
-                bFM4_GPIO_ADE_AN10 = 0; // disable adc
+            case GPIO_OUTPUT_LOW:
+                set<DEBUG_PIN1>(false);
+                bFM4_GPIO_DDR1_PF = 1;
+                bFM4_GPIO_PFR1_PF = 0;
                 break;
 
             default:
                 break;
         }
     }
+// *********************************************************************
+// DebugPin2 hardware access
+// *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DEBUG_PIN2>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<DEBUG_PIN2>(const boolean_t level)
     {
-        bFM4_GPIO_PDOR1_PA = state;
+        bFM4_GPIO_PDOR1_PA = level;
     }
 
 template<>
@@ -123,30 +107,30 @@ template<>
         return false;
     }
 
-// *********************************************************************
-// DebugPin3 hardware access
-// *********************************************************************
-
 template<>
-    INLINE void GPIOHardwareAccess::init<DEBUG_PIN3>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<DEBUG_PIN2>(GpioFunction function)
     {
         switch (function)
         {
-            case GPIO_OUTPUT:
-                bFM4_GPIO_DDR1_P9 = 1;
-                bFM4_GPIO_PFR1_P9 = 0;
-                bFM4_GPIO_ADE_AN09 = 0; // disable adc
+            case GPIO_OUTPUT_LOW:
+                set<DEBUG_PIN2>(false);
+                bFM4_GPIO_DDR1_PA = 1;
+                bFM4_GPIO_PFR1_PA = 0;
+                bFM4_GPIO_ADE_AN10 = 0; // disable adc
                 break;
 
             default:
                 break;
         }
     }
+// *********************************************************************
+// DebugPin3 hardware access
+// *********************************************************************
 
 template<>
-    INLINE void GPIOHardwareAccess::set<DEBUG_PIN3>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<DEBUG_PIN3>(const boolean_t level)
     {
-        bFM4_GPIO_PDOR1_P9 = state;
+        bFM4_GPIO_PDOR1_P9 = level;
     }
 
 template<>
@@ -162,18 +146,16 @@ template<>
         return false;
     }
 
-// *********************************************************************
-// DebugPin4 hardware access
-// *********************************************************************
-
 template<>
-    INLINE void GPIOHardwareAccess::init<DEBUG_PIN4>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<DEBUG_PIN3>(GpioFunction function)
     {
         switch (function)
         {
-            case GPIO_OUTPUT:
-                bFM4_GPIO_DDR2_P5 = 1;
-                bFM4_GPIO_PFR2_P5 = 0;
+            case GPIO_OUTPUT_LOW:
+                set<DEBUG_PIN3>(false);
+                bFM4_GPIO_DDR1_P9 = 1;
+                bFM4_GPIO_PFR1_P9 = 0;
+                bFM4_GPIO_ADE_AN09 = 0; // disable adc
                 break;
 
             default:
@@ -181,10 +163,14 @@ template<>
         }
     }
 
+// *********************************************************************
+// DebugPin4 hardware access
+// *********************************************************************
+
 template<>
-    INLINE void GPIOHardwareAccess::set<DEBUG_PIN4>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<DEBUG_PIN4>(const boolean_t level)
     {
-        bFM4_GPIO_PDOR2_P5 = state;
+        bFM4_GPIO_PDOR2_P5 = level;
     }
 
 template<>
@@ -200,18 +186,15 @@ template<>
         return false;
     }
 
-// *********************************************************************
-// LED_RED hardware access
-// *********************************************************************
-
 template<>
-    INLINE void GPIOHardwareAccess::init<LED_RED>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<DEBUG_PIN4>(GpioFunction function)
     {
         switch (function)
         {
-            case GPIO_OUTPUT:
-                bFM4_GPIO_DDR2_P7 = 1;
-                bFM4_GPIO_PFR2_P7 = 0;
+            case GPIO_OUTPUT_LOW:
+                set<DEBUG_PIN4>(false);
+                bFM4_GPIO_DDR2_P5 = 1;
+                bFM4_GPIO_PFR2_P5 = 0;
                 break;
 
             default:
@@ -219,10 +202,14 @@ template<>
         }
     }
 
+// *********************************************************************
+// LED_RED hardware access
+// *********************************************************************
+
 template<>
-    INLINE void GPIOHardwareAccess::set<LED_RED>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<LED_RED>(const boolean_t level)
     {
-        bFM4_GPIO_PDOR2_P7 = state;
+        bFM4_GPIO_PDOR2_P7 = level;
     }
 
 template<>
@@ -238,18 +225,15 @@ template<>
         return false;
     }
 
-// *********************************************************************
-// LED_GREEN hardware access
-// *********************************************************************
-
 template<>
-    INLINE void GPIOHardwareAccess::init<LED_GREEN>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<LED_RED>(GpioFunction function)
     {
         switch (function)
         {
-            case GPIO_OUTPUT:
-                bFM4_GPIO_DDR3_P8 = 1;
-                bFM4_GPIO_PFR3_P8 = 0;
+            case GPIO_OUTPUT_LOW:
+                set<LED_RED>(false);
+                bFM4_GPIO_DDR2_P7 = 1;
+                bFM4_GPIO_PFR2_P7 = 0;
                 break;
 
             default:
@@ -257,10 +241,14 @@ template<>
         }
     }
 
+// *********************************************************************
+// LED_GREEN hardware access
+// *********************************************************************
+
 template<>
-    INLINE void GPIOHardwareAccess::set<LED_GREEN>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<LED_GREEN>(const boolean_t level)
     {
-        bFM4_GPIO_PDOR3_P8 = state;
+        bFM4_GPIO_PDOR3_P8 = level;
     }
 
 template<>
@@ -276,29 +264,30 @@ template<>
         return false;
     }
 
-// *********************************************************************
-// LED_BLUE hardware access
-// *********************************************************************
-
 template<>
-    INLINE void GPIOHardwareAccess::init<LED_BLUE>(GpioFunction function)
+    INLINE void GPIOHardwareAccess::init<LED_GREEN>(GpioFunction function)
     {
         switch (function)
         {
-            case GPIO_OUTPUT:
-                bFM4_GPIO_DDRE_P0 = 1;
-                bFM4_GPIO_PFRE_P0 = 0;
+            case GPIO_OUTPUT_LOW:
+                set<LED_GREEN>(false);
+                bFM4_GPIO_DDR3_P8 = 1;
+                bFM4_GPIO_PFR3_P8 = 0;
                 break;
 
             default:
                 break;
         }
     }
+// *********************************************************************
+// LED_BLUE hardware access
+// *********************************************************************
+
 
 template<>
-    INLINE void GPIOHardwareAccess::set<LED_BLUE>(const boolean_t state)
+    INLINE void GPIOHardwareAccess::set<LED_BLUE>(const boolean_t level)
     {
-        bFM4_GPIO_PDORE_P0 = state;
+        bFM4_GPIO_PDORE_P0 = level;
     }
 
 template<>
@@ -313,4 +302,21 @@ template<>
         // not implemented
         return false;
     }
+
+template<>
+    INLINE void GPIOHardwareAccess::init<LED_BLUE>(GpioFunction function)
+    {
+        switch (function)
+        {
+            case GPIO_OUTPUT_LOW:
+                set<LED_BLUE>(false);
+                bFM4_GPIO_DDRE_P0 = 1;
+                bFM4_GPIO_PFRE_P0 = 0;
+                break;
+
+            default:
+                break;
+        }
+    }
+
 #endif
