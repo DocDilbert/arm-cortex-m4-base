@@ -1,8 +1,9 @@
-/// \file general.c
+/// \file
 ///
 /// File which contains some general system calls which are used by newlibc and stdlibc++
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
+/// \ingroup SystemCalls
 #include <errno.h>
 #include <sys/stat.h>
 #include <sys/times.h>

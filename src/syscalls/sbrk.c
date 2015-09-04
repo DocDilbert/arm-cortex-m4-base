@@ -1,8 +1,9 @@
-/// \file sbrk.c
+/// \file
 ///
-/// This file contains the _sbrk syscall. It is used to increase program data space
+/// This file contains the _sbrk syscall. It is used to increase program data space.
 ///
 /// \author Christian Groeling <ch.groeling@gmail.com>
+/// \ingroup SystemCalls
 
 #include <errno.h>
 
