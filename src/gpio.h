@@ -3,6 +3,7 @@
 /// File containing an abstract gpio access layer.
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
+/// @ingroup Gpio
 
 #ifndef __GPIO_H__
 #define __GPIO_H__
@@ -12,10 +13,19 @@
 #include "gpioHal.h"
 #include "utils.h"
 
-/// This abstract class is the base object of all GpioHardwarePin objects.
+/// @brief This module contains everything related to gpios.
+///
+/// The class GpioPin is the base class to all GpioHardwarePin classes. The GpioHardwarePin
+/// classes do the actual hardware access to a pin. To do this, they use the template
+/// methods defined in the GpioHal class.
+///
+/// @defgroup Gpio General Purpose Input Output
+
+/// This abstract class is the base object to all GpioHardwarePin classes.
+/// @ingroup Gpio
 struct GpioPin
 {
-    /// This method initialize a gpio pin to be used for a given function.
+    /// @brief This method initialize a gpio pin to be used for a given function.
     ///
     /// @param function The function for what the pin should be used.
     virtual void init(GpioFunction function) = 0;
@@ -41,14 +51,15 @@ struct GpioPin
     /// @brief This method returns the actual logic level of a gpio pin.
     /// @attention This method only works when the pin is configured as input.
     ///
-    /// \return The measured logic level.
+    /// @returns The measured logic level.
     virtual boolean_t getIn() const = 0;
 };
 
-/// This template class is used to build access object to the actual hardware. These access objects do all
+/// This template class is used to build access objects to the actual hardware. These access objects do all
 /// share the same base class GpioPin.
 ///
 /// @tparam pinId The pin identifier.
+/// @ingroup Gpio
 template<GpioPinId pinId>
     struct GpioHardwarePin : public GpioPin
     {
@@ -84,7 +95,7 @@ template<GpioPinId pinId>
     };
 
 /// This class administers all available GpioPin objects. The available
-/// GpioPin objects are listed in the enum GpioPinId .
+/// GpioPin objects are listed in the enum GpioPinId.
 struct GpioController
 {
     /// Get a pointer to the requested GpioPin object.

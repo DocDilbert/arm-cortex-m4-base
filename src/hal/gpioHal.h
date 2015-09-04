@@ -9,6 +9,7 @@
 /// adaptable to other microcontrollers.
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
+/// @ingroup Gpio
 
 #ifndef __GPIO_HAL_H__
 #define __GPIO_HAL_H__
@@ -38,12 +39,14 @@
 // Note: If a pin is selected as GPIO input or input/output of peripheral functions, a setting value is invalid.
 
 /// This enum lists all currently supported Pins.
+/// @ingroup Gpio
 enum GpioPinId
 {
     DEBUG_PIN1, DEBUG_PIN2, DEBUG_PIN3, DEBUG_PIN4, LED_RED, LED_GREEN, LED_BLUE
 };
 
 /// This enum lists all possible gpio functions.
+/// @ingroup Gpio
 enum GpioFunction
 {
     GPIO_OUTPUT_LOW ///<  Set the gpio function to output with initial low level
@@ -51,6 +54,7 @@ enum GpioFunction
 
 /// This class contains static template methods which perform the actual hardware accesses. For each pin identifier
 /// listed in GpioPinId all methods contained in this class must be specialized.
+/// @ingroup Gpio
 struct GpioHal
 {
     /// @brief This template method initializes a gpio pin to be used for a given functin.
