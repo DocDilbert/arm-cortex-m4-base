@@ -40,7 +40,7 @@ extern uint32_t __ramfuncs_end;
 
 
 
-/// \brief This function handles the reset irq
+/// @brief This function handles the reset irq
 ///
 /// When a reset is raised (e.g. at startup) this is the first function which gets called.
 /// It performs the following tasks:
@@ -51,7 +51,7 @@ extern uint32_t __ramfuncs_end;
 ///
 /// \attention C Linkage is required for interrupt service routines.
 ///
-/// \ingroup StartSequence
+/// @ingroup StartSequence
 extern "C" void RESET_isr()
 {
     uint32_t *src, *dest;

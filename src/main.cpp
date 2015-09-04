@@ -14,7 +14,7 @@
 #include "gpio.h"
 #include "utils.h"
 #include "gpio.h"
-/// \cond TEST
+/// @cond TEST
 class A
 {
 public:
@@ -60,7 +60,7 @@ RAMFUNC void ramTrampoline(GpioPin* debugPin)
     debugPin->setLow();
 }
 
-/// \endcond
+/// @endcond
 
 GpioController gpioCtrl; ///< The gpio controller object.
 
@@ -71,12 +71,12 @@ GpioPin* debug4; ///< reference to debug pin 4
 
 
 
-/// \brief This function is the starting point of the program. 
+/// @brief This function is the starting point of the program. 
 ///
 /// The function is called after the reset irq was handled by isr_reset().
 /// It should not be leaved.
 ///
-/// \ingroup StartSequence
+/// @ingroup StartSequence
 int main()
 {
     static uint32_t cycles;

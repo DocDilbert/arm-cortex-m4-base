@@ -9,7 +9,7 @@
 #include "gpio.h"
 extern GpioPin* debug1;
 
-/// \brief System tick interrupt service routine.
+/// @brief System tick interrupt service routine.
 ///
 /// This function is called when a systick irq is raised.
 ///

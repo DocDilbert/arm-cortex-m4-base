@@ -3,12 +3,12 @@
 /// This file contains the _sbrk syscall. It is used to increase program data space.
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 
 #include <errno.h>
 
 /// Libc error symbol. This is used to give more error details.
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 extern int errno;
 
 /// Start address of the .heap section. This symbol is set by the linker.
@@ -17,7 +17,7 @@ extern int __heap_start;
 /// Start address of the .heap section. This symbol is set by the linker.
 extern int __heap_end;
 
-/// \brief Increase program data space.
+/// @brief Increase program data space.
 ///
 /// The _sbrk( ) function adds incr bytes to the break value and changes the allocated space
 /// accordingly. If incr is negative, the amount of allocated space is decreased by incr bytes. The
@@ -28,7 +28,7 @@ extern int __heap_end;
 /// @returns Upon successful completion, sbrk( ) returns the prior break value. Otherwise, it returns
 ///          (void *)−1 and sets errno to indicate the error.
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 void* _sbrk(int incr)
 {
     static void *heap = NULL;

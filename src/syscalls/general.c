@@ -3,7 +3,7 @@
 /// File which contains some general system calls which are used by newlibc and stdlibc++
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 #include <errno.h>
 #include <sys/stat.h>
 #include <sys/times.h>
@@ -20,14 +20,16 @@ char **environ = __env; ///< A pointer to a list of environment variables and th
 /// the listed functions make no sense in an embedded bare metal application, but
 /// must be defined nonetheless.
 ///
-/// \defgroup SystemCalls System calls
+/// @defgroup SystemCalls System calls
 
-/// \brief Terminate process.
+
+
+/// @brief Terminate process.
 ///
 /// @param status User supplied argument to exit() call.
 ///
 /// \return This function does not return.
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 void _exit(int status)
 {
     while (1)
@@ -35,44 +37,44 @@ void _exit(int status)
     }
 }
 
-/// \brief Send a signal to a process or a group of processes.
+/// @brief Send a signal to a process or a group of processes.
 ///
 /// @param pid Process id
 /// @param sig The signal to be send.
 ///
 /// @returns Upon successful completion, 0 is returned. Otherwise, −1 is returned and errno is set to indicate
 ///          the error.
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 int _kill(pid_t pid, int sig)
 {
     return (-1); // Always return an error since we do not have any processes.
 }
 
-/// \brief The getpid() function returns the process ID of the calling process.
+/// @brief The getpid() function returns the process ID of the calling process.
 ///
 /// @returns The process id of the calling process
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 pid_t _getpid(void)
 {
     return 1; // always return 1
 }
 
 /// Close a file
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 int _close(int fildes)
 {
     return -1;
 }
 
 /// Set position in a file.
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 off_t _lseek(int fildes, off_t offset, int whence)
 {
     return 0;
 }
 
 /// Read from a file
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 ssize_t _read(int fildes, void *buf, size_t nbyte)
 {
     return ((ssize_t) -1);
@@ -81,7 +83,7 @@ ssize_t _read(int fildes, void *buf, size_t nbyte)
 /// Status of an open file. For consistency with other minimal implementations in these examples,
 /// all files are regarded as character special devices.
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 int _fstat(int fildes, struct stat *st)
 {
     st->st_mode = S_IFCHR;
@@ -90,7 +92,7 @@ int _fstat(int fildes, struct stat *st)
 
 /// Status of a file (by name)
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 int _stat(const char *filepath, struct stat *st)
 {
     st->st_mode = S_IFCHR;
@@ -99,7 +101,7 @@ int _stat(const char *filepath, struct stat *st)
 
 /// Timing information for current process
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 clock_t _times(struct tms *buf)
 {
     return -1;
@@ -107,7 +109,7 @@ clock_t _times(struct tms *buf)
 
 /// Remove a file's directory entry
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 int _unlink(char *name)
 {
     errno = ENOENT;
@@ -116,7 +118,7 @@ int _unlink(char *name)
 
 /// Establish a new name for an existing file
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 int _link(const char *old, const char *new)
 {
     errno = EMLINK;
@@ -125,7 +127,7 @@ int _link(const char *old, const char *new)
 
 /// Wait for a child process
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 int _wait(int *status)
 {
     errno = ECHILD;
@@ -134,7 +136,7 @@ int _wait(int *status)
 
 /// Query whether output stream is a terminal
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 int _isatty(int fildes)
 {
     switch (fildes)
@@ -155,7 +157,7 @@ int _isatty(int fildes)
 /// `libc' subroutines will use this system routine for output to all files, including stdout
 /// Returns -1 on error or number of bytes sent.
 ///
-/// \ingroup SystemCalls
+/// @ingroup SystemCalls
 ssize_t _write(int filedes, const void *buf, size_t nbytes)
 {
     int n;
