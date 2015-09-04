@@ -50,7 +50,7 @@ enum GpioFunction
 };
 
 /// This class contains static template methods which perform the actual hardware accesses. For each pin identifier
-/// all methods contained in this class must be specialized.
+/// listed in GpioPinId all methods contained in this class must be specialized.
 struct GpioHal
 {
     /// This template method initializes a gpio pin to be used for a given function.
@@ -81,7 +81,7 @@ struct GpioHal
         STATIC_INLINE boolean_t get();
 };
 
-/// \cond TEMPLATE_DOC
+/// @cond TEMPLATE_DOC
 
 // *********************************************************************
 // DebugPin1 hardware access
@@ -354,5 +354,5 @@ template<>
                 break;
         }
     }
-/// \endcond
+/// @endcond
 #endif
