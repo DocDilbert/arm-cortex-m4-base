@@ -62,7 +62,7 @@ RAMFUNC void ramTrampoline(GpioPin* debugPin)
 
 /// \endcond
 
-GPIOController gpioCtrl; ///< The gpio controller object.
+GpioController gpioCtrl; ///< The gpio controller object.
 
 GpioPin* debug1; ///< reference to debug pin 1
 GpioPin* debug2; ///< reference to debug pin 2

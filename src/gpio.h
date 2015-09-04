@@ -79,7 +79,7 @@ template<GpioPinId pinId>
     };
 
 /// This class administers all GpioPin objects and their hardware parts.
-struct GPIOController
+struct GpioController
 {
     /// Get a pointer to the requested GpioPin object.
     ///
