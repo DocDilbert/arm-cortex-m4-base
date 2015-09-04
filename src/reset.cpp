@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// File contains all code related to system reset.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #include <stdint.h>
 #include "base_types.h"

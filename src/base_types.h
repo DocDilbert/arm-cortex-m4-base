@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// Additional base type definitions to stddef.h and stdint.h
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #ifndef __BASE_TYPES_H__
 #define __BASE_TYPES_H__

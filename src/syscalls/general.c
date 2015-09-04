@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// File which contains some general system calls which are used by newlibc and stdlibc++
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 /// \ingroup SystemCalls
 #include <errno.h>
 #include <sys/stat.h>
@@ -24,7 +24,7 @@ char **environ = __env; ///< A pointer to a list of environment variables and th
 
 /// \brief Terminate process.
 ///
-/// \param status User supplied argument to exit() call.
+/// @param status User supplied argument to exit() call.
 ///
 /// \return This function does not return.
 /// \ingroup SystemCalls
@@ -37,10 +37,10 @@ void _exit(int status)
 
 /// \brief Send a signal to a process or a group of processes.
 ///
-/// \param pid Process id
-/// \param sig The signal to be send.
+/// @param pid Process id
+/// @param sig The signal to be send.
 ///
-/// \returns Upon successful completion, 0 is returned. Otherwise, −1 is returned and errno is set to indicate
+/// @returns Upon successful completion, 0 is returned. Otherwise, −1 is returned and errno is set to indicate
 ///          the error.
 /// \ingroup SystemCalls
 int _kill(pid_t pid, int sig)
@@ -50,7 +50,7 @@ int _kill(pid_t pid, int sig)
 
 /// \brief The getpid() function returns the process ID of the calling process.
 ///
-/// \returns The process id of the calling process
+/// @returns The process id of the calling process
 /// \ingroup SystemCalls
 pid_t _getpid(void)
 {

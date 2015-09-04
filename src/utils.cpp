@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// File containing utility functions.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #include <stdio.h>
 #include <stdint.h>

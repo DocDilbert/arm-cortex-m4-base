@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// File contains the HardFault, MemManage fault, UsageFault, and BusFault fault handlers.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 /// Hard fault interrupt service routine
 ///

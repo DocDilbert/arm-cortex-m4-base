@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// This file contains the _sbrk syscall. It is used to increase program data space.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 /// \ingroup SystemCalls
 
 #include <errno.h>
@@ -23,9 +23,9 @@ extern int __heap_end;
 /// accordingly. If incr is negative, the amount of allocated space is decreased by incr bytes. The
 /// current value of the program break is returned by sbrk(0).
 ///
-/// \param incr Number of increments which should be added to the break value
+/// @param incr Number of increments which should be added to the break value
 ///
-/// \returns Upon successful completion, sbrk( ) returns the prior break value. Otherwise, it returns
+/// @returns Upon successful completion, sbrk( ) returns the prior break value. Otherwise, it returns
 ///          (void *)−1 and sets errno to indicate the error.
 ///
 /// \ingroup SystemCalls

@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// File containing inclusion of target headers
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #ifndef __MCU_H__
 #define __MCU_H__

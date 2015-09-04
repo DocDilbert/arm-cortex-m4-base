@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// File contains systick related initialization and handling.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #include "systick.h"
 

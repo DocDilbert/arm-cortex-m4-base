@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// File containing utility functions.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #ifndef __UTILS_H__
 #define __UTILS_H__
@@ -21,7 +21,7 @@
 
 /// This template class injects a given number of nops into the code.
 ///
-/// \tparam count Number of nops which will be injected into the code.
+/// @tparam count Number of nops which will be injected into the code.
 template<unsigned count>
     struct NopUnroller
     {
@@ -47,7 +47,7 @@ template<>
 /// Convenience function which uses the NopUnroller class template to inject count
 /// number of nops into the code.
 ///
-/// \tparam count Number of nops which will be injected into the code.
+/// @tparam count Number of nops which will be injected into the code.
 template<unsigned count>
     STATIC_INLINE void UTILS_nopUnroll()
     {
@@ -62,7 +62,7 @@ template<unsigned count>
 /// placed by gcc automatically is not considered. Therefore don't expect 100 % accurate results.
 /// For big cycles_10 counts this can be neglected.
 ///
-/// \param cycles_10 Number of 10 times cycles to wait. All values equal or less than 1 are ignored.
+/// @param cycles_10 Number of 10 times cycles to wait. All values equal or less than 1 are ignored.
 ///
 extern void UTILS_simulateLoad(const unsigned cycles_10);
 

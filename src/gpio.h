@@ -1,8 +1,8 @@
-/// \file
+/// @file
 ///
 /// File containing an abstract gpio access layer.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #ifndef __GPIO_H__
 #define __GPIO_H__
@@ -17,12 +17,12 @@ struct GpioPin
 {
     /// This abstract methods initialize a gpio pin to be used for a given function.
     ///
-    /// \param function The function for what the pin should be used.
+    /// @param function The function for what the pin should be used.
     virtual void init(GpioFunction function) = 0;
 
     /// This abstract method sets the logic level of a gpio pin. It only works when the pin is configured as output.
     ///
-    /// \param level The new logic level.
+    /// @param level The new logic level.
     virtual void setLevel(const boolean_t level) const = 0;
 
     /// This abstract method sets the logic level of a gpio pin to high. It only works when the pin is configured as output.
@@ -43,7 +43,7 @@ struct GpioPin
 /// This class template is used to build access object to the actual hardware. These access objects do all
 /// share the same base class GpioPin.
 ///
-/// \tparam pinId The pin identifier.
+/// @tparam pinId The pin identifier.
 template<GpioPinId pinId>
     struct GpioHardwarePin : public GpioPin
     {
@@ -83,7 +83,7 @@ struct GPIOController
 {
     /// Get a pointer to the requested GpioPin object.
     ///
-    /// \tparam pinId The pin identifier.
+    /// @tparam pinId The pin identifier.
     template<GpioPinId pinId>
         GpioPin* getPin()
         {

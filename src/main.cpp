@@ -1,9 +1,9 @@
-/// \file
+/// @file
 ///
 /// File containing the main() function. The main() function is the starting 
 /// point of the program.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #include <stdlib.h>
 #include <stdio.h>

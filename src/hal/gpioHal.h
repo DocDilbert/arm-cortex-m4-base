@@ -1,4 +1,4 @@
-/// \file
+/// @file
 ///
 /// File containing the gpio hardware abstraction.
 ///
@@ -8,7 +8,7 @@
 /// This file is written for the spansion/cypress MB9BF568R. But is should be easily
 /// adaptable to other microcontrollers.
 ///
-/// \author Christian Groeling <ch.groeling@gmail.com>
+/// @author Christian Groeling <ch.groeling@gmail.com>
 
 #ifndef __GPIO_DEF_H__
 #define __GPIO_DEF_H__
@@ -55,28 +55,28 @@ struct GpioHal
 {
     /// This template method initializes a gpio pin to be used for a given function.
     ///
-    /// \tparam pinId The pin identifier.
-    /// \param function The function for what the pin should be used.
+    /// @tparam pinId The pin identifier.
+    /// @param function The function for what the pin should be used.
     template<GpioPinId pinId>
         STATIC_INLINE void init(GpioFunction function);
 
     /// This template method sets the logic level of a gpio pin. It only works when the pin is configured as output.
     ///
-    /// \tparam pinId The pin identifier.
-    /// \param level The new logic level.
+    /// @tparam pinId The pin identifier.
+    /// @param level The new logic level.
     template<GpioPinId pinId>
         STATIC_INLINE void set(const boolean_t level);
 
     /// This template method toggles the logic level of a gpio pin. It only works when the pin is configured as output.
     ///
-    /// \tparam pinId The pin identifier.
+    /// @tparam pinId The pin identifier.
     template<GpioPinId pinId>
         STATIC_INLINE void toggle();
 
     /// This template method gets the logic level of a gpio pin. It only works when the pin is configured as input.
     ///
-    /// \tparam pinId The pin identifier.
-    /// \returns The measured logic level.
+    /// @tparam pinId The pin identifier.
+    /// @returns The measured logic level.
     template<GpioPinId pinId>
         STATIC_INLINE boolean_t get();
 };
