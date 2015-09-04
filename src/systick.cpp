@@ -1,4 +1,4 @@
-/// \file systick.cpp
+/// \file
 ///
 /// File contains systick related initialization and handling.
 ///

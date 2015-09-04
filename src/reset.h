@@ -1,4 +1,4 @@
-/// \file reset.h
+/// \file
 ///
 /// File contains all code related to system reset.
 ///

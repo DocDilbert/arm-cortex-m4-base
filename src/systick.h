@@ -1,4 +1,4 @@
-/// \file systick.h
+/// \file
 ///
 /// File contains systick related initialization and handling.
 ///

@@ -1,4 +1,4 @@
-/// \file main.cpp
+/// \file
 ///
 /// File containing the main() function. The main() function is the starting 
 /// point of the program.

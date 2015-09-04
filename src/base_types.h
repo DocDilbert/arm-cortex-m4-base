@@ -1,4 +1,4 @@
-/// \file base_types.h
+/// \file
 ///
 /// Additional base type definitions to stddef.h and stdint.h
 ///

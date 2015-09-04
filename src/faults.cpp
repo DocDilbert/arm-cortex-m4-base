@@ -1,4 +1,4 @@
-/// \file faults.cpp
+/// \file
 ///
 /// File contains the HardFault, MemManage fault, UsageFault, and BusFault fault handlers.
 ///

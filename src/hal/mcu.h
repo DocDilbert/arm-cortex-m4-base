@@ -1,4 +1,4 @@
-/// \file mcu.h
+/// \file
 ///
 /// File containing inclusion of target headers
 ///

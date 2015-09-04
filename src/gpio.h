@@ -1,4 +1,4 @@
-/// \file gpio.h
+/// \file
 ///
 /// File containing an abstract gpio access layer.
 ///
