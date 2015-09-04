@@ -1,9 +1,9 @@
 /// @file
+/// @brief Definition of static template methods to access gpio hardware registers.
 ///
-/// File containing the gpio hardware abstraction.
-///
-/// Each cortex-m4 based microcontroller has its own way dealing with gpios. The functions
-/// in this file should deliver an hardware independent interface to access these.
+/// Each cortex-m4 based microcontroller has its own way dealing with gpios. This file
+/// defines the class GpioHal which consists out of static template methods. These methods
+/// are used to access the underlying gpio hardware.
 ///
 /// This file is written for the spansion/cypress MB9BF568R. But is should be easily
 /// adaptable to other microcontrollers.
