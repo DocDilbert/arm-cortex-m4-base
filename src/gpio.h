@@ -20,24 +20,29 @@ struct GpioPin
     /// @param function The function for what the pin should be used.
     virtual void init(GpioFunction function) = 0;
 
-    /// This method sets the logic level of a gpio pin. It only works when the pin is configured as output.
+    /// @brief This method sets the logic level of a gpio pin.
+    /// @attention This method only works when the pin is configured as output.
     ///
     /// @param level The new logic level.
-    virtual void setLevel(const boolean_t level) const = 0;
+    virtual void setOut(const boolean_t level) const = 0;
 
-    /// This method sets the logic level of a gpio pin to high. It only works when the pin is configured as output.
-    virtual void setHigh() const = 0;
+    /// @brief This method sets the logic level of a gpio pin to high.
+    /// @attention This method only works when the pin is configured as output.
+    virtual void setOutHigh() const = 0;
 
-    /// This method sets the logic level of a gpio pin to low. It only works when the pin is configured as output.
-    virtual void setLow() const = 0;
+    /// @brief This method sets the logic level of a gpio pin to low.
+    /// @attention This method only works when the pin is configured as output.
+    virtual void setOutLow() const = 0;
 
-    /// This method toggles the logic level of a gpio pin. It only works when the pin is configured as output.
-    virtual void toggle() const = 0;
+    /// @brief This method toggles the logic level of a gpio pin.
+    /// @attention This method only works when the pin is configured as output.
+    virtual void toggleOut() const = 0;
 
-    /// This method returns the logic level of a gpio pin. It only works when the pin is configured as input.
+    /// @brief This method returns the actual logic level of a gpio pin.
+    /// @attention This method only works when the pin is configured as input.
     ///
     /// \return The measured logic level.
-    virtual boolean_t get() const = 0;
+    virtual boolean_t getIn() const = 0;
 };
 
 /// This template class is used to build access object to the actual hardware. These access objects do all
@@ -52,34 +57,34 @@ template<GpioPinId pinId>
             GpioHal::init<pinId>(function);
         }
 
-        INLINE void setLevel(const boolean_t level) const
+        INLINE void setOut(const boolean_t level) const
         {
-            GpioHal::set<pinId>(level);
+            GpioHal::setOut<pinId>(level);
         }
 
-        INLINE void setHigh() const
+        INLINE void setOutHigh() const
         {
-            GpioHal::set<pinId>(true);
+            GpioHal::setOut<pinId>(TRUE);
         }
 
-        INLINE void setLow() const
+        INLINE void setOutLow() const
         {
-            GpioHal::set<pinId>(false);
+            GpioHal::setOut<pinId>(FALSE);
         }
 
-        INLINE void toggle() const
+        INLINE void toggleOut() const
         {
-            GpioHal::toggle<pinId>();
+            GpioHal::toggleOut<pinId>();
         }
 
-        INLINE boolean_t get() const
+        INLINE boolean_t getIn() const
         {
-            return GpioHal::get<pinId>();
+            return GpioHal::getIn<pinId>();
         }
     };
 
 /// This class administers all available GpioPin objects. The available
-/// GpioPin objects are listed in the enum GpioPinId.
+/// GpioPin objects are listed in the enum GpioPinId .
 struct GpioController
 {
     /// Get a pointer to the requested GpioPin object.

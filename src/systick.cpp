@@ -16,6 +16,6 @@ extern GpioPin* debug1;
 /// \attention C Linkage is required for interrupt service routines.
 extern "C" void SYSTICK_isr()
 {
-    debug1->toggle();
+    debug1->toggleOut();
 }
 

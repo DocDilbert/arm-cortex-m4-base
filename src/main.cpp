@@ -54,10 +54,10 @@ volatile A a_static(50);
 
 RAMFUNC void ramTrampoline(GpioPin* debugPin)
 {
-    debugPin->setHigh();
+    debugPin->setOutHigh();
     // This prevents that veneers are included to call UTILS_burn
     UTILS_simulateLoad(1000000);
-    debugPin->setLow();
+    debugPin->setOutLow();
 }
 
 /// @endcond
@@ -122,8 +122,8 @@ int main()
     malloc_test[5] = malloc(0x500);
     malloc_test[6] = malloc(0x500);
 
-    debug1->get();
-    debug2->get();
+    debug1->getIn();
+    debug2->getIn();
     while (1)
     {
         printf("Hello World %i\n", cycles);
@@ -137,11 +137,11 @@ int main()
         data_test2++;
         data_test3++;
 
-        led_red->setLow(); // red led on - inverse logic.
+        led_red->setOutLow(); // red led on - inverse logic.
 
         ramTrampoline(debug2);
 
-        led_red->setHigh(); // red led off - inverse logic.
+        led_red->setOutHigh(); // red led off - inverse logic.
 
         /*GPIO_PUT(DEBUGPIN_2, 1);
          UTILS_nopUnroll<500>();
@@ -150,9 +150,9 @@ int main()
 
         ramTrampoline(debug3);
 
-        debug4->setHigh();
+        debug4->setOutHigh();
 
-        debug4->setLow();
+        debug4->setOutLow();
     }
     // never leave this function
     return -1;
