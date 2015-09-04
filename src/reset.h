@@ -12,7 +12,7 @@
 /// When the system starts a reset irq is raised. The reset irq jumps to the assembler function
 /// reset_trampoline. This function calls:
 ///
-/// * isr_reset() - This is the interrupt service routine for handling the reset irq.
+/// * RESET_isr() - This is the interrupt service routine for handling the reset irq.
 /// * main() - After the reset isr finishes, the main routine is called. This should function should not be leaved.
 ///
 /// @defgroup StartSequence System startup sequence
