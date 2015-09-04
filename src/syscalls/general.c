@@ -28,7 +28,7 @@ char **environ = __env; ///< A pointer to a list of environment variables and th
 ///
 /// @param status User supplied argument to exit() call.
 ///
-/// \return This function does not return.
+/// @returns This function does not return.
 /// @ingroup SystemCalls
 void _exit(int status)
 {
