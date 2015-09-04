@@ -15,32 +15,32 @@
 /// This abstract class is the base object of all GpioHardwarePin objects.
 struct GpioPin
 {
-    /// This abstract methods initialize a gpio pin to be used for a given function.
+    /// This method initialize a gpio pin to be used for a given function.
     ///
     /// @param function The function for what the pin should be used.
     virtual void init(GpioFunction function) = 0;
 
-    /// This abstract method sets the logic level of a gpio pin. It only works when the pin is configured as output.
+    /// This method sets the logic level of a gpio pin. It only works when the pin is configured as output.
     ///
     /// @param level The new logic level.
     virtual void setLevel(const boolean_t level) const = 0;
 
-    /// This abstract method sets the logic level of a gpio pin to high. It only works when the pin is configured as output.
+    /// This method sets the logic level of a gpio pin to high. It only works when the pin is configured as output.
     virtual void setHigh() const = 0;
 
-    /// This abstract method sets the logic level of a gpio pin to low. It only works when the pin is configured as output.
+    /// This method sets the logic level of a gpio pin to low. It only works when the pin is configured as output.
     virtual void setLow() const = 0;
 
-    /// This abstract method toggles the logic level of a gpio pin. It only works when the pin is configured as output.
+    /// This method toggles the logic level of a gpio pin. It only works when the pin is configured as output.
     virtual void toggle() const = 0;
 
-    /// This abstract method gets the logic level of a gpio pin. It only works when the pin is configured as input.
+    /// This method returns the logic level of a gpio pin. It only works when the pin is configured as input.
     ///
     /// \return The measured logic level.
     virtual boolean_t get() const = 0;
 };
 
-/// This class template is used to build access object to the actual hardware. These access objects do all
+/// This template class is used to build access object to the actual hardware. These access objects do all
 /// share the same base class GpioPin.
 ///
 /// @tparam pinId The pin identifier.
@@ -78,7 +78,8 @@ template<GpioPinId pinId>
         }
     };
 
-/// This class administers all GpioPin objects and their hardware parts.
+/// This class administers all available GpioPin objects. The available
+/// GpioPin objects are listed in the enum GpioPinId.
 struct GpioController
 {
     /// Get a pointer to the requested GpioPin object.
