@@ -10,8 +10,8 @@
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
 
-#ifndef __GPIO_DEF_H__
-#define __GPIO_DEF_H__
+#ifndef __GPIO_HAL_H__
+#define __GPIO_HAL_H__
 
 #include "mcu.h"
 #include "base_types.h"
