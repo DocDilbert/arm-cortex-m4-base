@@ -82,6 +82,11 @@ struct GpioHal
     /// @returns The measured logic level.
     template<GpioPinId pinId>
         STATIC_INLINE boolean_t getIn();
+
+private:
+    /// Private constructor. This class cannot be instantiated. It only consits out of static methods.
+    GpioHal();
+
 };
 
 /// @cond TEMPLATE_DOC
