@@ -55,6 +55,36 @@ struct GpioPin
     virtual boolean_t getIn() const = 0;
 };
 
+/// This class defines a pin dummy object. This object does nothing. It can be used
+/// to replace a hardware access to the gpios.
+struct GpioPinDummy : public GpioPin
+{
+    INLINE void init(GpioFunction function)
+    {
+    }
+
+    INLINE void setOut(const boolean_t level) const
+    {
+    }
+
+    INLINE void setOutHigh() const
+    {
+    }
+
+    INLINE void setOutLow() const
+    {
+    }
+
+    INLINE void toggleOut() const
+    {
+    }
+
+    INLINE boolean_t getIn() const
+    {
+        return false;
+    }
+};
+
 /// This template class is used to build access objects to the actual hardware. These access objects do all
 /// share the same base class GpioPin.
 ///
@@ -108,6 +138,5 @@ struct GpioController
             return &re;
         }
 };
-
 
 #endif
