@@ -57,7 +57,7 @@ struct GpioPin
 
 /// This class defines a pin dummy object. This object does nothing. It can be used
 /// to replace a hardware access to the gpios.
-struct GpioPinDummy : public GpioPin
+struct GpioDummyPin : public GpioPin
 {
     INLINE void init(GpioFunction function)
     {
