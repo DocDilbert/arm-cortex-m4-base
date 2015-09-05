@@ -11,18 +11,14 @@
 #include <math.h>
 #include <malloc.h>
 #include "base_types.h"
+#include "systick.h"
 #include "gpio.h"
 #include "utils.h"
-#include "gpio.h"
 
+SysTickController sysTickCtrl; ///< The system tick controller object.
 GpioController gpioCtrl; ///< The gpio controller object.
 
-GpioPin* debug1; ///< Global reference to debug pin 1 object
-GpioPin* debug2; ///< Global reference to debug pin 2 object
-GpioPin* debug3; ///< Global reference to debug pin 3 object
-GpioPin* debug4; ///< Global reference to debug pin 4 object
-
-RAMFUNC void ramTrampoline(GpioPin* debugPin)
+RAMFUNC void ramTrampoline(IGpioPin* debugPin)
 {
     debugPin->setOutHigh();
     // This prevents that veneers are included to call UTILS_burn
@@ -39,6 +35,12 @@ RAMFUNC void ramTrampoline(GpioPin* debugPin)
 int main()
 {
     static uint32_t cycles;
+    IGpioPin* debug1; ///< Global reference to debug pin 1 object
+    IGpioPin* debug2; ///< Global reference to debug pin 2 object
+    IGpioPin* debug3; ///< Global reference to debug pin 3 object
+    IGpioPin* debug4; ///< Global reference to debug pin 4 object
+
+    registerSysTickControllerIsr(&sysTickCtrl);
 
     // printf: turn off buffers, so IO occurs immediately.
     setvbuf(stdin, NULL, _IONBF, 0);
@@ -51,12 +53,15 @@ int main()
     debug3 = gpioCtrl.getPin<DEBUG_PIN3>();
     debug4 = gpioCtrl.getPin<DEBUG_PIN4>();
 
-    GpioPin* led_red = gpioCtrl.getPin<LED_RED>();
+    IGpioPin* led_red = gpioCtrl.getPin<LED_RED>();
 
     debug1->init(GPIO_OUTPUT_LOW);
     debug2->init(GPIO_OUTPUT_LOW);
     debug3->init(GPIO_OUTPUT_LOW);
     debug4->init(GPIO_OUTPUT_LOW);
+
+    // Register debug1 Pin to be used as systick isr debug pin.
+    sysTickCtrl.registerDebugPin(debug1);
 
     led_red->init(GPIO_OUTPUT_LOW);
 
