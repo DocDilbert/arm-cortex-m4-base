@@ -21,9 +21,9 @@
 ///
 /// @defgroup Gpio General Purpose Input Output
 
-/// This abstract class is the base object to all GpioHardwarePin classes.
+/// Base interface to all GpioHardwarePin and GpioDummyPin classes.
 /// @ingroup Gpio
-struct GpioPin
+struct IGpioPin
 {
     /// @brief This method initialize a gpio pin to be used for a given function.
     ///
@@ -57,7 +57,7 @@ struct GpioPin
 
 /// This class defines a pin dummy object. This object does nothing. It can be used
 /// to replace a hardware access to the gpios.
-struct GpioDummyPin : public GpioPin
+struct GpioDummyPin : public IGpioPin
 {
     INLINE void init(GpioFunction function)
     {
@@ -91,7 +91,7 @@ struct GpioDummyPin : public GpioPin
 /// @tparam pinId The pin identifier.
 /// @ingroup Gpio
 template<GpioPinId pinId>
-    struct GpioHardwarePin : public GpioPin
+    struct GpioHardwarePin : public IGpioPin
     {
         INLINE void init(GpioFunction function)
         {
@@ -132,7 +132,7 @@ struct GpioController
     ///
     /// @tparam pinId The pin identifier.
     template<GpioPinId pinId>
-        GpioPin* getPin()
+        IGpioPin* getPin()
         {
             static GpioHardwarePin<pinId> re;
             return &re;
