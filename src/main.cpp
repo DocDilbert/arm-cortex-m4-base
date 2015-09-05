@@ -18,6 +18,12 @@
 SysTickController sysTickCtrl; ///< The system tick controller object.
 GpioController gpioCtrl; ///< The gpio controller object.
 
+/// @brief Trampoline to code which is placed in ram.
+///
+/// This function it placed into the .ramfuncs section. It should prevent
+/// the generation of veneers for calling UTILS_simulateLoad(). Without
+/// veneers the execution time of UTILS_simulateLoad(...) can be measured
+/// more accurate.
 RAMFUNC void ramTrampoline(IGpioPin* debugPin)
 {
     debugPin->setOutHigh();
@@ -40,7 +46,7 @@ int main()
     IGpioPin* debug3; ///< Global reference to debug pin 3 object
     IGpioPin* debug4; ///< Global reference to debug pin 4 object
 
-    registerSysTickControllerIsr(&sysTickCtrl);
+    SYSTICK_registerIsr(&sysTickCtrl);
 
     // printf: turn off buffers, so IO occurs immediately.
     setvbuf(stdin, NULL, _IONBF, 0);
