@@ -55,7 +55,7 @@ _isr_vector_m:
 	.long hang                     // 011 - Debug Monitor
 	.long hang                     // 012 - Reserved
 	.long hang                     // 013 - PendSV
-	.long SYSTICK_trampoline       // 014 - SysTick
+	.long ISR_Systick		       // 014 - SysTick
 
 	// 015 - 143
 	.rept 128                      // Currently no fm4 irq is enabled. Fill the vector table with branches to hang

@@ -12,7 +12,7 @@ SysTickController::SysTickController()
 {
     debugPin = &debugPinDummy;
 }
-void SysTickController::isr()
+void SysTickController::update()
 {
     debugPin->toggleOut();
 }

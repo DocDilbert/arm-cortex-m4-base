@@ -9,9 +9,10 @@
 
 #include "utils.h"
 #include "gpio.h"
+#include "isr.h"
 
 /// This class managed all systick related functionality.
-struct SysTickController
+struct SysTickController : public IInterruptServiceRoutine
 {
     SysTickController();
 
@@ -22,8 +23,8 @@ struct SysTickController
     /// @param debugPin The debug pin which should be used.
     void registerDebugPin(IGpioPin *debugPin);
 
-    /// Interrupt service routine with c++ linkage.
-     void isr();
+    /// Implements IInterruptServiceRoutine::update()
+    void update();
 
 private:
     IGpioPin* debugPin; ///< A pointer to the debug pin
