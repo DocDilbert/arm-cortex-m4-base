@@ -30,10 +30,6 @@ private:
     GpioDummyPin debugPinDummy; ///< A dummy gpio pin object  which is used when no debug pin was registered.
 };
 
-/// This registers a given SysTickController isr() method to be called by the
-/// systick trampoline function.
-void SYSTICK_registerIsr(SysTickController *sysTickController);
-
 
 
 #endif

@@ -13,6 +13,7 @@
 #include "base_types.h"
 #include "systick.h"
 #include "gpio.h"
+#include "isr.h"
 #include "utils.h"
 
 SysTickController sysTickCtrl; ///< The system tick controller object.
@@ -46,7 +47,7 @@ int main()
     IGpioPin* debug3; ///< Global reference to debug pin 3 object
     IGpioPin* debug4; ///< Global reference to debug pin 4 object
 
-    SYSTICK_registerIsr(&sysTickCtrl);
+    ISR_registerSysTick(&sysTickCtrl);
 
     // printf: turn off buffers, so IO occurs immediately.
     setvbuf(stdin, NULL, _IONBF, 0);

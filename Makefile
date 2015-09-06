@@ -32,6 +32,7 @@ SRCS =  src/pre_sections.s \
 		src/utils.cpp \
 		src/reset.cpp \
 		src/faults.cpp \
+		src/isr.cpp \
 		src/syscalls/general.c \
 		src/syscalls/sbrk.c \
 		src/hal/isr_vectors.s \
