@@ -1,6 +1,8 @@
 /// @file
 ///
-/// File contains systick related initialization and handling.
+/// This file contains the SysTickController class.
+///
+/// This class represent a software abstraction of the system tick interrupt.
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
 
@@ -12,7 +14,7 @@ SysTickController::SysTickController()
 {
     debugPin = &debugPinDummy;
 }
-void SysTickController::update()
+void SysTickController::isr()
 {
     debugPin->toggleOut();
 }

@@ -1,6 +1,8 @@
 /// @file
 ///
-/// File contains systick related initialization and handling.
+/// This file contains the SysTickController class.
+///
+/// This class represent a software abstraction of the system tick interrupt.
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
 
@@ -23,8 +25,8 @@ struct SysTickController : public IInterruptServiceRoutine
     /// @param debugPin The debug pin which should be used.
     void registerDebugPin(IGpioPin *debugPin);
 
-    /// Implements IInterruptServiceRoutine::update()
-    void update();
+    /// Implements IInterruptServiceRoutine::isr()
+    void isr();
 
 private:
     IGpioPin* debugPin; ///< A pointer to the debug pin
