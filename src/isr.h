@@ -7,15 +7,17 @@
 #ifndef __ISR_H__
 #define __ISR_H__
 
-/// Interface which an object implement to be called by the ISR module.
+/// @brief Interface class implementing an interface service routine
 struct IInterruptServiceRoutine
 {
     /// An interrupt service routine.
     virtual void isr() = 0;
 };
 
-/// This function registers an object which implements IInterrruptServiceRoutine interface.
-/// The method update() of this objects is called each time a systick irq is raised.
+/// @brief This function registers an object which implements IInterrruptServiceRoutine interface.
+///
+/// After succesfull registration the method isr() of this objects is called each time a
+/// systick irq is raised.
 void ISR_registerSysTick(IInterruptServiceRoutine *sysTickController);
 
 #endif

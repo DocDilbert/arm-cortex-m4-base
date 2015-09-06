@@ -14,6 +14,7 @@ SysTickController::SysTickController()
 {
     debugPin = &debugPinDummy;
 }
+
 void SysTickController::isr()
 {
     debugPin->toggleOut();

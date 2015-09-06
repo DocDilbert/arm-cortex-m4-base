@@ -13,7 +13,7 @@
 #include "gpio.h"
 #include "isr.h"
 
-/// This class managed all systick related functionality.
+/// This class manages all systick related functionalities.
 struct SysTickController : public IInterruptServiceRoutine
 {
     SysTickController();
