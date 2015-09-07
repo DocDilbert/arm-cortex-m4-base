@@ -1,6 +1,7 @@
 /// @file
 ///
-/// File contains interrupt service routine handling.
+/// In this file an interface is defined which is used to register
+/// abstract objects which do have an interrupt service routine.
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
 

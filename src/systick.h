@@ -1,8 +1,10 @@
 /// @file
 ///
-/// This file contains the SysTickController class.
+/// @brief This file contains the definition of the SysTickController class.
 ///
-/// This class represent a software abstraction of the system tick interrupt.
+/// The SysTickController class represent a software interface to system tick peripheral
+/// unit. This also includes an interrupt service routine which can be registered to be
+/// called when a system tick interrupt is raised.
 ///
 /// @author Christian Groeling <ch.groeling@gmail.com>
 
