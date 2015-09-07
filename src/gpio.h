@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include "base_types.h"
-#include "gpioHal.h"
+#include "hal/gpio_hal.h"
 #include "utils.h"
 
 /// @brief This module contains everything related to gpios.
