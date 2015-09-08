@@ -76,7 +76,7 @@ FUNCTION resetTrampoline
 	// This is currently not necessary.
 
 	// The BL and BLX instructions write the address of the next instruction to LR (the link register, R14).
-	BL RESET_isr// Branch with link to "isr_reset()", return address stored in LR (r14)
-	BL main		// Branch with link to "main()", return address stored in LR (r14)
-	B .			// This should not be reached
+	BL ISR_Reset // Branch with link to "isr_reset()", return address stored in LR (r14)
+	BL main		 // Branch with link to "main()", return address stored in LR (r14)
+	B .			 // This should not be reached
 ENDFUNC resetTrampoline

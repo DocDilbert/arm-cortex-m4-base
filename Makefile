@@ -30,7 +30,6 @@ SRCS =  src/pre_sections.s \
 		src/main.cpp \
 		src/systick.cpp \
 		src/utils.cpp \
-		src/reset.cpp \
 		src/isr.cpp \
 		src/syscalls/general.c \
 		src/syscalls/sbrk.c \
