@@ -43,10 +43,10 @@ _isr_vector_m:
 	.long __stack_top              // This entry is used at startup to initialize the top address of the stack
 	.long resetTrampoline          // 000 - Reset
 	.long hang                     // 001 - NMI
-	.long FAULTS_isrHardFault      // 002 - Hard Fault
-	.long FAULTS_isrMemManageFault // 003 - Mem manage Fault
-	.long FAULTS_isrBusFault       // 004 - Bus Fault
-	.long FAULTS_isrUsageFault     // 005 - Usage Fault
+	.long ISR_HardFault            // 002 - Hard Fault
+	.long ISR_MemManageFault       // 003 - Mem manage Fault
+	.long ISR_BusFault             // 004 - Bus Fault
+	.long ISR_UsageFault           // 005 - Usage Fault
 	.long hang                     // 006 - Reserved
 	.long hang                     // 007 - Reserved
 	.long hang                     // 008 - Reserved

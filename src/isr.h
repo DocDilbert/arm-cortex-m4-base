@@ -8,7 +8,7 @@
 #ifndef __ISR_H__
 #define __ISR_H__
 
-/// @brief Interface class implementing an interface service routine
+/// @brief A simple class defining an interface for class which implements an interrupt service routine.
 struct IInterruptServiceRoutine
 {
     /// An interrupt service routine.
@@ -17,7 +17,7 @@ struct IInterruptServiceRoutine
 
 /// @brief This function registers an object which implements IInterrruptServiceRoutine interface.
 ///
-/// After succesfull registration the method isr() of this objects is called each time a
+/// After successful registration the method isr() of this objects is called each time a
 /// systick irq is raised.
 void ISR_registerSysTick(IInterruptServiceRoutine *sysTickController);
 
