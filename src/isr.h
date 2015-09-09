@@ -20,7 +20,7 @@
 
 
 
-/// @brief A simple interface which has one abstract method which represent an interrupt service routine.
+/// @brief A simple interface to be used for defining interrupt service routines (methods).
 struct IInterruptServiceRoutine
 {
     /// An interrupt service routine.
