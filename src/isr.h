@@ -8,12 +8,12 @@
 #ifndef __ISR_H__
 #define __ISR_H__
 
-/// @brief Short explanation of what happens when the system starts.
+/// @brief Functions which get called when the system starts.
 ///
 /// When the system starts a reset irq is raised. The reset irq jumps to the assembler function
 /// reset_trampoline. This function calls:
 ///
-/// * RESET_isr() - This is the interrupt service routine for handling the reset irq.
+/// * ISR_Reset() - This is the interrupt service routine for handling the reset irq.
 /// * main() - After the reset isr finishes, the main routine is called. This should function should not be leaved.
 ///
 /// @defgroup StartSequence System startup sequence
