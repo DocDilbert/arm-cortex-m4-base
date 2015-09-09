@@ -27,7 +27,7 @@ struct IInterruptServiceRoutine
     virtual void isr() = 0;
 };
 
-/// @brief This function registers an object which implements IInterrruptServiceRoutine interface.
+/// @brief This function registers an object which implements the IInterrruptServiceRoutine interface.
 ///
 /// After successful registration the method isr() of the given objects is called each time a
 /// systick irq is raised.
