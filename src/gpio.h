@@ -16,8 +16,7 @@
 /// @brief This module contains everything related to gpios.
 ///
 /// The class GpioPin is the base class to all GpioHardwarePin classes. The GpioHardwarePin
-/// classes do the actual hardware access to a pin. To do this, they use the template
-/// methods defined in the GpioHal class.
+/// classes do the actual hardware accesses.
 ///
 /// @defgroup Gpio General Purpose Input Output
 
