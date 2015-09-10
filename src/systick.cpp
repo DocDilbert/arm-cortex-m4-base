@@ -16,9 +16,10 @@ SysTickController::SysTickController()
     debugPin = &debugPinDummy;
 }
 
-void SysTickController::isr()
+ReturnCode SysTickController::isr()
 {
     debugPin->toggleOut();
+    return RC_OK;
 }
 
 void SysTickController::registerDebugPin(IGpioPin *debugPin)

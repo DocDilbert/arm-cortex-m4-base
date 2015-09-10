@@ -8,6 +8,8 @@
 #ifndef __ISR_H__
 #define __ISR_H__
 
+#include "return_code.h"
+
 /// @brief Functions which get called when the system starts.
 ///
 /// When the system starts a reset irq is raised. The reset irq jumps to the assembler function
@@ -24,7 +26,7 @@
 struct IInterruptServiceRoutine
 {
     /// An interrupt service routine.
-    virtual void isr() = 0;
+    virtual ReturnCode isr() = 0;
 };
 
 /// @brief This function registers an object which implements the IInterrruptServiceRoutine interface.

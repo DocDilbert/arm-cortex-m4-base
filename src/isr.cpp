@@ -17,9 +17,10 @@
 struct InterruptServiceRoutineDummy : public IInterruptServiceRoutine
 {
     /// Implements IInterruptServiceRoutine::isr.
-    void isr()
+    ReturnCode isr()
     {
         // do nothing
+        return RC_OK;
     }
 };
 
