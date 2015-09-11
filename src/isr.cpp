@@ -11,7 +11,7 @@
 #include "mcu.h"
 #include "base_types.h"
 #include "isr.h"
-
+#include "error.h"
 
 /// Dummy class which implements an empty isr() method.
 struct InterruptServiceRoutineDummy : public IInterruptServiceRoutine
@@ -85,14 +85,12 @@ extern "C" void ISR_Systick()
 ///
 extern "C" void ISR_HardFault()
 {
-    while (1)
-    {
-    }
+    ERROR_handler();
 }
 
 /// Memory manage fault interrupt service routine
 ///
-/// A MemManage fault is an exception that occurs because of a memory protection related fault. The the fixed memory
+/// A MemManage fault is an exception that occurs because of a memory protection related fault. The fixed memory
 /// protection constraints determines this fault, for both instruction and data memory transactions. This fault is always
 /// used to abort instruction accesses to Execute Never (XN) memory regions.
 ///
@@ -100,9 +98,7 @@ extern "C" void ISR_HardFault()
 ///
 extern "C" void ISR_MemManageFault()
 {
-    while (1)
-    {
-    }
+    ERROR_handler();
 }
 
 /// Bus fault interrupt service routine
@@ -114,9 +110,7 @@ extern "C" void ISR_MemManageFault()
 ///
 extern "C" void ISR_BusFault()
 {
-    while (1)
-    {
-    }
+    ERROR_handler();
 }
 
 /// Usage fault interrupt service routine
@@ -135,19 +129,18 @@ extern "C" void ISR_BusFault()
 ///
 extern "C" void ISR_UsageFault()
 {
-    while (1)
-    {
-    }
+    ERROR_handler();
 }
 
 
 
 /// @brief This function handles the reset irq
 ///
-/// When a reset is raised (e.g. at startup) this is the first function which gets called.
+/// When a reset irq is raised (e.g. at startup) this is the first function is called.
 /// It performs the following tasks:
 /// * Copy initial values to the data section in ram.
 /// * Initialize the bss ram section with 0.
+/// * Eventually copy ram functions
 /// * PLL Configuration
 /// * SysTick Configuration
 ///

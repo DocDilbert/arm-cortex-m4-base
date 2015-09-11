@@ -28,6 +28,7 @@ LD_SCRIPT = src/hal/linker.ld
 # Source files          
 SRCS =  src/pre_sections.s \
 		src/main.cpp \
+		src/error.cpp \
 		src/systick.cpp \
 		src/utils.cpp \
 		src/isr.cpp \
